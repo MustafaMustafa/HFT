@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@pcroot.cern.ch)  -->
+<!--                                             -->
+<!--   Date: Tue Oct 25 11:51:46 2011            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>DIGParticle</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class DIGParticle','','digparticle.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/DIGParticle.h.html">header file</a>
+<a class="descrheadentry" href="src/DIGParticle.cxx.html">source file</a>
+<a class="descrheadentry" href="DIGParticle_Tree.pdf">inheritance tree (.pdf)</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk/digparticle.h?view=log">viewVC header</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk//var/autofs/nfs/rawcmos7/abesson/ILCSOFT/DIGITISEUR/code/digparticle.cxx?view=log">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#DIGParticle:description">class description</a> 
+<a class="descrheadentry" href="#DIGParticle:Function_Members">function members</a>
+<a class="descrheadentry" href="#DIGParticle:Data_Members">data members</a>
+<a class="descrheadentry" href="#DIGParticle:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">(UNKNOWN PRODUCT)</a>
+ &#187; <a class="locationlevel" href="./VAR_Index.html">VAR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_Index.html">AUTOFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_Index.html">NFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_Index.html">RAWCMOS7</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_Index.html">ABESSON</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_Index.html">ILCSOFT</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_Index.html">DIGITISEUR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_CODE_Index.html">CODE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">DIGParticle</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="DIGParticle:description"></a>class DIGParticle: public TObject</h1>
+<div class="classdescr">
+<pre>
+
+
+<a href="./DIGParticle.html">DIGParticle</a>
+
+particle class
+contains: -entry and exit point of the particle into the plane
+-segment list (Charge, position) of the track
+-pixel list (number, charge) where charge has been collected
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="DIGParticle:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGParticle:DIGParticle">DIGParticle</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGParticle:DIGParticle%2">DIGParticle</a>(<a href="./DIGParticle.html">DIGParticle</a>&amp; adigparticle)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGParticle:DIGParticle%1">DIGParticle</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryX, <a href="./ListOfTypes.html#Float_t">Float_t</a> EntryY, <a href="./ListOfTypes.html#Float_t">Float_t</a> EntryZ, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitX, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitY, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitZ, <a href="./ListOfTypes.html#Float_t">Float_t</a> Energy_deposited)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#DIGParticle:_DIGParticle">~DIGParticle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:AddPixel">AddPixel</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> AnalogCharge, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:AddRandomNoise">AddRandomNoise</a>(<a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:AnalogToDigitalconversion">AnalogToDigitalconversion</a>(<a href="./DIGADC.html">DIGADC</a>* myDIGADC, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#DIGParticle:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:ComputeChargeDeposition">ComputeChargeDeposition</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> StartingSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumChargePerSegment)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:ComputeChargeTransport">ComputeChargeTransport</a>(<a href="./DIGPlane.html">DIGPlane</a>* aDIGPlane, <a href="./DIGTransport.html">DIGTransport</a>* aDIGTransport)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute%1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject%1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GaussianLaw">GaussianLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetAnalogCharge">GetAnalogCharge</a>()</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetDigitalCharge">GetDigitalCharge</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetEnergy_deposited">GetEnergy_deposited</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetEntryX">GetEntryX</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetEntryY">GetEntryY</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetEntryZ">GetEntryZ</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetExitX">GetExitX</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetExitY">GetExitY</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetExitZ">GetExitZ</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetNpixels">GetNpixels</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetNSegment">GetNSegment</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetPixelMap">GetPixelMap</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetPixelNumber">GetPixelNumber</a>(<a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Float_t">Float_t</a> Xpos, <a href="./ListOfTypes.html#Float_t">Float_t</a> Ypos)</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetSegmentCharge">GetSegmentCharge</a>()</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetSegmentX">GetSegmentX</a>()</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetSegmentY">GetSegmentY</a>()</td></tr>
+<tr class="func"><td class="funcret">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="funcname"><a class="funcname" href="#DIGParticle:GetSegmentZ">GetSegmentZ</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetTotalAnalogCharge">GetTotalAnalogCharge</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetTotalDigitalCharge">GetTotalDigitalCharge</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetXYPixelCenter">GetXYPixelCenter</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a>&amp; Xpix, <a href="./ListOfTypes.html#Float_t">Float_t</a>&amp; Ypix, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:GetXYPixelNumber">GetXYPixelNumber</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; Xpix, <a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; Ypix, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom%1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#DIGParticle:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete%1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]%1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new%1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]%1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGParticle.html">DIGParticle</a>&amp;</td><td class="funcname"><a class="funcname" href="#DIGParticle:operator_">operator=</a>(<span class="keyword">const</span> <a href="./DIGParticle.html">DIGParticle</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:PrintInfo">PrintInfo</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(basic_ostream&lt;<span class="keyword">char</span>,char_traits&lt;<span class="keyword">char</span>&gt; &gt;&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit%1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetEnergy_deposited">SetEnergy_deposited</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Energy_deposited)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetEntryX">SetEntryX</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryX)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetEntryY">SetEntryY</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryY)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetEntryZ">SetEntryZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryZ)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetExitX">SetExitX</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitX)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetExitY">SetExitY</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitY)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetExitZ">SetExitZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitZ)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetNpixels">SetNpixels</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Npixels)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:SetNSegment">SetNSegment</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> NSegment)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:Streamer">Streamer</a>(TBuffer&amp; b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGParticle:UpdatePixel">UpdatePixel</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> AnalogCharge, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write%1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="DIGParticle:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fAnalogChargeMap"></a>fAnalogChargeMap</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fDigitalChargeMap"></a>fDigitalChargeMap</td><td class="datadesc">n'a pas de sens tant qu'on a pas somme la charge de toutes les particules</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fEnergy_deposited"></a>fEnergy_deposited</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fEntryX"></a>fEntryX</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fEntryY"></a>fEntryY</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fEntryZ"></a>fEntryZ</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fExitX"></a>fExitX</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fExitY"></a>fExitY</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGParticle:fExitZ"></a>fExitZ</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGParticle:fNSegment"></a>fNSegment</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGParticle:fNpixels"></a>fNpixels</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fPixelMap"></a>fPixelMap</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fSegmentCharge"></a>fSegmentCharge</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fSegmentX"></a>fSegmentX</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fSegmentY"></a>fSegmentY</td><td></td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt;</td><td class="dataname"><a name="DIGParticle:fSegmentZ"></a>fSegmentZ</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="DIGParticle:Class_Charts"></a>Class Charts</h2>
+<!--INHERITANCE TREE-->
+<table><tr><td width="10%"></td><td width="70%"><a href="ClassHierarchy.html">Inheritance Chart</a>:</td></tr><tr class="inhtree"><td width="10%"></td><td width="70%"><table class="inhtree"><tr><td>
+<table width="100%" border="0" cellpadding ="0" cellspacing="2"><tr>
+<td><table><tr>
+<td bgcolor="#f7f7f7" align="right">
+<tt>TObject</tt></td>
+</tr></table></td>
+<td>&larr;</td><td>
+<center><big><b><tt><a name="DIGParticle" href="./DIGParticle.html">DIGParticle</a></tt></b></big></center>
+</td>
+<td><table><tr>
+<td></td>
+</tr></table></td>
+</tr></table>
+</td></tr></table></td></tr></table>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGParticle:DIGParticle" href="src/DIGParticle.cxx.html#jo.eIE">DIGParticle</a>()</span><br />
+<div class="funccomm"><pre>
+ default constructor
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGParticle:DIGParticle%1" href="src/DIGParticle.cxx.html#iqXbND">DIGParticle</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryX, <a href="./ListOfTypes.html#Float_t">Float_t</a> EntryY, <a href="./ListOfTypes.html#Float_t">Float_t</a> EntryZ, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitX, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitY, <a href="./ListOfTypes.html#Float_t">Float_t</a> ExitZ, <a href="./ListOfTypes.html#Float_t">Float_t</a> Energy_deposited)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGParticle:DIGParticle%2" href="src/DIGParticle.cxx.html#EqV_nE">DIGParticle</a>(<a href="./DIGParticle.html">DIGParticle</a>&amp; adigparticle)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGParticle:_DIGParticle" href="src/DIGParticle.cxx.html#TCcIqE">~DIGParticle</a>()</span><br />
+<div class="funccomm"><pre> virtual destructor
+
+  delete fLayers;
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:Clear" href="src/DIGParticle.cxx.html#vzqWb">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>*  = <span class="string">""</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:ComputeChargeDeposition" href="src/DIGParticle.cxx.html#bf7FID">ComputeChargeDeposition</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> StartingSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumChargePerSegment)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:PrintInfo" href="src/DIGParticle.cxx.html#MAO98B">PrintInfo</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:ComputeChargeTransport" href="src/DIGParticle.cxx.html#dX9dUC">ComputeChargeTransport</a>(<a href="./DIGPlane.html">DIGPlane</a>* aDIGPlane, <a href="./DIGTransport.html">DIGTransport</a>* aDIGTransport)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:AddPixel" href="src/DIGParticle.cxx.html#P9LrED">AddPixel</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> AnalogCharge, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:UpdatePixel" href="src/DIGParticle.cxx.html#wkw_OE">UpdatePixel</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> AnalogCharge, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:AddRandomNoise" href="src/DIGParticle.cxx.html#knWbCC">AddRandomNoise</a>(<a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:AnalogToDigitalconversion" href="src/DIGParticle.cxx.html#hRNDOC">AnalogToDigitalconversion</a>(<a href="./DIGADC.html">DIGADC</a>* myDIGADC, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGParticle:GetPixelNumber" href="src/DIGParticle.cxx.html#csnsqD">GetPixelNumber</a>(<a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Float_t">Float_t</a> Xpos, <a href="./ListOfTypes.html#Float_t">Float_t</a> Ypos)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:GetXYPixelNumber" href="src/DIGParticle.cxx.html#fkvI3">GetXYPixelNumber</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; Xpix, <a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; Ypix, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:GetXYPixelCenter" href="src/DIGParticle.cxx.html#Z0M8ED">GetXYPixelCenter</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a>&amp; Xpix, <a href="./ListOfTypes.html#Float_t">Float_t</a>&amp; Ypix, <a href="./DIGPlane.html">DIGPlane</a>* myDIGPlane, <a href="./ListOfTypes.html#Int_t">Int_t</a> PixelNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="DIGParticle:GaussianLaw" href="src/DIGParticle.cxx.html#w40_C">GaussianLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetTotalAnalogCharge" href="src/DIGParticle.cxx.html#n1ytXB">GetTotalAnalogCharge</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGParticle:GetTotalDigitalCharge" href="src/DIGParticle.cxx.html#x3THeD">GetTotalDigitalCharge</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetEntryX" href="src/DIGParticle.h.html#Cjye7B">GetEntryX</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fEntryX" title="Float_t DIGParticle::fEntryX">fEntryX</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetEntryY" href="src/DIGParticle.h.html#KZ3Z7B">GetEntryY</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fEntryY" title="Float_t DIGParticle::fEntryY">fEntryY</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetEntryZ" href="src/DIGParticle.h.html#m2oo7B">GetEntryZ</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fEntryZ" title="Float_t DIGParticle::fEntryZ">fEntryZ</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetExitX" href="src/DIGParticle.h.html#wWn1rE">GetExitX</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fExitX" title="Float_t DIGParticle::fExitX">fExitX</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetExitY" href="src/DIGParticle.h.html#klYcEE">GetExitY</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fExitY" title="Float_t DIGParticle::fExitY">fExitY</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetExitZ" href="src/DIGParticle.h.html#Y0JDdD">GetExitZ</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fExitZ" title="Float_t DIGParticle::fExitZ">fExitZ</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGParticle:GetEnergy_deposited" href="src/DIGParticle.h.html#DCp2C">GetEnergy_deposited</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fEnergy_deposited" title="Float_t DIGParticle::fEnergy_deposited">fEnergy_deposited</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGParticle:GetNSegment" href="src/DIGParticle.h.html#heImSD">GetNSegment</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fNSegment" title="Int_t DIGParticle::fNSegment">fNSegment</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt; <a class="funcname" name="DIGParticle:GetSegmentX" href="src/DIGParticle.h.html#O4h7CE">GetSegmentX</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fSegmentX" title="vector&lt;Float_t&gt; DIGParticle::fSegmentX">fSegmentX</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt; <a class="funcname" name="DIGParticle:GetSegmentY" href="src/DIGParticle.h.html#ma.dCE">GetSegmentY</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fSegmentY" title="vector&lt;Float_t&gt; DIGParticle::fSegmentY">fSegmentY</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt; <a class="funcname" name="DIGParticle:GetSegmentZ" href="src/DIGParticle.h.html#yLOPDE">GetSegmentZ</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fSegmentZ" title="vector&lt;Float_t&gt; DIGParticle::fSegmentZ">fSegmentZ</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt; <a class="funcname" name="DIGParticle:GetSegmentCharge" href="src/DIGParticle.h.html#nVWQ9">GetSegmentCharge</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fSegmentCharge" title="vector&lt;Float_t&gt; DIGParticle::fSegmentCharge">fSegmentCharge</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGParticle:GetNpixels" href="src/DIGParticle.h.html#qkEhIE">GetNpixels</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fNpixels" title="Int_t DIGParticle::fNpixels">fNpixels</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt; <a class="funcname" name="DIGParticle:GetPixelMap" href="src/DIGParticle.h.html#HGo5DB">GetPixelMap</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fPixelMap" title="vector&lt;Int_t&gt; DIGParticle::fPixelMap">fPixelMap</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Float_t">Float_t</a>&gt; <a class="funcname" name="DIGParticle:GetAnalogCharge" href="src/DIGParticle.h.html#ZEjB7C">GetAnalogCharge</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fAnalogChargeMap" title="vector&lt;Float_t&gt; DIGParticle::fAnalogChargeMap">fAnalogChargeMap</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">std::vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt; <a class="funcname" name="DIGParticle:GetDigitalCharge" href="src/DIGParticle.h.html#SJrd9D">GetDigitalCharge</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGParticle.html#DIGParticle:fDigitalChargeMap" title="vector&lt;Int_t&gt; DIGParticle::fDigitalChargeMap">fDigitalChargeMap</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetNSegment" href="src/DIGParticle.h.html#cKDX3E">SetNSegment</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> NSegment)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fNSegment" title="Int_t DIGParticle::fNSegment">fNSegment</a>=NSegment;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetEntryX" href="src/DIGParticle.h.html#OvEUQC">SetEntryX</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryX)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fEntryX" title="Float_t DIGParticle::fEntryX">fEntryX</a>=EntryX;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetEntryY" href="src/DIGParticle.h.html#WlOaQC">SetEntryY</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryY)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fEntryY" title="Float_t DIGParticle::fEntryY">fEntryY</a>=EntryY;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetEntryZ" href="src/DIGParticle.h.html#SqJfQC">SetEntryZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> EntryZ)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fEntryY" title="Float_t DIGParticle::fEntryY">fEntryY</a>=EntryZ;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetExitX" href="src/DIGParticle.h.html#CF.O6">SetExitX</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitX)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fExitX" title="Float_t DIGParticle::fExitX">fExitX</a>=ExitX;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetExitY" href="src/DIGParticle.h.html#m2NU1">SetExitY</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitY)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fExitY" title="Float_t DIGParticle::fExitY">fExitY</a>=ExitY;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetExitZ" href="src/DIGParticle.h.html#WocZw">SetExitZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> ExitZ)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fExitZ" title="Float_t DIGParticle::fExitZ">fExitZ</a>=ExitZ;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetEnergy_deposited" href="src/DIGParticle.h.html#iEWJ_B">SetEnergy_deposited</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Energy_deposited)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fEnergy_deposited" title="Float_t DIGParticle::fEnergy_deposited">fEnergy_deposited</a>=Energy_deposited;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGParticle:SetNpixels" href="src/DIGParticle.h.html#pht7S">SetNpixels</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Npixels)</span><br />
+
+<div class="code"><code class="inlinecode">{<a href="./DIGParticle.html#DIGParticle:fNpixels" title="Int_t DIGParticle::fNpixels">fNpixels</a>= Npixels;}</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Tue Oct 25 11:51:47 2011 </em><em>&raquo; Last generated: 2011-10-25 11:51</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@root.cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

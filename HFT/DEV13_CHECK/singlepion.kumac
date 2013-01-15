@@ -1,0 +1,9 @@
+ detp geom dev13
+ gexec $STAR_LIB/xgeometry.so
+ gclose all
+ user/vsig 0 .1
+ gfile o test_dev13_v2.fz
+ aguser/gkine 30 8 .1 5.0 -1 +1 0 6.28
+ trig 10
+
+
