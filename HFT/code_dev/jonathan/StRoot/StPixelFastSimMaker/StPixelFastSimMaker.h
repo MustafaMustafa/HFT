@@ -76,19 +76,15 @@
 #include "StThreeVectorF.hh"
 #include "StThreeVectorD.hh"
 #include <vector>
-class StEvent;
-class StMcEvent;
 class StRandom;
 class StMcPixelHitCollection;
-class St_g2t_ist_hit;
-class St_g2t_pix_hit;
 
 class StPixelFastSimMaker : public StMaker {
  public:
 
   /* \brief Constructor uses standard Maker text naming convention,
      with value "PixelFastSim"*/
-  StPixelFastSimMaker(const char *name="PixelFastSim") :StMaker(name){}
+  StPixelFastSimMaker(const Char_t *name="PixelFastSim") :StMaker(name){}
 
   /* Please note: The destructor is empty. StEvent will own any hits
      created by this maker, and is responsible for cleanup.
@@ -99,37 +95,19 @@ class StPixelFastSimMaker : public StMaker {
   /* \brief This is called every event, and contains all the activity
      of making StHit objects.
 
-     Make() creates an StRnDHit object for every MChit, and fills the
+     Make() creates an StPxlHit object for every MChit, and fills the
      hit container. Hit container is passed to StEvent.
 
      Returns kStOk always.
   */
   virtual Int_t  Make();
 
-  /* \brief Init method is not currently used. */
-  virtual int Init();
+  /* \brief A random seed is passed to mRandom */
+  virtual Int_t Init();
 
- /* \brief InitRun method is not currently used. */
-  virtual int InitRun( int);
+ /* \brief Smearing resolutions for PXL and IST are fetched here. */
+  virtual Int_t InitRun(Int_t);
   
-  /* \brief Accept method for reconstructed event. */
-  virtual Bool_t accept(StEvent* event);
-
-  /* \brief Accept method for monte carlo event. */
-  virtual Bool_t accept(StMcEvent* event);
-
-  //.. load pileup hits ....
-  void LoadPixPileUpHits();
-
-  //..add PIXEL pileup into the collection
-  void AddPixPileUpHit(StMcPixelHitCollection* pixHitCol);
-
-  //Routine to smear hit by resolution with gaussian, mean zero and width res
-  double distortHit(double x, double res, double detLength);
-
-  /* \brief Method for adding a gaussian smearing to the hit error vector */
-  void smearGaus(StThreeVectorD &mError, double sigma1, double sigma2);
-
   /* \brief Documentation method. GetCVS can be called from the chain, providing a list
      of all maker versions in use.
   */
@@ -139,41 +117,46 @@ class StPixelFastSimMaker : public StMaker {
     return cvs;
   }
 
-  void shiftHit(StThreeVectorF &pos, StThreeVectorF &mom, int, int);
-  int sector(int,int);
-  int secLadder(int,int);
-  double phiForLadder(int,int);
+ private:
+  //.. load pileup hits ....
+  void loadPixPileUpHits();
+
+  //..add PIXEL pileup into the collection
+  void addPixPileUpHit(StMcPixelHitCollection* pixHitCol);
+
+  //Routine to smear hit by resolution with gaussian, mean zero and width res
+  Double_t distortHit(Double_t x, Double_t res, Double_t detLength);
 
 
  protected:
-  StRandom* myRandom;
+  StRandom* mRandom;
 
-  double resXIst1;
-  double resZIst1;
-  double resXIst2;
-  double resZIst2;
-  double resXIst3;
-  double resZIst3;
-  double resZPix;
-  double resXPix;
-  int mSmear; //to turn smearing on and off
+  Double_t mResXIst1;
+  Double_t mResZIst1;
+  Double_t mResXIst2;
+  Double_t mResZIst2;
+  Double_t mResXIst3;
+  Double_t mResZIst3;
+  Double_t mResZPix;
+  Double_t mResXPix;
+  Int_t mSmear; //to turn smearing on and off
 
  protected:
-  vector<double> pileup_x; 
-  vector<double> pileup_y; 
-  vector<double> pileup_z; 
+  vector<Double_t> mPxlPileup_x; 
+  vector<Double_t> mPxlPileup_y; 
+  vector<Double_t> mPxlPileup_z; 
 			
-  vector<float> pileup_px;
-  vector<float> pileup_py;
-  vector<float> pileup_pz;
+  vector<Float_t> mPxlPileup_px;
+  vector<Float_t> mPxlPileup_py;
+  vector<Float_t> mPxlPileup_pz;
 
-  vector<int> pileup_key;
-  vector<int> pileup_vid;
+  vector<Int_t> mPxlPileup_key;
+  vector<Int_t> mPxlPileup_vid;
 
-  vector<float> pileup_de;
-  vector<float> pileup_ds;
+  vector<Float_t> mPxlPileup_de;
+  vector<Float_t> mPxlPileup_ds;
   
-  bool pileup_on;  //.. true: there's a pile file on the disk and will do
+  Bool_t mPxlPileup_on;  //.. true: there's a pile file on the disk and will do
 		   //.. pileup simulation. 
 		   //.. false: there's no pile up file on the disk and will 
 		   //.. do regular production
@@ -181,18 +164,4 @@ class StPixelFastSimMaker : public StMaker {
 
   ClassDef(StPixelFastSimMaker,1)   //StAF chain virtual base class for Makers
 };
-
-struct stripHit{
-	double localX;
-	double e;
-};
-
-struct istStrip{
-	vector<stripHit> stripHits;
-	double intercept;
-};
-
 #endif
-
-
-

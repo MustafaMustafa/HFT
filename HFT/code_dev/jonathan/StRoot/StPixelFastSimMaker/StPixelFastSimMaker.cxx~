@@ -375,7 +375,6 @@ Int_t StPixelFastSimMaker::Make()
 	    
 	    pxlHitCol->addHit(tempHit);
 	    LOG_DEBUG << *tempHit<<endm;
-	    //LOG_DEBUG << " layer : " << tempHit->layer() << endm;
 	  }
 	}
       }

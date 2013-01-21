@@ -1,21 +1,7 @@
 /*!
- * \class StRnDHit 
- * \author Mike Miller and Andrew Rose, Jan 2006
- */
-/***************************************************************************
- *
- * $Id: StRnDHit.cxx,v 2.1 2006/01/19 21:42:06 ullrich Exp $
- *
- * Author: Mike Miller and Andrew Rose, Jan 2006
- ***************************************************************************
- *
- * Description:  This is an experimental class and not final yet
- *
- ***************************************************************************
- *
- * $Log: StRnDHit.cxx,v $
- * Revision 2.1  2006/01/19 21:42:06  ullrich
- * Initial Revision.
+ * \class StPxlHit 
+ * \authors S. MArgetis, J. Bouchet, Jan 2013
+ * \Initial Revision.
  *
  **************************************************************************/
 #include "StPxlHit.h"
@@ -28,53 +14,44 @@ StPxlHit::~StPxlHit() { /* noop */ }
 
 StPxlHit::StPxlHit()
 {
-    mSector = mLadder = mWafer = -1;
-    mExtraByte1 = mExtraByte0 = 0;
-    mKey = mVolumeId = -1;
-    mDouble0 = mDouble1 = mDouble2 = mDouble3 = mDouble4 = 0.;
+  mSector = mLadder = mSensor = -1;
     mDetectorId = kUnknownId;
 }
 
 StPxlHit::StPxlHit(const StThreeVectorF& p,
                    const StThreeVectorF& e,
-                   unsigned int hw, float q, unsigned char c,
-	         unsigned short idTruth,  unsigned short quality,
-	         unsigned short id, StDetectorId dId)
-    : StHit(p, e, hw, q, c, idTruth, quality, id)
+                   unsigned int hw, float q, unsigned char c)
+    : StHit(p, e, hw, q, c)
 { 
-    mSector = mLadder = mWafer = -1;
-    mExtraByte0 = mExtraByte1 = 0;
-    
-    mKey = mVolumeId = -1;
-    
-    mDouble0 = mDouble1 = mDouble2 = mDouble3 = mDouble4 = 0.;
-    mDetectorId = dId;
+  mSector = mLadder = mSensor = -1;
+  mDetectorId = kUnknownId;
 }
 
 StDetectorId StPxlHit::detector() const {return mDetectorId;}
 
 void StPxlHit::setDetectorId(StDetectorId id) {mDetectorId = id;}
 
-double StPxlHit::localPosition(unsigned int i) const
+Float_t StPxlHit::localPosition(unsigned int i) const
 {
-	if (i<2)
+	if (i<3)
 		return mLocalPosition[i];
 	else
       return 0;
 }
  
 void
-StPxlHit::setLocalPosition(double u, double v)
+StPxlHit::setLocalPosition(float u, float v, float w)
 {
-	mLocalPosition[0] = u;
+	mLocalPosition[0] = u;	
 	mLocalPosition[1] = v;
+	mLocalPosition[2] = w;
 }
 
 ostream& operator<<(ostream& os, const StPxlHit& hit)
 {
     return os << "HFT Hit -I- \tSector:"<<hit.mSector<<" ladder: "<<hit.mLadder
-	    << " wafer: "<< hit.mWafer<<"\n\t\t"<<((StHit)hit)
-	    <<" \n\t\tExtraByte0: "<<hit.mExtraByte0<<" ExtraByte1: "<<hit.mExtraByte1
-	    <<"\n\t\tDoubles: "<< hit.mDouble0<< " "<<hit.mDouble1<<" "<<hit.mDouble2
-	    << hit.mDouble3 << " " << hit.mDouble4<<endl;
+	      << " sensor: "<< hit.mSensor <<" localPosition[0]/localPosition[1]/localPosition[2] : " <<hit.localPosition(0)
+	      <<"/"<<hit.localPosition(1)<<"/"<<hit.localPosition(2)
+	      <<" kDetectorId : " <<hit.detector()<<"\n\t\t"<<((StHit)hit)
+	      <<endl;
 }
