@@ -1,6 +1,6 @@
 /*
  *
- * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT
+ * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
  * 
  **********************************************************
@@ -130,11 +130,9 @@
 #include "StPxlHit.h"
 #include "StMcEvent.hh"
 #include "StMcHit.hh"
-#include "StMcIstHit.hh"
 #include "StMcPixelHit.hh"
 #include "StMcEventTypes.hh"
 #include <stdio.h>
-#include "tables/St_g2t_ist_hit_Table.h"
 #include "tables/St_g2t_pix_hit_Table.h"
 #include "tables/St_HitError_Table.h"
 #include "TGeoManager.h"
@@ -151,7 +149,7 @@ using namespace std;
 
 StPixelFastSimMaker::~StPixelFastSimMaker(){ /*noop*/ }
 
-int StPixelFastSimMaker::Init()
+Int_t StPixelFastSimMaker::Init()
 {
   LOG_INFO<<"StPixelFastSimMaker::Init()"<<endm;
   Int_t seed=time(NULL);
@@ -163,18 +161,13 @@ int StPixelFastSimMaker::Init()
 }
 
 //____________________________________________________________
-int StPixelFastSimMaker::InitRun(Int_t RunNo)
+Int_t StPixelFastSimMaker::InitRun(Int_t RunNo)
 {
   LOG_INFO<<"StPixelFastSimMaker::InitRun"<<endm;
 
   TDataSet *set = GetDataBase("Calibrations/tracker");
-  St_HitError *istTableSet = (St_HitError *)set->Find("ist1HitError");
   St_HitError *pixelTableSet = (St_HitError *)set->Find("PixelHitError");
   
-  HitError_st* istHitError = istTableSet->GetTable();
-  mResXIst1 = sqrt(istHitError->coeff[0]);
-  mResZIst1 = sqrt(istHitError->coeff[3]);
-
   HitError_st* pixelHitError = pixelTableSet->GetTable();
   mResXPix = sqrt(pixelHitError->coeff[0]);
   mResZPix = sqrt(pixelHitError->coeff[3]);
@@ -189,12 +182,12 @@ void StPixelFastSimMaker::loadPixPileUpHits()
 {
   LOG_INFO<<"+++ loading the PIXEL pileup files +++"<<endm;
 
-  mPxlPileup_on = true;
+  mPxlPileup_on = kTRUE;
 
   TFile f_pileup("pileup.root");
   if (f_pileup.IsZombie()) {
 
-    mPxlPileup_on = false;
+    mPxlPileup_on = kFALSE;
 
     LOG_INFO << "no PIXEL pileup file found. Will run with regular setup" << endm;
     return;
@@ -236,7 +229,7 @@ void StPixelFastSimMaker::loadPixPileUpHits()
 
   pileup_tree->GetEntry(0); //.. just one events
 
-  for(int ihit = 0; ihit<nhits; ihit++) {
+  for(Int_t ihit = 0; ihit<nhits; ihit++) {
     mPxlPileup_x.push_back(x[ihit]);
     mPxlPileup_y.push_back(y[ihit]);
     mPxlPileup_z.push_back(z[ihit]);
@@ -284,11 +277,8 @@ Int_t StPixelFastSimMaker::Make()
 
   TDataSetIter geant(GetInputDS("geant"));
   if (! gGeoManager) GetDataBase("VmcGeometry");
-  g2t_ist_hit_st* g2tIst=0;
   g2t_pix_hit_st* g2tPix=0;
-  St_g2t_ist_hit *g2t_ist_hit=(St_g2t_ist_hit *)geant("g2t_ist_hit");
   St_g2t_pix_hit *g2t_pix_hit=(St_g2t_pix_hit *)geant("g2t_pix_hit");
-  if(g2t_ist_hit) g2tIst=g2t_ist_hit->GetTable();
   if(g2t_pix_hit) g2tPix=g2t_pix_hit->GetTable();
 
   StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
@@ -388,99 +378,6 @@ Int_t StPixelFastSimMaker::Make()
     gMessMgr->Info() <<"No pixel hits found.\n";
   }
   
- /*   
-  // Don't use realistic hit errors for now. When we transit to smeared
-  // hits, this would be a good place to store offset info
-  StThreeVectorF mHitError(0.,0.,0.);
-
-      const StMcIstHitCollection* istHitCol = mcEvent->istHitCollection();
-      
-      //new simulator for new 1-layer design
-      Int_t id=0;
-      //Float_t smearedX,smearedZ;
-      TString Path("");
-      if(istHitCol){
-      LOG_INFO<<"ist hit collection found"<<endm;
-      Int_t nIsthits=istHitCol->numberOfHits();
-      LOG_DEBUG<<"there are "<<nIsthits<<" ist hits"<<endm;
-      vector<StMcIstHit*> ladderHits;
-      if(nIsthits){
-      if(istHitCol->layer(0)){
-      //simple simulator for perfect hits that merely converts from StMcIstHit to StRnDHit
-      //as of 11/21/08, the simulator now smears hits by hit resolutions taken from hit error tables
-      for(unsigned int kk=0;kk<istHitCol->layer(0)->hits().size();kk++){
-      StMcHit* mcH=istHitCol->layer(0)->hits()[kk];
-      StMcIstHit* mcI=dynamic_cast<StMcIstHit*>(mcH);
-      LOG_DEBUG<<"mc ist hit location x: "<<mcI->position().x()<<"; y: "<<mcI->position().y()<<"; z: "<<mcI->position().z()<<endm;
-      TString Path("");
-      Path=Form("/HALL_1/CAVE_1/IDSM_1/IBMO_1/IBAM_%i/IBLM_%i/IBSS_1",mcI->ladder(),mcI->wafer());
-      gGeoManager->RestoreMasterVolume();
-      gGeoManager->CdTop();
-      gGeoManager->cd(Path);
-      Double_t globalIstHitPos[3]={mcI->position().x(),mcI->position().y(),mcI->position().z()};
-      Double_t localIstHitPos[3]={0,0,0};
-      gGeoManager->GetCurrentMatrix()->MasterToLocal(globalIstHitPos,localIstHitPos);
-      smearedX=distortHit(localIstHitPos[0],mResXIst1,100);
-      smearedZ=distortHit(localIstHitPos[2],mResZIst1,100);
-      localIstHitPos[0]=smearedX;
-      localIstHitPos[2]=smearedZ;
-      Double_t smearedGlobalIstHitPos[3]={0,0,0};
-      gGeoManager->GetCurrentMatrix()->LocalToMaster(localIstHitPos,smearedGlobalIstHitPos);
-      StThreeVectorF gistpos(smearedGlobalIstHitPos);
-      StRnDHit* tempHit = new StRnDHit(gistpos, mHitError, 1, 1., 0, 1, 1, id++, kIstId);  
-      tempHit->setDetectorId(kIstId); 
-      tempHit->setVolumeId(mcI->volumeId());
-      tempHit->setKey(mcI->key());
-      tempHit->setLayer(mcI->layer());           
-      tempHit->setLadder(mcI->ladder());           
-      tempHit->setWafer(mcI->wafer());
-      tempHit->setIdTruth(g2tIst[kk].track_p,100);
-      LOG_DEBUG<<"ist hit volume id: "<<tempHit->volumeId()<<endm;
-      LOG_DEBUG<<"ist hit ladder/wafer: "<<tempHit->ladder()<<"/"<<tempHit->wafer()<<endm;
-      col->addHit(tempHit);
-      LOG_DEBUG<<"ist rnd hit location x: "<<tempHit->position().x()<<"; y: "<<tempHit->position().y()<<"; z: "<<tempHit->position().z()<<" idTruth = " << g2tIst[kk].track_p << endm;
-      }
-      }
-      }
-      }
-      else{
-      LOG_INFO <<"No Ist hits found."<<endm;
-      }
-      
-      const StMcFgtHitCollection* fgtHitCol = mcEvent->fgtHitCollection();
-      if (fgtHitCol)
-      {
-      Int_t nhits = fgtHitCol->numberOfHits();
-      if (nhits)
-      {
-      Int_t id = 0;
-      //StSPtrVecHit *cont = new StSPtrVecHit();
-      //rcEvent->addHitCollection(cont, # Name );
-      for (UInt_t k=0; k<fgtHitCol->numberOfLayers(); k++){
-      if (fgtHitCol->layer(k))
-      {
-      UInt_t nh = fgtHitCol->layer(k)->hits().size();
-      for (UInt_t i = 0; i < nh; i++) {
-      StMcHit *mcH = fgtHitCol->layer(k)->hits()[i];
-      StRnDHit* tempHit = new StRnDHit(mcH->position(), mHitError, 1, 1., 0, 1, 1, id++);
-      tempHit->setVolumeId(mcH->volumeId());
-      tempHit->setKey(mcH->key());
-      
-      StMcIstHit *mcI = dynamic_cast<StMcIstHit*>(mcH);
-      if(mcI){
-      tempHit->setLayer(mcI->layer());
-      tempHit->setLadder(mcI->ladder());
-      tempHit->setWafer(mcI->wafer());
-      //tempHit->setExtraByte0(mcI->side());
-      }
-      col->addHit(tempHit);
-      }
-      }
-      }
-      }
-      }
- */ 
-
   rcEvent->setPixelHitCollection(pxlHitCol);
   LOG_DEBUG <<" size of hit collection : " << pxlHitCol->numberOfHits() << endm;
 

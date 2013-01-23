@@ -1,7 +1,7 @@
 /*
  * $Id: StPixelFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $
  *
- * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT
+ * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
  * 
  **********************************************************
@@ -51,19 +51,13 @@
 /**
    \class StPixelFastSimMaker
 
-   \brief Class to simulate Pixel and Ist hits from Monte Carlo.
+   \brief Class to simulate Pixel hits from Monte Carlo.
 
-   The HFT and IST hits slow simulator will evolve over time. This class
-   has responsibility for creating StHit objects and storing them in the
-   appropriate container. The created container is then added to the
+   This class has the responsibility for creating StPxlHit objects and storing them in
+   the appropriate container. The created container is then added to the
    reconstructed event.
 
-   Currently (Jan, 2006), we simply store the perfect Monte Carlo position
-   for each hit. This will change as the simulations become more complex.
-   In particular, for the HFT gaussian smearing will be introduced as a
-   first approximation. For the IST, a more complicated simulator is needed
-   to account for ambiguities in hit recconstruction. That is not the
-   purpose of this maker.
+   Gaussian smearing of the perfect MC hit is stored in StPxlHit. 
 
    This class conforms to the STAR StMaker standards.
 */
@@ -89,11 +83,11 @@ class StPixelFastSimMaker : public StMaker {
   /* Please note: The destructor is empty. StEvent will own any hits
      created by this maker, and is responsible for cleanup.
   */
-  virtual       ~StPixelFastSimMaker();
+  virtual ~StPixelFastSimMaker();
 
 
   /* \brief This is called every event, and contains all the activity
-     of making StHit objects.
+     of making StPxlHit objects.
 
      Make() creates an StPxlHit object for every MChit, and fills the
      hit container. Hit container is passed to StEvent.
@@ -105,7 +99,7 @@ class StPixelFastSimMaker : public StMaker {
   /* \brief A random seed is passed to mRandom */
   virtual Int_t Init();
 
- /* \brief Smearing resolutions for PXL and IST are fetched here. */
+ /* \brief Smearing resolutions for PXL are fetched here. */
   virtual Int_t InitRun(Int_t);
   
   /* \brief Documentation method. GetCVS can be called from the chain, providing a list
@@ -131,12 +125,6 @@ class StPixelFastSimMaker : public StMaker {
  protected:
   StRandom* mRandom;
 
-  Double_t mResXIst1;
-  Double_t mResZIst1;
-  Double_t mResXIst2;
-  Double_t mResZIst2;
-  Double_t mResXIst3;
-  Double_t mResZIst3;
   Double_t mResZPix;
   Double_t mResXPix;
   Int_t mSmear; //to turn smearing on and off
