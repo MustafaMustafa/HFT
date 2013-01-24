@@ -54,10 +54,9 @@
    \brief Class to simulate Pixel hits from Monte Carlo.
 
    This class has the responsibility for creating StPxlHit objects and storing them in
-   the appropriate container. The created container is then added to the
-   reconstructed event.
+   StPxlHitCollection which is later added to StEvent.
 
-   Gaussian smearing of the perfect MC hit is stored in StPxlHit. 
+   StPxlHit is a Gaussian smeared StMcPixelHit. 
 
    This class conforms to the STAR StMaker standards.
 */
@@ -72,6 +71,7 @@
 #include <vector>
 class StRandom;
 class StMcPixelHitCollection;
+class StPixelPileupSimMaker;
 
 class StPixelFastSimMaker : public StMaker {
  public:
@@ -80,8 +80,8 @@ class StPixelFastSimMaker : public StMaker {
      with value "PixelFastSim"*/
   StPixelFastSimMaker(const Char_t *name="PixelFastSim") :StMaker(name){}
 
-  /* Please note: The destructor is empty. StEvent will own any hits
-     created by this maker, and is responsible for cleanup.
+  /* \brief StEvent will own any hits created by this maker, and is responsible for cleanup.
+   *        mPixelPileupSimMaker and mRandom are deleted here. 
   */
   virtual ~StPixelFastSimMaker();
 
@@ -96,7 +96,9 @@ class StPixelFastSimMaker : public StMaker {
   */
   virtual Int_t  Make();
 
-  /* \brief A random seed is passed to mRandom */
+  /* \brief A random seed is passed to mRandom 
+   *        and mPixelPileupSimMaker is created and initiated here.
+   */
   virtual Int_t Init();
 
  /* \brief Smearing resolutions for PXL are fetched here. */
@@ -112,42 +114,20 @@ class StPixelFastSimMaker : public StMaker {
   }
 
  private:
-  //.. load pileup hits ....
-  void loadPixPileUpHits();
-
-  //..add PIXEL pileup into the collection
-  void addPixPileUpHit(StMcPixelHitCollection* pixHitCol);
-
   //Routine to smear hit by resolution with gaussian, mean zero and width res
   Double_t distortHit(Double_t x, Double_t res, Double_t detLength);
 
 
- protected:
+ private:
   StRandom* mRandom;
+  StPixelPileupSimMaker* mPixelPileupSimMaker;
+
 
   Double_t mResZPix;
   Double_t mResXPix;
   Int_t mSmear; //to turn smearing on and off
 
- protected:
-  vector<Double_t> mPxlPileup_x; 
-  vector<Double_t> mPxlPileup_y; 
-  vector<Double_t> mPxlPileup_z; 
-			
-  vector<Float_t> mPxlPileup_px;
-  vector<Float_t> mPxlPileup_py;
-  vector<Float_t> mPxlPileup_pz;
-
-  vector<Int_t> mPxlPileup_key;
-  vector<Int_t> mPxlPileup_vid;
-
-  vector<Float_t> mPxlPileup_de;
-  vector<Float_t> mPxlPileup_ds;
-  
-  Bool_t mPxlPileup_on;  //.. true: there's a pile file on the disk and will do
-		   //.. pileup simulation. 
-		   //.. false: there's no pile up file on the disk and will 
-		   //.. do regular production
+  Bool_t mPxlPileup_on;  //.. true: if mPixelPilupSimMaker is initiated successfully. mFALSE otherwise
 
 
   ClassDef(StPixelFastSimMaker,1)   //StAF chain virtual base class for Makers

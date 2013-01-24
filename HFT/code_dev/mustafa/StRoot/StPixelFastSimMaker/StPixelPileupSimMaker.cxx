@@ -6,8 +6,9 @@
  **********************************************************
  */
 
-#include "StPixelPileUpSimMaker.h"
+#include "StPixelPileupSimMaker.h"
 #include "StMcPixelHit.hh"
+#include "StMcEventTypes.hh"
 #include <stdio.h>
 #include "TFile.h"
 #include "TTree.h"
@@ -19,26 +20,26 @@ ClassImp(StPixelPileupSimMaker)
   
 using namespace std;
 
-StPixelPileupSimMaker::~StPixelFastSimMaker(){ /*noop*/ }
+StPixelPileupSimMaker::~StPixelPileupSimMaker(){ /*noop*/ }
 
 Int_t StPixelPileupSimMaker::Init()
 {
   LOG_INFO<<"StPixelPileupSimMaker::Init()"<<endm;
   
-  return loadPixPileUpHits();
+  return (Int_t)loadPixPileUpHits();
 }
 //___________________________
-Int_t StPixelPileupSimMaker::loadPixPileUpHits()
+Bool_t StPixelPileupSimMaker::loadPixPileUpHits()
 {
   LOG_INFO<<"+++ loading the PIXEL pileup files +++"<<endm;
 
-  pxlPileup_on = 0;
+  Bool_t pxlPileup_on = kTRUE;
 
   TFile f_pileup("pileup.root");
   
   if (f_pileup.IsZombie()) 
   {
-    pxlPileup_on = 0;
+    pxlPileup_on = kFALSE;
     LOG_INFO << "no PIXEL pileup file found. Will run with regular setup" << endm;
     return pxlPileup_on;
   }
@@ -79,7 +80,7 @@ Int_t StPixelPileupSimMaker::loadPixPileUpHits()
 
   pileup_tree->GetEntry(0); //.. just one events
 
-  for(int ihit = 0; ihit<nhits; ihit++) 
+  for(Int_t ihit = 0; ihit<nhits; ihit++) 
   {
     mPxlPileup_x.push_back(x[ihit]);
     mPxlPileup_y.push_back(y[ihit]);
@@ -96,7 +97,7 @@ Int_t StPixelPileupSimMaker::loadPixPileUpHits()
     mPxlPileup_ds.push_back(ds[ihit]);
   }
 
-  pxlPileup_on = 1;
+  pxlPileup_on = kTRUE;
   return pxlPileup_on;
 }
 //____________________________________________________________

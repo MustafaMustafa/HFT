@@ -124,6 +124,7 @@
 
 #include "Stiostream.h"
 #include "StPixelFastSimMaker.h"
+#include "StPixelPileupSimMaker.h"
 #include "StHit.h"
 #include "StEventTypes.h"
 #include "StEvent.h"
@@ -147,8 +148,12 @@ ClassImp(StPixelFastSimMaker)
   
 using namespace std;
 
-StPixelFastSimMaker::~StPixelFastSimMaker(){ /*noop*/ }
-
+StPixelFastSimMaker::~StPixelFastSimMaker()
+{
+    if(mPixelPileupSimMaker) delete mPixelPileupSimMaker;
+    if(mRandom) delete mRandom;
+}    
+//____________________________________________________________
 Int_t StPixelFastSimMaker::Init()
 {
   LOG_INFO<<"StPixelFastSimMaker::Init()"<<endm;
@@ -157,6 +162,9 @@ Int_t StPixelFastSimMaker::Init()
   mRandom->setSeed(seed);
  
   mSmear=1;
+
+  mPixelPileupSimMaker = new StPixelPileupSimMaker;
+  mPxlPileup_on = (Bool_t)mPixelPileupSimMaker->Init();
   return kStOk;
 }
 
@@ -172,96 +180,7 @@ Int_t StPixelFastSimMaker::InitRun(Int_t RunNo)
   mResXPix = sqrt(pixelHitError->coeff[0]);
   mResZPix = sqrt(pixelHitError->coeff[3]);
 
-  loadPixPileUpHits(); //.. load the pile up hits for PIXEL
-
   return kStOk;
-}
-
-//___________________________
-void StPixelFastSimMaker::loadPixPileUpHits()
-{
-  LOG_INFO<<"+++ loading the PIXEL pileup files +++"<<endm;
-
-  mPxlPileup_on = kTRUE;
-
-  TFile f_pileup("pileup.root");
-  if (f_pileup.IsZombie()) {
-
-    mPxlPileup_on = kFALSE;
-
-    LOG_INFO << "no PIXEL pileup file found. Will run with regular setup" << endm;
-    return;
-  }
-
-  LOG_INFO<<"+++ Loaded pileup.root for PIXEL pileup simulation +++"<<endm;
-
-  TTree* pileup_tree = (TTree*)f_pileup.Get("pileup_tree");
-
-  const Int_t maxhit = 200000;
-  Float_t x[maxhit], y[maxhit], z[maxhit], px[maxhit], py[maxhit], pz[maxhit], de[maxhit], ds[maxhit];
-  Long_t key[maxhit], vid[maxhit];
-  Int_t layer[maxhit], nhits;
-
-  TBranch *b_x = pileup_tree->GetBranch("x");
-  TBranch *b_y = pileup_tree->GetBranch("y");
-  TBranch *b_z = pileup_tree->GetBranch("z");
-  TBranch *b_px = pileup_tree->GetBranch("px");
-  TBranch *b_py = pileup_tree->GetBranch("py");
-  TBranch *b_pz = pileup_tree->GetBranch("pz");
-  TBranch *b_de = pileup_tree->GetBranch("de");
-  TBranch *b_ds = pileup_tree->GetBranch("ds");
-  TBranch *b_key = pileup_tree->GetBranch("key");
-  TBranch *b_vid = pileup_tree->GetBranch("vid");
-  TBranch *b_layer = pileup_tree->GetBranch("layer");
-  TBranch *b_nhits = pileup_tree->GetBranch("nhits");
-  b_x->SetAddress(x);
-  b_y->SetAddress(y);
-  b_z->SetAddress(z);
-  b_px->SetAddress(px);
-  b_py->SetAddress(py);
-  b_pz->SetAddress(pz);
-  b_de->SetAddress(de);
-  b_ds->SetAddress(de);
-  b_key->SetAddress(key);
-  b_vid->SetAddress(vid);
-  b_layer->SetAddress(layer);
-  b_nhits->SetAddress(&nhits);
-
-  pileup_tree->GetEntry(0); //.. just one events
-
-  for(Int_t ihit = 0; ihit<nhits; ihit++) {
-    mPxlPileup_x.push_back(x[ihit]);
-    mPxlPileup_y.push_back(y[ihit]);
-    mPxlPileup_z.push_back(z[ihit]);
-
-    mPxlPileup_px.push_back(px[ihit]);
-    mPxlPileup_py.push_back(py[ihit]);
-    mPxlPileup_pz.push_back(pz[ihit]);
-
-    mPxlPileup_key.push_back(key[ihit]);
-    mPxlPileup_vid.push_back(vid[ihit]);
-
-    mPxlPileup_de.push_back(de[ihit]);
-    mPxlPileup_ds.push_back(ds[ihit]);
-  }
-}
-//____________________________________________________________
-void StPixelFastSimMaker::addPixPileUpHit(StMcPixelHitCollection* pixHitCol)
-{
-  for(UInt_t i = 0; i<mPxlPileup_x.size(); i++) {
-
-    StThreeVectorD pos(mPxlPileup_x[i], mPxlPileup_y[i], mPxlPileup_z[i]);
-    StThreeVectorF mom(mPxlPileup_px[i], mPxlPileup_py[i], mPxlPileup_pz[i]);
-
-    Float_t de = mPxlPileup_de[i]; 
-    Float_t ds = mPxlPileup_ds[i];
-
-    Int_t key = mPxlPileup_key[i];
-    Int_t vid = mPxlPileup_vid[i];
-
-    StMcPixelHit* pixhit = new StMcPixelHit(pos, mom, de, ds, key, vid, 0);
-    pixHitCol->addHit(pixhit);
-  }
 }
 //____________________________________________________________
 
@@ -294,14 +213,14 @@ Int_t StPixelFastSimMaker::Make()
 
   if (mcPxlHitCol)
   {
-    if(mPxlPileup_on) addPixPileUpHit(mcPxlHitCol); //.. add the pileup hits into the collection
+    if(mPxlPileup_on) mPixelPileupSimMaker->addPixPileUpHit(mcPxlHitCol); //.. add the pileup hits into the collection
     
     Int_t nMcHits = mcPxlHitCol->numberOfHits();
     LOG_DEBUG<<"There are "<<nMcHits<<" mc pixel hits"<<endm;
     
     if (nMcHits)
     {
-      Int_t id = pxlHitCol->numberOfHits();
+      //Int_t id = pxlHitCol->numberOfHits();
 
       for (UInt_t iSec=0; iSec<mcPxlHitCol->numberOfLayers(); iSec++)
       {
@@ -337,12 +256,17 @@ Int_t StPixelFastSimMaker::Make()
 	    Double_t localPixHitPos[3]  = {0,0,0};
 	    gGeoManager->GetCurrentMatrix()->MasterToLocal(globalPixHitPos,localPixHitPos);
 
+            LOG_DEBUG<<endm;
+            LOG_DEBUG<<"globalPixHitPos = "<<globalPixHitPos[0]<<" "<<globalPixHitPos[1]<<" "<<globalPixHitPos[2]<<endm;
+            LOG_DEBUG<<"localPixHitPos = "<<localPixHitPos[0]<<" "<<localPixHitPos[1]<<" "<<localPixHitPos[2]<<endm;
 	    smearedX=distortHit(localPixHitPos[0],mResXPix,100);
 	    smearedY=distortHit(localPixHitPos[1],mResXPix,100);
 	    smearedZ=distortHit(localPixHitPos[2],mResZPix,100);
 	    localPixHitPos[0]=smearedX;
 	    localPixHitPos[1]=smearedY;
 	    localPixHitPos[2]=smearedZ;
+            LOG_DEBUG<<"smearedlocal = "<<localPixHitPos[0]<<" "<<localPixHitPos[1]<<" "<<localPixHitPos[2]<<endm;
+            LOG_DEBUG<<endm;
 	    Double_t smearedGlobalPixHitPos[3]={0,0,0};
 	    gGeoManager->GetCurrentMatrix()->LocalToMaster(localPixHitPos,smearedGlobalPixHitPos);
 
@@ -365,7 +289,6 @@ Int_t StPixelFastSimMaker::Make()
 	    
 	    pxlHitCol->addHit(tempHit);
 	    LOG_DEBUG << *tempHit<<endm;
-	    //LOG_DEBUG << " layer : " << tempHit->layer() << endm;
 	  }
 	}
       }

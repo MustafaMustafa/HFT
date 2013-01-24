@@ -50,12 +50,12 @@ class StPixelPileupSimMaker : public StMaker
     return cvs;
   }
 
- private:
-  //.. load pileup hits ....
-  Int_t loadPixPileUpHits();
-
   //..add PIXEL pileup into the collection
   void addPixPileUpHit(StMcPixelHitCollection* pixHitCol);
+
+ private:
+  //.. load pileup hits ....
+  Bool_t loadPixPileUpHits();
 
  protected:
   vector<Double_t> mPxlPileup_x; 
