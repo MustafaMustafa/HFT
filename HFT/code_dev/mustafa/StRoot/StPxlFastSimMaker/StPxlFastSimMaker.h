@@ -1,5 +1,5 @@
 /*
- * $Id: StPixelFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $
+ * $Id: StPxlFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $
  *
  * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
@@ -49,7 +49,7 @@
  */
 
 /**
-   \class StPixelFastSimMaker
+   \class StPxlFastSimMaker
 
    \brief Class to simulate Pixel hits from Monte Carlo.
 
@@ -61,8 +61,8 @@
    This class conforms to the STAR StMaker standards.
 */
 
-#ifndef STAR_StPixelFastSimMaker
-#define STAR_StPixelFastSimMaker
+#ifndef STAR_StPxlFastSimMaker
+#define STAR_StPxlFastSimMaker
 #ifndef StMaker_H
 #include "StMaker.h"
 #endif
@@ -71,20 +71,19 @@
 #include <vector>
 class StRandom;
 class StMcPixelHitCollection;
-class StPixelPileupSimMaker;
 
-class StPixelFastSimMaker : public StMaker 
+class StPxlFastSimMaker : public StMaker 
 {
  public:
 
   /*! \brief Constructor uses standard Maker text naming convention,
-   *  with value "PixelFastSim"*/
-  StPixelFastSimMaker(const Char_t *name="PixelFastSim") :StMaker(name){}
+   *  with value "PxlFastSim"*/
+  StPxlFastSimMaker(const Char_t *name="PxlFastSim") :StMaker(name){}
 
   /*! \brief StEvent will own any hits created by this maker, and is responsible for cleanup.
-   *        mPixelPileupSimMaker and mRandom are deleted here. 
+   *        mRandom is deleted here. 
   */
-  virtual ~StPixelFastSimMaker();
+  virtual ~StPxlFastSimMaker();
 
 
   /*! \brief This is called every event, and contains all the activity
@@ -113,7 +112,7 @@ class StPixelFastSimMaker : public StMaker
   */
   virtual const char *GetCVS() const
   {
-    static const char cvs[]="Tag $Name:  $ $Id: StPixelFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $ built "__DATE__" "__TIME__ ; 
+    static const char cvs[]="Tag $Name:  $ $Id: StPxlFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $ built "__DATE__" "__TIME__ ; 
     return cvs;
   }
 
@@ -124,16 +123,14 @@ class StPixelFastSimMaker : public StMaker
 
  private:
   StRandom* mRandom;
-  StPixelPileupSimMaker* mPixelPileupSimMaker;
-
 
   Double_t mResZPix;
   Double_t mResXPix;
   Int_t mSmear; //to turn smearing on and off
 
-  Bool_t mPxlPileup_on;  //.. true: if mPixelPilupSimMaker is initiated successfully. mFALSE otherwise
+  Bool_t mPxlPileup_on;  //.. true: if mPxlPilupSimMaker has been initiated successfully. mFALSE otherwise
 
 
-  ClassDef(StPixelFastSimMaker,1)   //StAF chain virtual base class for Makers
+  ClassDef(StPxlFastSimMaker,1)   //StAF chain virtual base class for Makers
 };
 #endif

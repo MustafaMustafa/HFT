@@ -4,7 +4,7 @@
  *
  * 
  **********************************************************
- * $Log: StPxlFastSimMaker.cxx,v $
+ * $Log: StPixelFastSimMaker.cxx,v $
  * Revision 1.44  2012/12/18 18:46:59  margetis
  * update for DEV13 geometry
  *
@@ -123,8 +123,7 @@
  */
 
 #include "Stiostream.h"
-#include "StPixelFastSimMaker.h"
-#include "StPixelPileupSimMaker.h"
+#include "StPxlFastSimMaker.h"
 #include "StHit.h"
 #include "StEventTypes.h"
 #include "StEvent.h"
@@ -143,35 +142,32 @@
 #include "TFile.h"
 #include "TTree.h"
 
-ClassImp(StPixelFastSimMaker)
+ClassImp(StPxlFastSimMaker)
 
   
 using namespace std;
 
-StPixelFastSimMaker::~StPixelFastSimMaker()
+StPxlFastSimMaker::~StPxlFastSimMaker()
 {
-    if(mPixelPileupSimMaker) delete mPixelPileupSimMaker;
     if(mRandom) delete mRandom;
 }    
 //____________________________________________________________
-Int_t StPixelFastSimMaker::Init()
+Int_t StPxlFastSimMaker::Init()
 {
-  LOG_INFO<<"StPixelFastSimMaker::Init()"<<endm;
+  LOG_INFO<<"StPxlFastSimMaker::Init()"<<endm;
   Int_t seed=time(NULL);
   mRandom=new StRandom();
   mRandom->setSeed(seed);
  
   mSmear=1;
 
-  mPixelPileupSimMaker = new StPixelPileupSimMaker;
-  mPxlPileup_on = (Bool_t)mPixelPileupSimMaker->Init();
   return kStOk;
 }
 
 //____________________________________________________________
-Int_t StPixelFastSimMaker::InitRun(Int_t RunNo)
+Int_t StPxlFastSimMaker::InitRun(Int_t RunNo)
 {
-  LOG_INFO<<"StPixelFastSimMaker::InitRun"<<endm;
+  LOG_INFO<<"StPxlFastSimMaker::InitRun"<<endm;
 
   TDataSet *set = GetDataBase("Calibrations/tracker");
   St_HitError *pixelTableSet = (St_HitError *)set->Find("PixelHitError");
@@ -184,9 +180,9 @@ Int_t StPixelFastSimMaker::InitRun(Int_t RunNo)
 }
 //____________________________________________________________
 
-Int_t StPixelFastSimMaker::Make()
+Int_t StPxlFastSimMaker::Make()
 {
-  LOG_INFO<<"StPixelFastSimMaker::Make()"<<endm;
+  LOG_INFO<<"StPxlFastSimMaker::Make()"<<endm;
 
   // Get the input data structures from StEvent and StMcEvent
   StEvent* rcEvent =  (StEvent*) GetInputDS("StEvent");
@@ -203,7 +199,7 @@ Int_t StPixelFastSimMaker::Make()
   StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
   if (!pxlHitCol)
   {
-    gMessMgr->Info()<<"StPixelFastSimMaker -E- no PixelHitCollection!\n";
+    gMessMgr->Info()<<"StPxlFastSimMaker -E- no PixelHitCollection!\n";
     abort();
   }
 
@@ -213,7 +209,7 @@ Int_t StPixelFastSimMaker::Make()
 
   if (mcPxlHitCol)
   {
-    if(mPxlPileup_on) mPixelPileupSimMaker->addPixPileUpHit(mcPxlHitCol); //.. add the pileup hits into the collection
+    //if(mPxlPileup_on) mPixelPileupSimMaker->addPixPileUpHit(mcPxlHitCol); //.. add the pileup hits into the collection
     
     Int_t nMcHits = mcPxlHitCol->numberOfHits();
     LOG_DEBUG<<"There are "<<nMcHits<<" mc pixel hits"<<endm;
@@ -308,7 +304,7 @@ Int_t StPixelFastSimMaker::Make()
 }
 
 //____________________________________________________________
-Double_t StPixelFastSimMaker::distortHit(Double_t x, Double_t res, Double_t detLength)
+Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t detLength)
 {
   Double_t test;
 
