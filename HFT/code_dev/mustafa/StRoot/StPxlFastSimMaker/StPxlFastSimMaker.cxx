@@ -124,6 +124,7 @@
 
 #include "Stiostream.h"
 #include "StPxlFastSimMaker.h"
+#include "../StPxlUtil/StPxlPileupSimMaker.h"
 #include "StHit.h"
 #include "StEventTypes.h"
 #include "StEvent.h"
@@ -155,10 +156,11 @@ StPxlFastSimMaker::~StPxlFastSimMaker()
 Int_t StPxlFastSimMaker::Init()
 {
   LOG_INFO<<"StPxlFastSimMaker::Init()"<<endm;
+
   Int_t seed=time(NULL);
   mRandom=new StRandom();
   mRandom->setSeed(seed);
- 
+
   mSmear=1;
 
   return kStOk;
@@ -175,6 +177,15 @@ Int_t StPxlFastSimMaker::InitRun(Int_t RunNo)
   HitError_st* pixelHitError = pixelTableSet->GetTable();
   mResXPix = sqrt(pixelHitError->coeff[0]);
   mResZPix = sqrt(pixelHitError->coeff[3]);
+
+  mPileupHitsAvailable = kFALSE;
+  mPxlPileupSimMaker = (StPxlPileupSimMaker*)GetMaker("pxlPileupSimMaker");
+  if(!mPxlPileupSimMaker){LOG_INFO << "No StPxlPileupSimMaker in chain" <<endm;}
+  else
+  {
+	  LOG_INFO<< "StPxlPileupSimMaker in chain and fetched" <<endm;
+	  mPileupHitsAvailable = mPxlPileupSimMaker->pileupHitsAvailable();
+  }
 
   return kStOk;
 }
@@ -209,7 +220,7 @@ Int_t StPxlFastSimMaker::Make()
 
   if (mcPxlHitCol)
   {
-    //if(mPxlPileup_on) mPixelPileupSimMaker->addPixPileUpHit(mcPxlHitCol); //.. add the pileup hits into the collection
+    if(mPileupHitsAvailable) mPxlPileupSimMaker->addPxlPileupHit(mcPxlHitCol); //.. add the pileup hits into the collection
     
     Int_t nMcHits = mcPxlHitCol->numberOfHits();
     LOG_DEBUG<<"There are "<<nMcHits<<" mc pixel hits"<<endm;

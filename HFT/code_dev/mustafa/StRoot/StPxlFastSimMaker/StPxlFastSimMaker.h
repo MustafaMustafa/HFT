@@ -71,14 +71,15 @@
 #include <vector>
 class StRandom;
 class StMcPixelHitCollection;
+class StPxlPileupSimMaker;
 
 class StPxlFastSimMaker : public StMaker 
 {
  public:
 
   /*! \brief Constructor uses standard Maker text naming convention,
-   *  with value "PxlFastSim"*/
-  StPxlFastSimMaker(const Char_t *name="PxlFastSim") :StMaker(name){}
+   *  with value "pxlFastSim"*/
+  StPxlFastSimMaker(const Char_t *name="pxlFastSim") :StMaker(name){}
 
   /*! \brief StEvent will own any hits created by this maker, and is responsible for cleanup.
    *        mRandom is deleted here. 
@@ -123,13 +124,13 @@ class StPxlFastSimMaker : public StMaker
 
  private:
   StRandom* mRandom;
+  StPxlPileupSimMaker* mPxlPileupSimMaker;
+
+  Bool_t mPileupHitsAvailable;
 
   Double_t mResZPix;
   Double_t mResXPix;
   Int_t mSmear; //to turn smearing on and off
-
-  Bool_t mPxlPileup_on;  //.. true: if mPxlPilupSimMaker has been initiated successfully. mFALSE otherwise
-
 
   ClassDef(StPxlFastSimMaker,1)   //StAF chain virtual base class for Makers
 };
