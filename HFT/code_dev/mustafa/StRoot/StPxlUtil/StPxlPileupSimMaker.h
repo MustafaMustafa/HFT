@@ -1,7 +1,9 @@
 /**
    \class StPxlPileupSimMaker
 
-   \brief Class to add PXL pile up hits
+   \brief A utility class to add PXL pile up hits. 
+
+   This class is to be used by any PXL simulator (e.g. StPxlFastSimMaker) to add pileup hits
   
    This class conforms to the STAR StMaker standards.
   
@@ -21,8 +23,8 @@ class StPxlPileupSimMaker : public StMaker
  public:
 
   /*! \brief Constructor uses standard Maker text naming convention,
-   *  with value "PxlPileupSim"*/
-  StPxlPileupSimMaker(const Char_t *name="PxlPileupSim") :StMaker(name){}
+   *  with value "pxlPileupSim"*/
+  StPxlPileupSimMaker(const Char_t *name="pxlPileupSimMaker") :StMaker(name){}
 
   /*! \brief The destructor is empty. Nothing is owned by this class. */ 
   virtual ~StPxlPileupSimMaker();
@@ -35,8 +37,6 @@ class StPxlPileupSimMaker : public StMaker
   virtual Int_t  Make();
 
   /*! \brief loads the pile hits. 
-   * 
-   *  Returns 1 if pileup hits were loaded successfully. 0 otherwise. 
    */
   virtual Int_t Init();
 
@@ -50,13 +50,18 @@ class StPxlPileupSimMaker : public StMaker
   }
 
   /*! \brief This adds PXL pileup hits into the collection */
-  void addPxlPileUpHit(StMcPixelHitCollection* mcPxlHitCol);
+  void addPxlPileupHit(StMcPixelHitCollection* mcPxlHitCol);
 
- private:
-  //.. load pileup hits ....
-  Bool_t loadPxlPileUpHits();
+  /*! \brief returns kTRUE if pilehits were loaded successfully, kFALSE otherwise */
+  inline Bool_t pileupHitsAvailable(){return mPileupHitsAvailable;}
+ 
 
 private:
+  //! .. load pileup hits ....
+  void loadPxlPileupHits();
+
+private:
+  Bool_t mPileupHitsAvailable;
   vector<Double_t> mPxlPileup_x; 
   vector<Double_t> mPxlPileup_y; 
   vector<Double_t> mPxlPileup_z; 
@@ -70,7 +75,6 @@ private:
 
   vector<Float_t> mPxlPileup_de;
   vector<Float_t> mPxlPileup_ds;
-  
 
   ClassDef(StPxlPileupSimMaker,1)   //StAF chain virtual base class for Makers
 };

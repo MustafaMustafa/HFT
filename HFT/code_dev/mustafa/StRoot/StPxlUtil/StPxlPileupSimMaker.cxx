@@ -26,22 +26,24 @@ Int_t StPxlPileupSimMaker::Init()
 {
   LOG_INFO<<"StPxlPileupSimMaker::Init()"<<endm;
   
-  return (Int_t)loadPxlPileUpHits();
+  loadPxlPileupHits();
+
+  return StMaker::Init();
 }
 //___________________________
-Bool_t StPxlPileupSimMaker::loadPxlPileUpHits()
+void StPxlPileupSimMaker::loadPxlPileupHits()
 {
   LOG_INFO<<"+++ loading the PXL pileup files +++"<<endm;
 
-  Bool_t pxlPileup_on = kTRUE;
+  mPileupHitsAvailable = kTRUE;
 
   TFile f_pileup("pileup.root");
   
   if (f_pileup.IsZombie()) 
   {
-    pxlPileup_on = kFALSE;
+    mPileupHitsAvailable = kFALSE;
     LOG_INFO << "no PXL pileup file found. Will run with regular setup" << endm;
-    return pxlPileup_on;
+    return;
   }
 
   LOG_INFO<<"+++ Loaded pileup.root for PXL pileup simulation +++"<<endm;
@@ -97,11 +99,10 @@ Bool_t StPxlPileupSimMaker::loadPxlPileUpHits()
     mPxlPileup_ds.push_back(ds[ihit]);
   }
 
-  pxlPileup_on = kTRUE;
-  return pxlPileup_on;
+  mPileupHitsAvailable = kTRUE;
 }
 //____________________________________________________________
-void StPxlPileupSimMaker::addPxlPileUpHit(StMcPixelHitCollection* mcPxlHitCol)
+void StPxlPileupSimMaker::addPxlPileupHit(StMcPixelHitCollection* mcPxlHitCol)
 {
   for(UInt_t i = 0; i<mPxlPileup_x.size(); i++) 
   {
@@ -117,6 +118,8 @@ void StPxlPileupSimMaker::addPxlPileUpHit(StMcPixelHitCollection* mcPxlHitCol)
     StMcPixelHit* pxlhit = new StMcPixelHit(pos, mom, de, ds, key, vid, 0);
     mcPxlHitCol->addHit(pxlhit);
   }
+
+  LOG_DEBUG<<"pilup hits added."<<endm;
 }
 //____________________________________________________________
 
