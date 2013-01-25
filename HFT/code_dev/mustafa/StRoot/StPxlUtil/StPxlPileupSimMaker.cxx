@@ -121,11 +121,3 @@ void StPxlPileupSimMaker::addPxlPileupHit(StMcPixelHitCollection* mcPxlHitCol)
 
   LOG_DEBUG<<"pilup hits added."<<endm;
 }
-//____________________________________________________________
-
-Int_t StPxlPileupSimMaker::Make()
-{
-  LOG_INFO<<"StPxlPileupSimMaker::Make()"<<endm;
-
-  return kStOK;
-}

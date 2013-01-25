@@ -34,7 +34,7 @@ class StPxlPileupSimMaker : public StMaker
    * 
    *  Returns kStOk always.
   */
-  virtual Int_t  Make();
+  //virtual Int_t  Make();
 
   /*! \brief loads the pile hits. 
    */
@@ -52,7 +52,7 @@ class StPxlPileupSimMaker : public StMaker
   /*! \brief This adds PXL pileup hits into the collection */
   void addPxlPileupHit(StMcPixelHitCollection* mcPxlHitCol);
 
-  /*! \brief returns kTRUE if pilehits were loaded successfully, kFALSE otherwise */
+  /*! \brief returns kTRUE if pileuphits were loaded successfully, kFALSE otherwise */
   inline Bool_t pileupHitsAvailable(){return mPileupHitsAvailable;}
  
 
