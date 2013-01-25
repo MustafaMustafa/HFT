@@ -53,7 +53,7 @@
 
    \brief Class to simulate Pixel hits from Monte Carlo.
 
-   This class has the responsibility for creating StPxlHit objects and storing them in
+   This class has the responsibility to create StPxlHit objects and store them in
    StPxlHitCollection which is later added to StEvent.
 
    StPxlHit is a Gaussian smeared StMcPixelHit. 
