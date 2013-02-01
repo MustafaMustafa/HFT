@@ -229,7 +229,7 @@ Int_t StPxlFastSimMaker::Make()
     {
       //Int_t id = pxlHitCol->numberOfHits();
 
-      for (UInt_t iSec=0; iSec<mcPxlHitCol->numberOfLayers(); iSec++)
+      for (UInt_t iSec=0; iSec<mcPxlHitCol->numberOfLayers(); iSec++) // As of 1/25/2013, layer of StMcPixelHitCollection is actually a sector
       {
 	if (mcPxlHitCol->layer(iSec))
         {
@@ -266,9 +266,9 @@ Int_t StPxlFastSimMaker::Make()
             LOG_DEBUG<<endm;
             LOG_DEBUG<<"globalPixHitPos = "<<globalPixHitPos[0]<<" "<<globalPixHitPos[1]<<" "<<globalPixHitPos[2]<<endm;
             LOG_DEBUG<<"localPixHitPos = "<<localPixHitPos[0]<<" "<<localPixHitPos[1]<<" "<<localPixHitPos[2]<<endm;
-	    smearedX=distortHit(localPixHitPos[0],mResXPix,100);
-	    smearedY=distortHit(localPixHitPos[1],mResXPix,100);
-	    smearedZ=distortHit(localPixHitPos[2],mResZPix,100);
+	    smearedX=distortHit(localPixHitPos[0],mResXPix,PXL_MAX_X_CORD);
+	    smearedY=distortHit(localPixHitPos[1],mResXPix,PXL_MAX_Y_CORD);
+	    smearedZ=distortHit(localPixHitPos[2],mResZPix,0.5); // Not properly constrained yet
 	    localPixHitPos[0]=smearedX;
 	    localPixHitPos[1]=smearedY;
 	    localPixHitPos[2]=smearedZ;
@@ -315,7 +315,7 @@ Int_t StPxlFastSimMaker::Make()
 }
 
 //____________________________________________________________
-Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t detLength)
+Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t sensorLenght)
 {
   Double_t test;
 
@@ -323,7 +323,7 @@ Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t detLen
   {
     test = x + mRandom->gauss(0,res);
 
-    while( fabs(test) > detLength)
+    while( test <0 || test > sensorLenght)
     {
       test = x + mRandom->gauss(0,res);
     }

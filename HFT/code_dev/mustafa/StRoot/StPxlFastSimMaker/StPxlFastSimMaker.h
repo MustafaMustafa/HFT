@@ -73,6 +73,12 @@ class StRandom;
 class StMcPixelHitCollection;
 class StPxlPileupSimMaker;
 
+//! coordinates of PXL sensor active area to restrict smeared hits to active area
+//! see doc/PXL_ultimate_sensor_flemming.pdf
+const Double_t PXL_MAX_X_CORD = 2.0220;
+const Double_t PXL_MAX_Y_CORD = 2.2710;
+
+
 class StPxlFastSimMaker : public StMaker 
 {
  public:
@@ -119,7 +125,7 @@ class StPxlFastSimMaker : public StMaker
 
  private:
   //Routine to smear hit by resolution with gaussian, mean zero and width res
-  Double_t distortHit(Double_t x, Double_t res, Double_t detLength);
+  Double_t distortHit(Double_t x, Double_t res, Double_t sensorLenght);
 
 
  private:
