@@ -50,7 +50,6 @@ public:
   ULong_t sector() const {return mVolumeId/1000000;}
   ULong_t ladder() const {return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
   ULong_t sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
-  UInt_t  hardwarePosition() const {return sector()*10 + ladder;}
   UShort_t  idTruth() const;
   virtual void Print(Option_t *option="") const; // *MENU* 
 
