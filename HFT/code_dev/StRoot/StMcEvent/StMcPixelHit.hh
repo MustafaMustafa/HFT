@@ -43,17 +43,29 @@ public:
   StMcPixelHit(g2t_pix_hit_st* pt) : 
     StMcHit(StThreeVectorF(pt->x[0], pt->x[1], pt->x[2]),
 	    StThreeVectorF(pt->p[0], pt->p[1], pt->p[2]), 
-	    pt->de, pt->ds, pt->tof, pt->id, pt->volume_id, 0) {}
+	    pt->de, pt->ds, pt->tof, pt->id, pt->volume_id, 0) {mIdTruth=pt->track_p;}
   ~StMcPixelHit() {}
-  ULong_t layer() const {return mVolumeId/1000000;}
-  ULong_t ladder() const { return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
+
+  // Get methods
+  ULong_t sector() const {return mVolumeId/1000000;}
+  ULong_t ladder() const {return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
+  ULong_t sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
+  UInt_t  hardwarePosition() const {return sector()*10 + ladder;}
+  UShort_t  idTruth() const;
   virtual void Print(Option_t *option="") const; // *MENU* 
+
+  void setIdTruth(const UShort_t id);
+protected:
+    UShort_t mIdTruth;
   
 private:
-  ClassDef(StMcPixelHit,2)
+  ClassDef(StMcPixelHit,3)
 };
 
 ostream&  operator<<(ostream& os, const StMcPixelHit&);
 
+inline UShort_t StMcPixelHit::idTruth() const {return mIdTruth;} 
+
+inline void StMcPixelHit::setIdTruth(const UShort_t id) {mIdTruth=id;}
 
 #endif
