@@ -122,26 +122,35 @@
  *
  */
 
-#include "StPxlFastSim.h"
-#include "StHit.h"
-#include "StPxlHit.h"
-#include "StMcPixelHit.hh"
 #include <stdio.h>
-#include "tables/St_g2t_pix_hit_Table.h"
-#include "StarClassLibrary/StRandom.hh"
 
+#include "StMessMgr.h" 
+#include "Stypes.h"
+#include "Stiostream.h"
+#include "StPxlFastSim.h"
+#include "StEvent/StPxlHit.h"
+#include "StEvent/StPxlHitCollection.h"
+#include "StMcEvent/StMcPixelHit.hh"
+#include "StMcEvent/StMcPixelHitCollection.hh"
+#include "tables/St_g2t_pix_hit_Table.h"
+#include "tables/St_HitError_Table.h"
+#include "StarClassLibrary/StRandom.hh"
+#include "TGeoManager.h"
+#include "TGeoMatrix.h"
   
+#include "TDataSet.h"
+
 StPxlFastSim::~StPxlFastSim()
 {
     if(mRandom) delete mRandom;
 }    
 //____________________________________________________________
-Int_t StPxlFastSim::init(const TDataset& calib_db)
+Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
 {
   LOG_INFO<<"StPxlFastSim::init()"<<endm;
 
   Int_t seed=time(NULL);
-  mRandom=new StRandom();
+  if(!mRandom) mRandom = new StRandom();
   mRandom->setSeed(seed);
 
   St_HitError *pixelTableSet = (St_HitError*)calib_db.Find("PixelHitError");
@@ -153,38 +162,39 @@ Int_t StPxlFastSim::init(const TDataset& calib_db)
   return kStOk;
 }
 //____________________________________________________________
-Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol, StPxlHitCollection& pxlHitCol, const g2t_pix_hit_st& g2tPix)
+Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol, StPxlHitCollection& pxlHitCol)
 {
   Float_t smearedX=0,smearedY=0,smearedZ=0;
 
-    Int_t nMcHits = mcPxlHitCol->numberOfHits();
+    Int_t nMcHits = mcPxlHitCol.numberOfHits();
     LOG_DEBUG<<"There are "<<nMcHits<<" mc pixel hits"<<endm;
     
     if (nMcHits)
     {
-      for(UInt_t iSec=0; iSec<mcPxlHitCol->numberOfLayers(); iSec++) // As of 1/25/2013, layer of StMcPixelHitCollection is actually a sector
+      for(UInt_t iSec=0; iSec<mcPxlHitCol.numberOfSectors(); iSec++) // As of 1/25/2013, layer of StMcPixelHitCollection is actually a sector
       {
-	if (mcPxlHitCol->layer(iSec))
+	if (mcPxlHitCol.sector(iSec))
         {
 	  LOG_DEBUG<<"Sector "<<iSec+1<<endm;
 	  //simple simulator for perfect hits that just converts StMcPixelHit to StPxlHit
 	  //as of 11/21/08, hits are now smeared with resolution taken from hit error table
-	  UInt_t nSecHits = mcPxlHitCol->layer(iSec)->hits().size();
+	  UInt_t nSecHits = mcPxlHitCol.sector(iSec)->hits().size();
 	  LOG_DEBUG << " Number of hits in sector "<< iSec+1 <<" =" << nSecHits << endm;
 
 	  for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
 	  {
-	    StMcHit *mcH    = mcPxlHitCol->layer(iSec)->hits()[iHit];
+	    StMcHit *mcH    = mcPxlHitCol.sector(iSec)->hits()[iHit];
 	    StMcPixelHit* mcPix=dynamic_cast<StMcPixelHit*>(mcH);
 	    
 	    Long_t volId     = mcPix->volumeId();
-	    Int_t sector     = mcPix->layer();
+	    Int_t sector     = mcPix->sector();
 	    Int_t ladder    = mcPix->ladder();
+	    Int_t sensor    = mcPix->sensor();
 
 	    TString Path("");
-	    Path= Form("/HALL_1/CAVE_1/IDSM_1/PXMO_1/PXLA_%i/LADR_%i/PLAC_1",layer,ladder);
+	    Path= Form("/HALL_1/CAVE_1/IDSM_1/PXMO_1/PXLA_%i/LADR_%i/PXSI_%i/PLAC_1",sector,ladder,sensor);
 	    LOG_DEBUG <<"PATH: " << Path << endm;
-	    LOG_DEBUG<<"pixel hit sector/ladder is "<<sector<<"/"<<ladder<<" and volume id "<<volId<<endm;
+	    LOG_DEBUG<<"pxl hit volId/sector/ladder/sensor is "<<volId<<"/"<<sector<<"/"<<ladder<<"/"<<sensor<<endm;
 
 	    gGeoManager->RestoreMasterVolume();
 	    gGeoManager->CdTop();
@@ -215,19 +225,15 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol, StPxlH
 	    StPxlHit* tempHit = new StPxlHit(gpixpos, mRndHitError, hw,mcPix->dE() ,0);
 	    tempHit->setSector(iSec+1);
 	    tempHit->setLadder(mcPix->ladder());
-	    //tempHit->setSensor(mcPix->ladder());
-	    //to be set later with new geom
-
+	    tempHit->setSensor(mcPix->sensor());
+            tempHit->setIdTruth(mcPix->idTruth(),100);
 	    tempHit->setLocalPosition(localPixHitPos[0],localPixHitPos[1],localPixHitPos[2]); 
-	    Int_t truth =0;
-	    truth = g2tPix[mcPix->key()-1].track_p;
-	    tempHit->setIdTruth(truth,100);
 
-	    LOG_DEBUG<<"key() : "<< mcPix->key()-1 << " idTruth: "<< truth <<endm;
-	    LOG_DEBUG <<"from g2t : x= " << g2tPix[iHit].x[0] <<"  y= " << g2tPix[iHit].x[1] <<"  z= " << g2tPix[iHit].x[2] << endm;
+	    LOG_DEBUG<<"key() : "<< mcPix->key()-1 << " idTruth: "<< mcPix->idTruth() <<endm;
+	    LOG_DEBUG <<"from g2t : x= " << mcPix->position().x() <<"  y= " << mcPix->position().y() <<"  z= " << mcPix->position().z() << endm;
 	    LOG_DEBUG<<"pixel rnd hit location x: "<<tempHit->position().x()<<"; y: "<<tempHit->position().y()<<"; z: "<<tempHit->position().z()<<endm;
 	    
-	    pxlHitCol->addHit(tempHit);
+	    pxlHitCol.addHit(tempHit);
 	    LOG_DEBUG << *tempHit<<endm;
 	  }
 	}
@@ -238,12 +244,10 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol, StPxlH
 }
 
 //____________________________________________________________
-Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t sensorLenght)
+Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t sensorLenght)
 {
   Double_t test;
 
-  if(mSmear)
-  {
     test = x + mRandom->gauss(0,res);
 
     while( test <0 || test > sensorLenght)
@@ -252,6 +256,4 @@ Double_t StPxlFastSimMaker::distortHit(Double_t x, Double_t res, Double_t sensor
     }
 
     return test;
-  }
-  else return x;
 }

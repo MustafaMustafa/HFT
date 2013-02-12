@@ -50,8 +50,9 @@ ostream&  operator<<(ostream& os, const StMcPixelHit& h)
 {
     os << "PixelHit" << endl;
     os << *((StMcHit *) &h);
-    os << "Layer           : " << h.layer() << endl;
+    os << "Layer           : " << h.sector() << endl;
     os << "Ladder          : " << h.ladder() << endl;
+    os << "Sensor          : " << h.sensor() << endl;
   return os;
 }
 

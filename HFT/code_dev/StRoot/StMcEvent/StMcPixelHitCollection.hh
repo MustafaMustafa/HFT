@@ -35,13 +35,13 @@ public:
     
     bool addHit(StMcPixelHit*);
     unsigned long numberOfHits() const;
-    unsigned int  numberOfLayers() const;
+    unsigned int  numberOfSectors() const;
     
-    StMcPixelLayerHitCollection*       layer(unsigned int);
-    const StMcPixelLayerHitCollection* layer(unsigned int) const;
+    StMcPixelLayerHitCollection*       sector(unsigned int);
+    const StMcPixelLayerHitCollection* sector(unsigned int) const;
 protected:
     enum { mNumberOfLayers = 10 };
     StMcPixelLayerHitCollection mLayers[mNumberOfLayers];
-    ClassDef(StMcPixelHitCollection,1)
+    ClassDef(StMcPixelHitCollection,2)
 };
 #endif

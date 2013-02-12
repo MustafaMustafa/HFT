@@ -9,8 +9,9 @@
 #ifndef STAR_STPXLISIM_H
 #define	STAR_STPXLISIM_H
 
-class TNamed;
-class TDataset;
+#include "TNamed.h"
+
+class TDataSet;
 class StMcPixelHitCollection;
 class StPxlHitCollection;
 class StPxlRawHitCollection;
@@ -19,9 +20,10 @@ class g2t_pix_hit_st; // temp
 class StPxlISim : public TNamed
 {
 public:
-    virtual Int_t init(const TDataSet& calib_db) = 0;
-    virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection&, const g2t_pix_hit_st&);
-    virtual Int_t addPxlRawHits(const StMcPixelHitCollection&, StPxlRawHitCollection& );
+    StPxlISim(const Char_t *name): TNamed(name,name){}
+    virtual Int_t initRun(const TDataSet& calib_db,const Int_t run) = 0;
+    virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection& ){return 0;};
+    //virtual Int_t addPxlRawHits(const StMcPixelHitCollection&, StPxlRawHitCollection& );
 };
 
 #endif	/* STPXLISIM_H */

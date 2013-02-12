@@ -1,5 +1,5 @@
 /*
- * $Id: StPxlFastSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $
+ * $Id: StPxlSimMaker.h,v 1.13 2009/02/06 20:48:48 wleight Exp $
  *
  * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
@@ -49,74 +49,67 @@
  */
 
 /**
-   \class StPxlFastSim
+   \class StPxlSimMaker
 
-   \brief Class to simulate Pixel hits from Monte Carlo.
-
-   This class has the responsibility to create StPxlHit objects and store them in
-   StPxlHitCollection.
-
-   StPxlHit is a Gaussian smeared StMcPixelHit. 
+   \brief 
 
    This class conforms to the STAR StMaker standards.
 */
 
-#ifndef STAR_StPxlFastSim
-#define STAR_StPxlFastSim
+#ifndef STAR_StPxlSimMaker
+#define STAR_StPxlSimMaker
 
-#include "StPxlISim.h"
+#include "TString.h"
+#ifndef StMaker_H
+#include "StMaker.h"
+#endif
 #include "StThreeVectorF.hh"
 #include "StThreeVectorD.hh"
 #include <vector>
-class StRandom;
 
-//! coordinates of PXL sensor active area to restrict smeared hits to active area
-//! see doc/PXL_ultimate_sensor_flemming.pdf
-const Double_t PXL_MAX_X_CORD = 2.0220;
-const Double_t PXL_MAX_Y_CORD = 2.2710;
+class StPxlISim;
 
-
-class StPxlFastSim: public StPxlISim
+class StPxlSimMaker : public StMaker 
 {
  public:
 
-  /*! \brief Constructor */ 
-  StPxlFastSim(const Char_t *name="pxlFastSim"): StPxlISim(name){mRandom=0;}
+  /*! \brief Constructor uses standard Maker text naming convention,
+   *  with value "pxlFastSim"*/
+  StPxlSimMaker(const Char_t *name="pxlSimMaker");
 
-  /*! \brief This class does not own any hit containers.
-   *        mRandom is deleted here. 
+  /*! \brief StEvent will own any hits created by this maker, and is responsible for cleanup.
   */
-  virtual ~StPxlFastSim();
+  virtual ~StPxlSimMaker();
 
 
-  /*! \brief A random seed is passed to mRandom 
-   * PXL smearing resolutions (PixelHitError) are fetched from calib_db.
+  /*! \brief 
    * 
-   * returns kStOk if resolutions have been fetched successfully. kStErr otherwise.
+   *  Returns kStOk always.
+  */
+  virtual Int_t  Make();
+
+  /*! \brief 
    */
-  virtual Int_t initRun(const TDataSet& calib_db, const Int_t run);
+  virtual Int_t Init();
 
-   /*! \brief creates an StPxlHit object for every StMcPixelHit, and fills the
-   *  hit StPxlHitCollection container. 
-   * 
-   *  Returns kStOk always (for now).
+ /*! \brief 
   */
-  virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection&);
+  virtual Int_t InitRun(Int_t);
 
+  void useSlowSim() {SetAttr("useSlowSim",kTRUE);}
+  
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.
   */
- virtual const char *GetCVS() const
+  virtual const char *GetCVS() const
   {static const char cvs[]="Tag $Name$ $Id$ built "__DATE__" "__TIME__ ; return cvs;}
 
- private:
-  //Routine to smear hit by resolution with gaussian, mean zero and width res
-  Double_t distortHit(Double_t x, Double_t res, Double_t sensorLenght);
+private:
+    StPxlISim* mPxlSimulator;
 
- private:
-  StRandom* mRandom;
+    Bool_t mUseSlowSimulator;
 
-  Double_t mResZPix;
-  Double_t mResXPix;
+
+  ClassDef(StPxlSimMaker,1)   //StAF chain virtual base class for Makers
 };
 #endif

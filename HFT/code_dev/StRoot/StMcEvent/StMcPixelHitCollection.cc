@@ -41,7 +41,7 @@ bool
 StMcPixelHitCollection::addHit(StMcPixelHit* hit)
 {
     unsigned int p;
-    if (hit && (p = hit->layer()-1) < mNumberOfLayers) {
+    if (hit && (p = hit->sector()-1) < mNumberOfLayers) {
       mLayers[p].hits().push_back(hit);
       return true;
     }
@@ -50,7 +50,7 @@ StMcPixelHitCollection::addHit(StMcPixelHit* hit)
 }
 
 unsigned int
-StMcPixelHitCollection::numberOfLayers() const { return mNumberOfLayers; }
+StMcPixelHitCollection::numberOfSectors() const { return mNumberOfLayers; }
 
 unsigned long
 StMcPixelHitCollection::numberOfHits() const
@@ -63,7 +63,7 @@ StMcPixelHitCollection::numberOfHits() const
 }
 
 StMcPixelLayerHitCollection*
-StMcPixelHitCollection::layer(unsigned int i)
+StMcPixelHitCollection::sector(unsigned int i)
 {
     if (i < mNumberOfLayers)
         return &(mLayers[i]);
@@ -72,7 +72,7 @@ StMcPixelHitCollection::layer(unsigned int i)
 }
 
 const StMcPixelLayerHitCollection*
-StMcPixelHitCollection::layer(unsigned int i) const
+StMcPixelHitCollection::sector(unsigned int i) const
 {
     if (i < mNumberOfLayers)
         return &(mLayers[i]);
