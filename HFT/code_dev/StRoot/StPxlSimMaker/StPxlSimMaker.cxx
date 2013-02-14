@@ -2,7 +2,7 @@
  *
  * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
- * 
+ *
  **********************************************************
  * $Log: StPixelFastSimMaker.cxx,v $
  * Revision 1.44  2012/12/18 18:46:59  margetis
@@ -31,7 +31,7 @@
  *
  * Revision 1.33  2007/10/18 14:25:13  didenko
  * updates for pile-up events
- * 
+ *
  * Revision 1.32  2007/10/16 19:53:08  fisyak
  * rename Hft => Pxl, remove Hpd, Igt and Fst
  *
@@ -122,108 +122,118 @@
  *
  */
 
-#include "Stiostream.h"
 #include "StPxlSimMaker.h"
 #include "StPxlFastSim.h"
+#include "StPxlISim.h"
+#include "StMcPixelHitCollection.hh"
+#include "StPxlHitCollection.h"
+
+#include "Stiostream.h"
 #include "StHit.h"
 #include "StEventTypes.h"
 #include "StEvent.h"
-#include "StPxlHit.h"
 #include "StMcEvent.hh"
-#include "StMcHit.hh"
-#include "StMcPixelHit.hh"
 #include "StMcEventTypes.hh"
-#include <stdio.h>
-#include "tables/St_g2t_pix_hit_Table.h"
-#include "tables/St_HitError_Table.h"
+
 #include "TGeoManager.h"
-#include "TGeoMatrix.h"
-#include "StarClassLibrary/StRandom.hh"
-#include "tables/St_HitError_Table.h"
-#include "TFile.h"
-#include "TTree.h"
-#include "StPxlISim.h"
 
 ClassImp(StPxlSimMaker)
-  
+
 using namespace std;
 
-StPxlSimMaker::StPxlSimMaker(const Char_t* name) :StMaker(name)
+StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name)
 {
-    mUseSlowSimulator = kFALSE;
+   mUseDIGMAPSSim = kFALSE;
 }
 //____________________________________________________________
 StPxlSimMaker::~StPxlSimMaker()
 {
-    delete mPxlSimulator;
-}    
+   delete mPxlSimulator;
+}
 //____________________________________________________________
 Int_t StPxlSimMaker::Init()
 {
-  LOG_INFO<<"StPxlSimMaker::Init()"<<endm;
+   LOG_INFO << "StPxlSimMaker::Init()" << endm;
 
-  mUseSlowSimulator = IAttr("useSlowSim");
+   mUseDIGMAPSSim = IAttr("useDIGMAPSSim");
 
-  //if(mUseSlowSimulator)
-  //{
-      // mPxlSimulator = new StPxlSlowSim();
-  //}
-  //else
-  //{
-      mPxlSimulator = new StPxlFastSim();
-  //}
+   //if(mUseDIGMAPSSim)
+   //{
+   // mPxlSimulator = new StPxlSlowSim();
+   //}
+   //else
+   //{
+   mPxlSimulator = new StPxlFastSim();
+   //}
 
-  return kStOk;
+   return kStOk;
 }
 
 //____________________________________________________________
 Int_t StPxlSimMaker::InitRun(Int_t RunNo)
 {
-  LOG_INFO<<"StPxlSimMaker::InitRun"<<endm;
+   LOG_INFO << "StPxlSimMaker::InitRun" << endm;
 
-  TDataSet *set = GetDataBase("Calibrations/tracker");
+   TDataSet *set = GetDataBase("Calibrations/tracker");
 
-  mPxlSimulator->initRun(*set,RunNo);
+   if (!set)
+   {
+      LOG_ERROR << "StPxlSimMaker - E - could not Get Calibrations/tracker." << endm;
+   }
 
-  return kStOk;
+   return mPxlSimulator->initRun(*set, RunNo);
 }
 //____________________________________________________________
 
 Int_t StPxlSimMaker::Make()
 {
-  LOG_INFO<<"StPxlSimMaker::Make()"<<endm;
+   LOG_INFO << "StPxlSimMaker::Make()" << endm;
 
-  // Get the input data structures from StEvent and StMcEvent
-  StEvent* rcEvent =  (StEvent*) GetInputDS("StEvent");
-  if (! rcEvent) {LOG_INFO << "No StEvent on input" << endl; return kStWarn;}
-  StMcEvent* mcEvent = (StMcEvent *) GetInputDS("StMcEvent");
-  if (! mcEvent) {LOG_INFO << "No StMcEvent on input" << endl; return kStWarn;}
+   // Get the input data structures from StEvent and StMcEvent
+   StEvent* rcEvent = (StEvent*) GetInputDS("StEvent");
+   if (! rcEvent)
+   {
+      LOG_INFO << "No StEvent on input" << endl;
+      return kStWarn;
+   }
 
-  if (! gGeoManager) GetDataBase("VmcGeometry");
+   StMcEvent* mcEvent = (StMcEvent *) GetInputDS("StMcEvent");
+   if (! mcEvent)
+   {
+      LOG_INFO << "No StMcEvent on input" << endl;
+      return kStWarn;
+   }
 
-  StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
-  if (!pxlHitCol)
-  {
-      LOG_ERROR<<"StPxlSimMaker -E- no PixelHitCollection!"<<endm;
+   if (!gGeoManager) GetDataBase("VmcGeometry");
+   if (!gGeoManager)
+   {
+      LOG_ERROR << " StPxlSimMaker - E - gGeoManager is not available." << endm;
       return kStErr;
-  }
+   }
 
-  //Get MC Pixel hit collection. This contains all pixel hits.
-  StMcPixelHitCollection* mcPxlHitCol = mcEvent->pixelHitCollection();
+   StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
+   if (!pxlHitCol)
+   {
+      LOG_ERROR << "StPxlSimMaker -E- no PixelHitCollection!" << endm;
+      return kStErr;
+   }
 
-  if(mcPxlHitCol)
-  {
-      //if(mUseSlowSimulator) mPxlSimulator->addPxlRawHits();
-      mPxlSimulator->addPxlHits(*mcPxlHitCol,*pxlHitCol);
-  }
-  else
-  {
-      LOG_INFO<<"StPxlSimMaker no PXL hits in this event!"<<endm;
-  }
+   //Get MC Pixel hit collection. This contains all pixel hits.
+   StMcPixelHitCollection* mcPxlHitCol = mcEvent->pixelHitCollection();
 
-  
-  rcEvent->setPixelHitCollection(pxlHitCol);
-  LOG_DEBUG <<" size of hit collection : " << pxlHitCol->numberOfHits() << endm;
+   if (mcPxlHitCol)
+   {
+      //if(mUseDIGMAPSSim) mPxlSimulator->addPxlRawHits();
+      mPxlSimulator->addPxlHits(*mcPxlHitCol, *pxlHitCol);
+   }
+   else
+   {
+      LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
+   }
 
-  return kStOK;
+
+   rcEvent->setPixelHitCollection(pxlHitCol);
+   LOG_DEBUG << " size of hit collection : " << pxlHitCol->numberOfHits() << endm;
+
+   return kStOK;
 }

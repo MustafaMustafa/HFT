@@ -2,7 +2,7 @@
  *
  * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
  *
- * 
+ *
  **********************************************************
  * $Log: StPixelFastSimMaker.cxx,v $
  * Revision 1.44  2012/12/18 18:46:59  margetis
@@ -31,7 +31,7 @@
  *
  * Revision 1.33  2007/10/18 14:25:13  didenko
  * updates for pile-up events
- * 
+ *
  * Revision 1.32  2007/10/16 19:53:08  fisyak
  * rename Hft => Pxl, remove Hpd, Igt and Fst
  *
@@ -124,7 +124,7 @@
 
 #include <stdio.h>
 
-#include "StMessMgr.h" 
+#include "StMessMgr.h"
 #include "Stypes.h"
 #include "Stiostream.h"
 #include "StPxlFastSim.h"
@@ -132,128 +132,144 @@
 #include "StEvent/StPxlHitCollection.h"
 #include "StMcEvent/StMcPixelHit.hh"
 #include "StMcEvent/StMcPixelHitCollection.hh"
-#include "tables/St_g2t_pix_hit_Table.h"
 #include "tables/St_HitError_Table.h"
 #include "StarClassLibrary/StRandom.hh"
+#include "StThreeVectorF.hh"
+
 #include "TGeoManager.h"
 #include "TGeoMatrix.h"
-  
 #include "TDataSet.h"
 
 StPxlFastSim::~StPxlFastSim()
 {
-    if(mRandom) delete mRandom;
-}    
+   if (mRandom) delete mRandom;
+}
 //____________________________________________________________
 Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
 {
-  LOG_INFO<<"StPxlFastSim::init()"<<endm;
+   // run is not used in the current implementation, but might be necessary in the future.
 
-  Int_t seed=time(NULL);
-  if(!mRandom) mRandom = new StRandom();
-  mRandom->setSeed(seed);
+   LOG_INFO << "StPxlFastSim::init()" << endm;
 
-  St_HitError *pixelTableSet = (St_HitError*)calib_db.Find("PixelHitError");
-  
-  HitError_st* pixelHitError = pixelTableSet->GetTable();
-  mResXPix = sqrt(pixelHitError->coeff[0]);
-  mResZPix = sqrt(pixelHitError->coeff[3]);
+   if (!mRandom) mRandom = new StRandom();
+   Int_t seed = time(NULL);
+   mRandom->setSeed(seed);
 
-  return kStOk;
+   St_HitError *pxlTableSet = (St_HitError*)calib_db.Find("PixelHitError");
+
+   if (!pxlTableSet)
+   {
+      LOG_ERROR << "StPxlFastSim - E - PixelHitError is not available" << endm;
+      return kStErr;
+   }
+
+   HitError_st* pxlHitError = pxlTableSet->GetTable();
+
+   if (!pxlHitError)
+   {
+      LOG_ERROR << "StPxlFastSim - E - pxl hit table is not available in PixelHitError" << endm;
+      return kStErr;
+   }
+
+   mResXPix = sqrt(pxlHitError->coeff[0]);
+   mResYPix = sqrt(pxlHitError->coeff[3]);
+
+   return kStOk;
 }
 //____________________________________________________________
-Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol, StPxlHitCollection& pxlHitCol)
+Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
+                               StPxlHitCollection& pxlHitCol)
 {
-  Float_t smearedX=0,smearedY=0,smearedZ=0;
+   Float_t smearedX = 0, smearedY = 0, smearedZ = 0;
 
-    Int_t nMcHits = mcPxlHitCol.numberOfHits();
-    LOG_DEBUG<<"There are "<<nMcHits<<" mc pixel hits"<<endm;
-    
-    if (nMcHits)
-    {
-      for(UInt_t iSec=0; iSec<mcPxlHitCol.numberOfSectors(); iSec++) // As of 1/25/2013, layer of StMcPixelHitCollection is actually a sector
+   Int_t nMcHits = mcPxlHitCol.numberOfHits();
+   LOG_DEBUG << "There are" << nMcHits << " mc pixel hits" << endm;
+
+   if (nMcHits)
+   {
+      // Loop over sectors
+      for (UInt_t iSec = 0; iSec < mcPxlHitCol.numberOfSectors(); iSec++)
       {
-	if (mcPxlHitCol.sector(iSec))
-        {
-	  LOG_DEBUG<<"Sector "<<iSec+1<<endm;
-	  //simple simulator for perfect hits that just converts StMcPixelHit to StPxlHit
-	  //as of 11/21/08, hits are now smeared with resolution taken from hit error table
-	  UInt_t nSecHits = mcPxlHitCol.sector(iSec)->hits().size();
-	  LOG_DEBUG << " Number of hits in sector "<< iSec+1 <<" =" << nSecHits << endm;
+         if (mcPxlHitCol.sector(iSec))
+         {
+            LOG_DEBUG << "Sector " << iSec + 1 << endm;
 
-	  for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
-	  {
-	    StMcHit *mcH    = mcPxlHitCol.sector(iSec)->hits()[iHit];
-	    StMcPixelHit* mcPix=dynamic_cast<StMcPixelHit*>(mcH);
-	    
-	    Long_t volId     = mcPix->volumeId();
-	    Int_t sector     = mcPix->sector();
-	    Int_t ladder    = mcPix->ladder();
-	    Int_t sensor    = mcPix->sensor();
+            UInt_t nSecHits = mcPxlHitCol.sector(iSec)->hits().size();
+            LOG_DEBUG << " Number of hits in sector " << iSec + 1 << " =" << nSecHits << endm;
 
-	    TString Path("");
-	    Path= Form("/HALL_1/CAVE_1/IDSM_1/PXMO_1/PXLA_%i/LADR_%i/PXSI_%i/PLAC_1",sector,ladder,sensor);
-	    LOG_DEBUG <<"PATH: " << Path << endm;
-	    LOG_DEBUG<<"pxl hit volId/sector/ladder/sensor is "<<volId<<"/"<<sector<<"/"<<ladder<<"/"<<sensor<<endm;
+            // Loop over hits in the sector
+            for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
+            {
+               StMcHit* mcH = mcPxlHitCol.sector(iSec)->hits()[iHit];
+               StMcPixelHit* mcPix = dynamic_cast<StMcPixelHit*>(mcH);
 
-	    gGeoManager->RestoreMasterVolume();
-	    gGeoManager->CdTop();
-	    gGeoManager->cd(Path);
+               Long_t volId = mcPix->volumeId();
+               Int_t sector = mcPix->sector();
+               Int_t ladder = mcPix->ladder();
+               Int_t sensor = mcPix->sensor();
 
-	    Double_t globalPixHitPos[3] = {mcPix->position().x(),mcPix->position().y(),mcPix->position().z()};
-	    Double_t localPixHitPos[3]  = {0,0,0};
-	    gGeoManager->GetCurrentMatrix()->MasterToLocal(globalPixHitPos,localPixHitPos);
+               TString Path("");
+               LOG_DEBUG << endm;
+               Path = Form("/HALL_1/CAVE_1/IDSM_1/PXMO_1/PXLA_%i/LADR_%i/PXSI_%i/PLAC_1", sector, ladder, sensor);
+               LOG_DEBUG << "PATH: " << Path << endm;
+               LOG_DEBUG << "pxl hit volId/sector/ladder/sensor is " << volId << "/" << sector << "/" << ladder << "/" << sensor << endm;
 
-            LOG_DEBUG<<endm;
-            LOG_DEBUG<<"globalPixHitPos = "<<globalPixHitPos[0]<<" "<<globalPixHitPos[1]<<" "<<globalPixHitPos[2]<<endm;
-            LOG_DEBUG<<"localPixHitPos = "<<localPixHitPos[0]<<" "<<localPixHitPos[1]<<" "<<localPixHitPos[2]<<endm;
-	    smearedX=distortHit(localPixHitPos[0],mResXPix,PXL_MAX_X_CORD);
-	    smearedY=distortHit(localPixHitPos[1],mResXPix,PXL_MAX_Y_CORD);
-	    smearedZ=distortHit(localPixHitPos[2],mResZPix,0.5); // Not properly constrained yet
-	    localPixHitPos[0]=smearedX;
-	    localPixHitPos[1]=smearedY;
-	    localPixHitPos[2]=smearedZ;
-            LOG_DEBUG<<"smearedlocal = "<<localPixHitPos[0]<<" "<<localPixHitPos[1]<<" "<<localPixHitPos[2]<<endm;
-            LOG_DEBUG<<endm;
-	    Double_t smearedGlobalPixHitPos[3]={0,0,0};
-	    gGeoManager->GetCurrentMatrix()->LocalToMaster(localPixHitPos,smearedGlobalPixHitPos);
+               gGeoManager->RestoreMasterVolume();
+               gGeoManager->CdTop();
+               gGeoManager->cd(Path);
 
-	    StThreeVectorF gpixpos(smearedGlobalPixHitPos);
-	    StThreeVectorD mRndHitError(0.,0.,0.);
+               Double_t globalPixHitPos[3] = {mcPix->position().x(), mcPix->position().y(), mcPix->position().z()};
+               Double_t localPixHitPos[3]  = {0, 0, 0};
+               gGeoManager->GetCurrentMatrix()->MasterToLocal(globalPixHitPos, localPixHitPos);
 
-	    UInt_t hw = sector*10 + ladder;
-	    StPxlHit* tempHit = new StPxlHit(gpixpos, mRndHitError, hw,mcPix->dE() ,0);
-	    tempHit->setSector(iSec+1);
-	    tempHit->setLadder(mcPix->ladder());
-	    tempHit->setSensor(mcPix->sensor());
-            tempHit->setIdTruth(mcPix->idTruth(),100);
-	    tempHit->setLocalPosition(localPixHitPos[0],localPixHitPos[1],localPixHitPos[2]); 
+               LOG_DEBUG << "globalPixHitPos = " << globalPixHitPos[0] << " " << globalPixHitPos[1] << " " << globalPixHitPos[2] << endm;
+               LOG_DEBUG << "localPixHitPos = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
+               smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH);
+               smearedY = distortHit(localPixHitPos[1], mResYPix, PXL_ACTIVE_Y_LENGTH);
+               // Need to check with Hao on the constraint and smearing resolution for local Z. Both need to be in the DB.
+               //smearedZ = distortHit(localPixHitPos[2], mResZPix, 10.0); // Not properly constrained yet
+               localPixHitPos[0] = smearedX;
+               localPixHitPos[1] = smearedY;
+               localPixHitPos[2] = globalPixHitPos[2]; // temporary, see comment above
+               LOG_DEBUG << "smearedlocal = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
+               Double_t smearedGlobalPixHitPos[3] = {0, 0, 0};
+               gGeoManager->GetCurrentMatrix()->LocalToMaster(localPixHitPos, smearedGlobalPixHitPos);
 
-	    LOG_DEBUG<<"key() : "<< mcPix->key()-1 << " idTruth: "<< mcPix->idTruth() <<endm;
-	    LOG_DEBUG <<"from g2t : x= " << mcPix->position().x() <<"  y= " << mcPix->position().y() <<"  z= " << mcPix->position().z() << endm;
-	    LOG_DEBUG<<"pixel rnd hit location x: "<<tempHit->position().x()<<"; y: "<<tempHit->position().y()<<"; z: "<<tempHit->position().z()<<endm;
-	    
-	    pxlHitCol.addHit(tempHit);
-	    LOG_DEBUG << *tempHit<<endm;
-	  }
-	}
+               StThreeVectorF gpixpos(smearedGlobalPixHitPos);
+               StThreeVectorF mRndHitError(0., 0., 0.);
+
+               UInt_t hw = sector * 10 + ladder; // needs to be updated later after clustering alogrithms are finalized
+               StPxlHit* tempHit = new StPxlHit(gpixpos, mRndHitError, hw, mcPix->dE() , 0);
+               tempHit->setSector(iSec + 1);
+               tempHit->setLadder(mcPix->ladder());
+               tempHit->setSensor(mcPix->sensor());
+               tempHit->setIdTruth(mcPix->idTruth(), 100);
+               tempHit->setLocalPosition(localPixHitPos[0], localPixHitPos[1], localPixHitPos[2]);
+
+               LOG_DEBUG << "key() : " << mcPix->key() - 1 << " idTruth: " << mcPix->idTruth() << endm;
+               LOG_DEBUG << "from StMcPixelHit : x= " << mcPix->position().x() << ";  y= " << mcPix->position().y() << ";  z= " << mcPix->position().z() << endm;
+               LOG_DEBUG << "pxlHit location x= " << tempHit->position().x() << "; y= " << tempHit->position().y() << "; z= " << tempHit->position().z() << endm;
+
+               pxlHitCol.addHit(tempHit);
+            }
+         }
       }
-    }
+   }
 
-  return kStOK;
+   return kStOK;
 }
 
 //____________________________________________________________
-Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t sensorLenght)
+Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t sensorLength)
 {
-  Double_t test;
+   Double_t test;
 
-    test = x + mRandom->gauss(0,res);
+   test = x + mRandom->gauss(0, res);
 
-    while( test <0 || test > sensorLenght)
-    {
-      test = x + mRandom->gauss(0,res);
-    }
+   while (fabs(test) > sensorLength / 2.0)
+   {
+      test = x + mRandom->gauss(0, res);
+   }
 
-    return test;
+   return test;
 }

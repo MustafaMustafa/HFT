@@ -57,6 +57,7 @@
    StPxlHitCollection.
 
    StPxlHit is a Gaussian smeared StMcPixelHit. 
+   The smearing parameters are fetched from Calibrations/tracker/PixelHitError*
 
    This class conforms to the STAR StMaker standards.
 */
@@ -65,15 +66,12 @@
 #define STAR_StPxlFastSim
 
 #include "StPxlISim.h"
-#include "StThreeVectorF.hh"
-#include "StThreeVectorD.hh"
-#include <vector>
 class StRandom;
 
 //! coordinates of PXL sensor active area to restrict smeared hits to active area
 //! see doc/PXL_ultimate_sensor_flemming.pdf
-const Double_t PXL_MAX_X_CORD = 2.0220;
-const Double_t PXL_MAX_Y_CORD = 2.2710;
+const Double_t PXL_ACTIVE_X_LENGTH = 1.921;
+const Double_t PXL_ACTIVE_Y_LENGTH = 1.9872;
 
 
 class StPxlFastSim: public StPxlISim
@@ -99,7 +97,8 @@ class StPxlFastSim: public StPxlISim
    /*! \brief creates an StPxlHit object for every StMcPixelHit, and fills the
    *  hit StPxlHitCollection container. 
    * 
-   *  Returns kStOk always (for now).
+   *  Returns:
+   *  kStOk: if hits have been loaded to StPxlHitCollection successfully.
   */
   virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection&);
 
@@ -110,13 +109,13 @@ class StPxlFastSim: public StPxlISim
   {static const char cvs[]="Tag $Name$ $Id$ built "__DATE__" "__TIME__ ; return cvs;}
 
  private:
-  //Routine to smear hit by resolution with gaussian, mean zero and width res
+  //Routine to smear hit by resolution with gaussian, mean zero and width res.
   Double_t distortHit(Double_t x, Double_t res, Double_t sensorLenght);
 
  private:
   StRandom* mRandom;
 
-  Double_t mResZPix;
   Double_t mResXPix;
+  Double_t mResYPix;
 };
 #endif

@@ -51,7 +51,12 @@
 /**
    \class StPxlSimMaker
 
-   \brief 
+   \brief maker for all PXL simulators
+
+   This maker should be called for all PXL simulators.
+   The simulation algorithm depends on the StPxlISim used. 
+   The default algorithm is StPxlFastSim.
+   Options for other alogrithms should be set using SetAttr method.
 
    This class conforms to the STAR StMaker standards.
 */
@@ -59,13 +64,9 @@
 #ifndef STAR_StPxlSimMaker
 #define STAR_StPxlSimMaker
 
-#include "TString.h"
 #ifndef StMaker_H
 #include "StMaker.h"
 #endif
-#include "StThreeVectorF.hh"
-#include "StThreeVectorD.hh"
-#include <vector>
 
 class StPxlISim;
 
@@ -74,7 +75,7 @@ class StPxlSimMaker : public StMaker
  public:
 
   /*! \brief Constructor uses standard Maker text naming convention,
-   *  with value "pxlFastSim"*/
+   *  with value "pxlSimMaker"*/
   StPxlSimMaker(const Char_t *name="pxlSimMaker");
 
   /*! \brief StEvent will own any hits created by this maker, and is responsible for cleanup.
@@ -82,21 +83,21 @@ class StPxlSimMaker : public StMaker
   virtual ~StPxlSimMaker();
 
 
-  /*! \brief 
+  /*! \brief calls the StPxlISim methods.
    * 
    *  Returns kStOk always.
   */
   virtual Int_t  Make();
 
-  /*! \brief 
+  /*! \brief checks if other simulators have been requested and initializes StPxlISim accordingly.
    */
   virtual Int_t Init();
 
- /*! \brief 
+ /*! \brief gets the DB and initializes StPxlISim for this run.
   */
   virtual Int_t InitRun(Int_t);
 
-  void useSlowSim() {SetAttr("useSlowSim",kTRUE);}
+  void useDIGMAPSSim() {SetAttr("useDIGMAPSSim",kTRUE);}
   
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.
@@ -107,7 +108,7 @@ class StPxlSimMaker : public StMaker
 private:
     StPxlISim* mPxlSimulator;
 
-    Bool_t mUseSlowSimulator;
+    Bool_t mUseDIGMAPSSim;
 
 
   ClassDef(StPxlSimMaker,1)   //StAF chain virtual base class for Makers
