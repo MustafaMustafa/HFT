@@ -171,8 +171,11 @@ Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
       return kStErr;
    }
 
+   // please note what is called local Y in the PXL sensor design
+   // is actually called Z in STAR coordinates convention
    mResXPix = sqrt(pxlHitError->coeff[0]);
-   mResYPix = sqrt(pxlHitError->coeff[3]);
+   mResZPix = sqrt(pxlHitError->coeff[3]);
+   mResYPix = sqrt(pxlHitError->coeff[3]); // needs to be updated in the DB later
 
    return kStOk;
 }
@@ -224,13 +227,15 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
 
                LOG_DEBUG << "globalPixHitPos = " << globalPixHitPos[0] << " " << globalPixHitPos[1] << " " << globalPixHitPos[2] << endm;
                LOG_DEBUG << "localPixHitPos = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
-               smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH);
-               smearedY = distortHit(localPixHitPos[1], mResYPix, PXL_ACTIVE_Y_LENGTH);
+               // please note what is called local Y in the PXL sensor design
+               // is actually called Z in STAR coordinates convention
+               smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH / 2.0);
+               smearedZ = distortHit(localPixHitPos[2], mResZPix, PXL_ACTIVE_Y_LENGTH / 2.0);
                // Need to check with Hao on the constraint and smearing resolution for local Z. Both need to be in the DB.
-               //smearedZ = distortHit(localPixHitPos[2], mResZPix, 10.0); // Not properly constrained yet
+               smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
                localPixHitPos[0] = smearedX;
+               localPixHitPos[2] = smearedZ;
                localPixHitPos[1] = smearedY;
-               localPixHitPos[2] = globalPixHitPos[2]; // temporary, see comment above
                LOG_DEBUG << "smearedlocal = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
                Double_t smearedGlobalPixHitPos[3] = {0, 0, 0};
                gGeoManager->GetCurrentMatrix()->LocalToMaster(localPixHitPos, smearedGlobalPixHitPos);
@@ -260,13 +265,13 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
 }
 
 //____________________________________________________________
-Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t sensorLength)
+Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t constraint)
 {
    Double_t test;
 
    test = x + mRandom->gauss(0, res);
 
-   while (fabs(test) > sensorLength / 2.0)
+   while (fabs(test) > constraint)
    {
       test = x + mRandom->gauss(0, res);
    }

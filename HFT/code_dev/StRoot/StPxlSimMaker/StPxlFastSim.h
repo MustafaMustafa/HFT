@@ -110,12 +110,13 @@ class StPxlFastSim: public StPxlISim
 
  private:
   //Routine to smear hit by resolution with gaussian, mean zero and width res.
-  Double_t distortHit(Double_t x, Double_t res, Double_t sensorLenght);
+  Double_t distortHit(Double_t x, Double_t res, Double_t constraint);
 
  private:
   StRandom* mRandom;
 
   Double_t mResXPix;
   Double_t mResYPix;
+  Double_t mResZPix;
 };
 #endif
