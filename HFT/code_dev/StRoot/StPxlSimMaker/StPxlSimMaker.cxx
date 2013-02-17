@@ -125,7 +125,7 @@
 #include "StPxlSimMaker.h"
 #include "StPxlFastSim.h"
 #include "StPxlISim.h"
-#include "StMcPixelHitCollection.hh"
+#include "StMcPxlHitCollection.hh"
 #include "StPxlHitCollection.h"
 
 #include "Stiostream.h"
@@ -214,12 +214,12 @@ Int_t StPxlSimMaker::Make()
    StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
    if (!pxlHitCol)
    {
-      LOG_ERROR << "StPxlSimMaker -E- no PixelHitCollection!" << endm;
+      LOG_ERROR << "StPxlSimMaker -E- no PxlHitCollection!" << endm;
       return kStErr;
    }
 
-   //Get MC Pixel hit collection. This contains all pixel hits.
-   StMcPixelHitCollection* mcPxlHitCol = mcEvent->pixelHitCollection();
+   //Get MC Pxl hit collection. This contains all PXL hits.
+   StMcPxlHitCollection* mcPxlHitCol = mcEvent->pxlHitCollection();
 
    if (mcPxlHitCol)
    {

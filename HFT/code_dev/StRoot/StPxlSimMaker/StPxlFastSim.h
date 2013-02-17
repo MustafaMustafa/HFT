@@ -51,12 +51,12 @@
 /**
    \class StPxlFastSim
 
-   \brief Class to simulate Pixel hits from Monte Carlo.
+   \brief Class to simulate PXL hits from Monte Carlo.
 
    This class has the responsibility to create StPxlHit objects and store them in
    StPxlHitCollection.
 
-   StPxlHit is a Gaussian smeared StMcPixelHit. 
+   StPxlHit is a Gaussian smeared StMcPxlHit. 
    The smearing parameters are fetched from Calibrations/tracker/PixelHitError*
 
    This class conforms to the STAR StMaker standards.
@@ -94,13 +94,13 @@ class StPxlFastSim: public StPxlISim
    */
   virtual Int_t initRun(const TDataSet& calib_db, const Int_t run);
 
-   /*! \brief creates an StPxlHit object for every StMcPixelHit, and fills the
+   /*! \brief creates an StPxlHit object for every StMcPxlHit, and fills the
    *  hit StPxlHitCollection container. 
    * 
    *  Returns:
    *  kStOk: if hits have been loaded to StPxlHitCollection successfully.
   */
-  virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection&);
+  virtual Int_t addPxlHits(const StMcPxlHitCollection&, StPxlHitCollection&);
 
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.

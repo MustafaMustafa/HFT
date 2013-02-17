@@ -130,8 +130,8 @@
 #include "StPxlFastSim.h"
 #include "StEvent/StPxlHit.h"
 #include "StEvent/StPxlHitCollection.h"
-#include "StMcEvent/StMcPixelHit.hh"
-#include "StMcEvent/StMcPixelHitCollection.hh"
+#include "StMcEvent/StMcPxlHit.hh"
+#include "StMcEvent/StMcPxlHitCollection.hh"
 #include "tables/St_HitError_Table.h"
 #include "StarClassLibrary/StRandom.hh"
 #include "StThreeVectorF.hh"
@@ -180,13 +180,13 @@ Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
    return kStOk;
 }
 //____________________________________________________________
-Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
+Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
                                StPxlHitCollection& pxlHitCol)
 {
    Float_t smearedX = 0, smearedY = 0, smearedZ = 0;
 
    Int_t nMcHits = mcPxlHitCol.numberOfHits();
-   LOG_DEBUG << "There are" << nMcHits << " mc pixel hits" << endm;
+   LOG_DEBUG << "There are" << nMcHits << " mc PXL hits" << endm;
 
    if (nMcHits)
    {
@@ -204,7 +204,7 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
             for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
             {
                StMcHit* mcH = mcPxlHitCol.sector(iSec)->hits()[iHit];
-               StMcPixelHit* mcPix = dynamic_cast<StMcPixelHit*>(mcH);
+               StMcPxlHit* mcPix = dynamic_cast<StMcPxlHit*>(mcH);
 
                Long_t volId = mcPix->volumeId();
                Int_t sector = mcPix->sector();
@@ -252,7 +252,7 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
                tempHit->setLocalPosition(localPixHitPos[0], localPixHitPos[1], localPixHitPos[2]);
 
                LOG_DEBUG << "key() : " << mcPix->key() - 1 << " idTruth: " << mcPix->idTruth() << endm;
-               LOG_DEBUG << "from StMcPixelHit : x= " << mcPix->position().x() << ";  y= " << mcPix->position().y() << ";  z= " << mcPix->position().z() << endm;
+               LOG_DEBUG << "from StMcPxlHit : x= " << mcPix->position().x() << ";  y= " << mcPix->position().y() << ";  z= " << mcPix->position().z() << endm;
                LOG_DEBUG << "pxlHit location x= " << tempHit->position().x() << "; y= " << tempHit->position().y() << "; z= " << tempHit->position().z() << endm;
 
                pxlHitCol.addHit(tempHit);
