@@ -154,7 +154,7 @@ class StMcEtrHitCollection;
 class StMcTofHitCollection;
 class StMcBTofHitCollection;
 class StMcMtdHitCollection;
-class StMcPixelHitCollection;
+class StMcPxlHitCollection;
 class StMcIstHitCollection;
 class StMcFgtHitCollection;
 class StMcVertex;
@@ -259,8 +259,8 @@ public:
   StMcEmcHitCollection*          fscHitCollection()       { return emcHitCollection("FscHits"); }
   const StMcEmcHitCollection*    fscHitCollection() const { return emcHitCollection("FscHits"); }
   
-  StMcPixelHitCollection*      pixelHitCollection()       {return mPixelHits;}				
-  const StMcPixelHitCollection*pixelHitCollection() const {return mPixelHits;}		
+  StMcPxlHitCollection*      pxlHitCollection()       {return mPxlHits;}				
+  const StMcPxlHitCollection*pxlHitCollection() const {return mPxlHits;}		
   StMcIstHitCollection*          istHitCollection()       {return mIstHits;}				
   const StMcIstHitCollection*    istHitCollection() const {return mIstHits;}	  
   StMcFgtHitCollection*          fgtHitCollection()       {return mFgtHits;}		         
@@ -295,7 +295,7 @@ public:
   void setTofHitCollection(StMcTofHitCollection*);
   void setBTofHitCollection(StMcBTofHitCollection*);
   void setMtdHitCollection(StMcMtdHitCollection*);
-  void setPixelHitCollection(StMcPixelHitCollection*);       
+  void setPxlHitCollection(StMcPxlHitCollection*);       
   void setIstHitCollection(StMcIstHitCollection*); 
   void setFgtHitCollection(StMcFgtHitCollection*);       
   void setEtrHitCollection(StMcEtrHitCollection*);       
@@ -331,7 +331,7 @@ public:
   StMcTofHitCollection*          mTofHits;
   StMcBTofHitCollection*         mBTofHits;
   StMcMtdHitCollection*          mMtdHits;
-  StMcPixelHitCollection*        mPixelHits;
+  StMcPxlHitCollection*          mPxlHits;
   StMcIstHitCollection*          mIstHits;
   StMcFgtHitCollection*          mFgtHits;
   StMcEtrHitCollection*          mEtrHits;

@@ -148,7 +148,7 @@
 #include "StMcTofHitCollection.hh"
 #include "StMcBTofHitCollection.hh"
 #include "StMcMtdHitCollection.hh"
-#include "StMcPixelHitCollection.hh"
+#include "StMcPxlHitCollection.hh"
 #include "StMcIstHitCollection.hh"
 #include "StMcFgtHitCollection.hh"
 #include "StMcEtrHitCollection.hh"
@@ -164,7 +164,7 @@
 #include "StMcTofHit.hh"
 #include "StMcBTofHit.hh"
 #include "StMcMtdHit.hh"
-#include "StMcPixelHit.hh"
+#include "StMcPxlHit.hh"
 #include "StMcIstHit.hh"
 #include "StMcFgtHit.hh"
 #include "StMcEtrHit.hh"
@@ -194,7 +194,7 @@ void StMcEvent::makeColls()
     mTofHits  = new StMcTofHitCollection();
     mBTofHits = new StMcBTofHitCollection();
     mMtdHits  = new StMcMtdHitCollection();
-    mPixelHits = new StMcPixelHitCollection();
+    mPxlHits  = new StMcPxlHitCollection();
     mIstHits  = new StMcIstHitCollection();
     mFgtHits  = new StMcFgtHitCollection();
     mEtrHits  = new StMcEtrHitCollection();
@@ -454,10 +454,10 @@ void StMcEvent::setEsmdvHitCollection(StMcEmcHitCollection* val)
 }
 #endif
 //______________________________________________________________________________
-void StMcEvent::setPixelHitCollection(StMcPixelHitCollection* val)
+void StMcEvent::setPxlHitCollection(StMcPxlHitCollection* val)
 {
-    if (mPixelHits && mPixelHits!= val) delete mPixelHits;
-    mPixelHits = val;
+    if (mPxlHits && mPxlHits!= val) delete mPxlHits;
+    mPxlHits = val;
 }   
 
 //______________________________________________________________________________
@@ -693,7 +693,7 @@ void StMcEvent::Print(Option_t *option) const {
   PrintHitCollection(Tof,tof);
   PrintHitCollection(BTof,btof);
   PrintHitCollection(Mtd,mtd);
-  PrintHitCollectionL(Pixel,pixel,sector,Sectors);
+  PrintHitCollectionL(Pxl,pxl,sector,Sectors);
   PrintHitCollectionL(Ist,ist,layer,Layers);
   PrintHitCollectionL(Fgt,fgt,layer,Layers);
   PrintHitCollection(Etr,etr);
