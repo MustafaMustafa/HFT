@@ -10,7 +10,7 @@
  * Description: Monte Carlo PXL Hit Collection class
  *
  *  ***************************************************************************
- * 
+ *
  **************************************************************************/
 #include "StMcPxlHitCollection.hh"
 #include "StMcPxlHit.hh"
@@ -19,49 +19,59 @@ static const char rcsid[] = "$Id: $";
 
 ClassImp(StMcPxlHitCollection)
 
-StMcPxlHitCollection::StMcPxlHitCollection() { /* noop */ }
+StMcPxlHitCollection::StMcPxlHitCollection()
+{
+   /* noop */
+}
 
-StMcPxlHitCollection::~StMcPxlHitCollection() { /* noop */ }
+StMcPxlHitCollection::~StMcPxlHitCollection()
+{
+   /* noop */
+}
 
- bool
+bool
 StMcPxlHitCollection::addHit(StMcPxlHit* hit)
 {
-    unsigned int s, l, w;
-    if (hit &&
-        (s = hit->sector()-1) < mNumberOfSectors &&
-        (l = hit->ladder()-1) < mSectors[s].numberOfLadders() &&
-        (w = hit->sensor()-1) < mSectors[s].ladder(l)->numberOfSensors()) {
-        mSectors[s].ladder(l)->sensor(w)->hits().push_back(hit);
-        return kTRUE;
-    }
-    else
-        return kFALSE;
-}   
+   unsigned int s, l, w;
+   if (hit &&
+         (s = hit->sector() - 1) < mNumberOfSectors &&
+         (l = hit->ladder() - 1) < mSectors[s].numberOfLadders() &&
+         (w = hit->sensor() - 1) < mSectors[s].ladder(l)->numberOfSensors())
+   {
+      mSectors[s].ladder(l)->sensor(w)->hits().push_back(hit);
+      return kTRUE;
+   }
+   else
+      return kFALSE;
+}
 
 unsigned int
 StMcPxlHitCollection::numberOfHits() const
 {
-    unsigned int sum = 0;
-    for (int iSec=0; iSec<mNumberOfSectors; iSec++) {
-      for (unsigned int iLadder=0; iLadder<mSectors[iSec].numberOfLadders(); iLadder++) {
-        for (unsigned int iSensor=0; iSensor<mSectors[iSec].ladder(iLadder)->numberOfSensors(); iSensor++) {
-          sum += mSectors[iSec].ladder(iLadder)->sensor(iSensor)->hits().size();
-        }
+   unsigned int sum = 0;
+   for (int iSec = 0; iSec < mNumberOfSectors; iSec++)
+   {
+      for (unsigned int iLad = 0; iLad < mSectors[iSec].numberOfLadders(); iLad++)
+      {
+         for (unsigned int iSen = 0; iSen < mSectors[iSec].ladder(iLad)->numberOfSensors(); iSen++)
+         {
+            sum += mSectors[iSec].ladder(iLad)->sensor(iSen)->hits().size();
+         }
       }
-    }
-    return sum;
+   }
+   return sum;
 }
 
 StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i)
 {
-  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+   return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 
 const StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i) const
 {
-  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+   return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 /***************************************************************************
  *

@@ -164,6 +164,7 @@ Int_t StPxlSimMaker::Init()
    //else
    //{
    mPxlSimulator = new StPxlFastSim();
+   LOG_INFO << "StPxlSimMaker: using StPxlFastSim " <<endm;
    //}
 
    return kStOk;

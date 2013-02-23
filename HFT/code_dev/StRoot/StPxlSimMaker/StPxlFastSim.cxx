@@ -130,8 +130,8 @@
 #include "StPxlFastSim.h"
 #include "StEvent/StPxlHit.h"
 #include "StEvent/StPxlHitCollection.h"
-#include "StMcEvent/StMcPxlHit.hh"
 #include "StMcEvent/StMcPxlHitCollection.hh"
+#include "StMcEvent/StMcPxlHit.hh"
 #include "tables/St_HitError_Table.h"
 #include "StarClassLibrary/StRandom.hh"
 #include "StThreeVectorF.hh"
@@ -185,26 +185,31 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
 {
    Float_t smearedX = 0, smearedY = 0, smearedZ = 0;
 
-   Int_t nMcHits = mcPxlHitCol.numberOfHits();
-   LOG_DEBUG << "There are" << nMcHits << " mc PXL hits" << endm;
 
-   if (nMcHits)
+   // Loop over sectors
+   for (UInt_t iSec = 0; iSec < mcPxlHitCol.numberOfSectors(); iSec++)
    {
-      // Loop over sectors
-      for (UInt_t iSec = 0; iSec < mcPxlHitCol.numberOfSectors(); iSec++)
+      const StMcPxlSectorHitCollection* mcPxlSectorHitCol = mcPxlHitCol.sector(iSec);
+      if (!mcPxlSectorHitCol) continue;
+
+      for (UInt_t iLad = 0; iLad < mcPxlSectorHitCol->numberOfLadders(); iLad++)
       {
-         if (mcPxlHitCol.sector(iSec))
-         {
-            LOG_DEBUG << "Sector " << iSec + 1 << endm;
+         const StMcPxlLadderHitCollection* mcPxlLadderHitCol = mcPxlSectorHitCol->ladder(iLad);
+         if (!mcPxlLadderHitCol) continue;
 
-            UInt_t nSecHits = mcPxlHitCol.sector(iSec)->hits().size();
-            LOG_DEBUG << " Number of hits in sector " << iSec + 1 << " =" << nSecHits << endm;
+         for (UInt_t iSen = 0; iSen < mcPxlLadderHitCol->numberOfSensors(); iSen++)
+         { 
+            const StMcPxlSensorHitCollection* mcPxlSensorHitCol = mcPxlLadderHitCol->sensor(iSen);
+	    LOG_DEBUG<< mcPxlSensorHitCol <<endm;
+            if (!mcPxlSensorHitCol) continue;
 
-            // Loop over hits in the sector
-            for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
+            UInt_t nSenHits = mcPxlSensorHitCol->hits().size();
+	    LOG_DEBUG << "Sector/Ladder/Sensor = " << iSec<<"/"<<iLad<<"/"<<iSen << ". Number of sensor hits = "<< nSenHits <<endm;
+
+            // Loop over hits in the sensor
+            for (UInt_t iHit = 0; iHit < nSenHits; iHit++)
             {
-               StMcHit* mcH = mcPxlHitCol.sector(iSec)->hits()[iHit];
-               StMcPxlHit* mcPix = dynamic_cast<StMcPxlHit*>(mcH);
+               StMcPxlHit* mcPix = mcPxlSensorHitCol->hits()[iHit];
 
                Long_t volId = mcPix->volumeId();
                Int_t sector = mcPix->sector();

@@ -6,7 +6,7 @@
  * Author: Fabrice Retiere/Kai Schweda, Aug 2003
  ***************************************************************************
  *
- * Description: 
+ * Description:
  *
  ***************************************************************************
  *
@@ -18,30 +18,36 @@ static const char rcsid[] = "$Id: $";
 ClassImp(StMcPxlLadderHitCollection)
 
 //_____________________________________________________________________________
-StMcPxlLadderHitCollection::StMcPxlLadderHitCollection() { /* noop */ }
-//_____________________________________________________________________________
-StMcPxlLadderHitCollection::~StMcPxlLadderHitCollection(){ /* noop */ }
-
-StMcPxlSensorHitCollection* 
-StMcPxlLadderHitCollection::sensor(unsigned int i)
+StMcPxlLadderHitCollection::StMcPxlLadderHitCollection()
 {
-  return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
+   /* noop */
+}
+//_____________________________________________________________________________
+StMcPxlLadderHitCollection::~StMcPxlLadderHitCollection()
+{
+   /* noop */
 }
 
-const StMcPxlSensorHitCollection* 
+StMcPxlSensorHitCollection*
+StMcPxlLadderHitCollection::sensor(unsigned int i)
+{
+   return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
+}
+
+const StMcPxlSensorHitCollection*
 StMcPxlLadderHitCollection::sensor(unsigned int i) const
-{ 
-  return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
+{
+   return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
 }
 
 unsigned int StMcPxlLadderHitCollection::numberOfHits() const
 {
-  unsigned int sum = 0;
-  for ( int iLadder=0; iLadder < mNumberOfSensors; iLadder++) 
-  {
-      sum += mSensors[iLadder].hits().size();
-  }
-  return sum;
+   unsigned int sum = 0;
+   for (int iSen = 0; iSen < mNumberOfSensors; iSen++)
+   {
+      sum += mSensors[iSen].hits().size();
+   }
+   return sum;
 }
 /***************************************************************************
  *

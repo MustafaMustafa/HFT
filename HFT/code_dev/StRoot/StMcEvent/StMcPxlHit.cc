@@ -5,7 +5,7 @@
  *
  **************************************************************************/
 #include "StMcPxlHit.hh"
-#include "tables/St_g2t_pix_hit_Table.h" 
+#include "tables/St_g2t_pix_hit_Table.h"
 
 static const char rcsid[] = "$Id: $";
 
@@ -15,17 +15,18 @@ StMemoryPool StMcPixelHit::mPool(sizeof(StMcPixelHit));
 ClassImp(StMcPxlHit);
 ostream&  operator<<(ostream& os, const StMcPxlHit& h)
 {
-    os << "PxlHit" << endl;
-    os << *((StMcHit *) &h);
-    os << "Layer           : " << h.sector() << endl;
-    os << "Ladder          : " << h.ladder() << endl;
-    os << "Sensor          : " << h.sensor() << endl;
-  return os;
+   os << "PxlHit" << endl;
+   os << *((StMcHit *) &h);
+   os << "Layer           : " << h.sector() << endl;
+   os << "Ladder          : " << h.ladder() << endl;
+   os << "Sensor          : " << h.sensor() << endl;
+   return os;
 }
 
 //________________________________________________________________________________
-void StMcPxlHit::Print(Option_t *option) const {
-  cout << *this << endl;
+void StMcPxlHit::Print(Option_t *option) const
+{
+   cout << *this << endl;
 }
 
 /***************************************************************************
