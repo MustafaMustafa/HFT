@@ -6,41 +6,40 @@
  * Author: Fabrice Retiere/Kai Schweda, Aug 2003
  ***************************************************************************
  *
- * Description: Monte Carlo PXL Layer Hit Collection class
+ * Description: 
  *
  ***************************************************************************
  *
  **************************************************************************/
-#include "StMcPxlSectorHitCollection.hh"
+#include "StMcPxlLadderHitCollection.hh"
 #include "StMcPxlHit.hh"
 static const char rcsid[] = "$Id: $";
 
-ClassImp(StMcPxlSectorHitCollection)
+ClassImp(StMcPxlLadderHitCollection)
 
 //_____________________________________________________________________________
-StMcPxlSectorHitCollection::StMcPxlSectorHitCollection() { /* noop */ }
+StMcPxlLadderHitCollection::StMcPxlLadderHitCollection() { /* noop */ }
 //_____________________________________________________________________________
-StMcPxlSectorHitCollection::~StMcPxlSectorHitCollection(){ /* noop */ }
+StMcPxlLadderHitCollection::~StMcPxlLadderHitCollection(){ /* noop */ }
 
-StMcPxlLadderHitCollection* 
-StMcPxlSectorHitCollection::ladder(unsigned int i)
+StMcPxlSensorHitCollection* 
+StMcPxlLadderHitCollection::sensor(unsigned int i)
 {
-  return (i < mNumberOfLadders) ? &(mLadders[i]) : 0;
+  return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
 }
 
-const StMcPxlLadderHitCollection* 
-StMcPxlSectorHitCollection::ladder(unsigned int i) const
+const StMcPxlSensorHitCollection* 
+StMcPxlLadderHitCollection::sensor(unsigned int i) const
 { 
-  return (i < mNumberOfLadders) ? &(mLadders[i]) : 0;
+  return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
 }
 
-unsigned int StMcPxlSectorHitCollection::numberOfHits() const
+unsigned int StMcPxlLadderHitCollection::numberOfHits() const
 {
   unsigned int sum = 0;
-  for ( int iLadder=0; iLadder < mNumberOfLadders; iLadder++) {
-    for ( int iSensor=0; iSensor < mLadders[iSensor].numberOfSensors(); iSensor++) {
-      sum += mLadders[iLadder].sensor(iSensor)->hits().size();
-    }
+  for ( int iLadder=0; iLadder < mNumberOfSensors; iLadder++) 
+  {
+      sum += mSensors[iLadder].hits().size();
   }
   return sum;
 }

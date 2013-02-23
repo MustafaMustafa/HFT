@@ -17,8 +17,8 @@ public:
     virtual ~StMcPxlHitCollection();
     
     bool addHit(StMcPxlHit*);
-    unsigned long numberOfHits() const;
-    unsigned int  numberOfSectors() const;
+    unsigned int numberOfHits() const;
+    unsigned int  numberOfSectors() const {return mNumberOfSectors;}
     
     StMcPxlSectorHitCollection*       sector(unsigned int);
     const StMcPxlSectorHitCollection* sector(unsigned int) const;

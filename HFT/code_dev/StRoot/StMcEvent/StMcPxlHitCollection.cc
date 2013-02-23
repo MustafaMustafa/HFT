@@ -22,50 +22,47 @@ ClassImp(StMcPxlHitCollection)
 StMcPxlHitCollection::StMcPxlHitCollection() { /* noop */ }
 
 StMcPxlHitCollection::~StMcPxlHitCollection() { /* noop */ }
-    
-bool
+
+ bool
 StMcPxlHitCollection::addHit(StMcPxlHit* hit)
 {
-    unsigned int p;
-    if (hit && (p = hit->sector()-1) < mNumberOfSectors) {
-      mSectors[p].hits().push_back(hit);
-      return true;
+    unsigned int s, l, w;
+    if (hit &&
+        (s = hit->sector()-1) < mNumberOfSectors &&
+        (l = hit->ladder()-1) < mSectors[s].numberOfLadders() &&
+        (w = hit->sensor()-1) < mSectors[s].ladder(l)->numberOfSensors()) {
+        mSectors[s].ladder(l)->sensor(w)->hits().push_back(hit);
+        return kTRUE;
     }
     else
-      return false;
-}
+        return kFALSE;
+}   
 
 unsigned int
-StMcPxlHitCollection::numberOfSectors() const { return mNumberOfSectors; }
-
-unsigned long
 StMcPxlHitCollection::numberOfHits() const
 {
-    unsigned long sum = 0;
-    for (int i=0; i<mNumberOfSectors; i++)
-      sum += mSectors[i].numberOfHits();
-
+    unsigned int sum = 0;
+    for (int iSec=0; iSec<mNumberOfSectors; iSec++) {
+      for (unsigned int iLadder=0; iLadder<mSectors[iSec].numberOfLadders(); iLadder++) {
+        for (unsigned int iSensor=0; iSensor<mSectors[iSec].ladder(iLadder)->numberOfSensors(); iSensor++) {
+          sum += mSectors[iSec].ladder(iLadder)->sensor(iSensor)->hits().size();
+        }
+      }
+    }
     return sum;
 }
 
 StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i)
 {
-    if (i < mNumberOfSectors)
-        return &(mSectors[i]);
-    else
-        return 0;
+  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 
 const StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i) const
 {
-    if (i < mNumberOfSectors)
-        return &(mSectors[i]);
-    else
-        return 0;
+  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }
-
 /***************************************************************************
  *
  * $Id: StMcPixelHitCollection.cc,v 2.2 2005/07/06 21:47:45 calderon Exp $

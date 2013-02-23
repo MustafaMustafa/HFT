@@ -693,7 +693,7 @@ void StMcEvent::Print(Option_t *option) const {
   PrintHitCollection(Tof,tof);
   PrintHitCollection(BTof,btof);
   PrintHitCollection(Mtd,mtd);
-  PrintHitCollectionL(Pxl,pxl,sector,Sectors);
+  //PrintHitCollectionL(Pxl,pxl,sector,Sectors);
   PrintHitCollectionL(Ist,ist,layer,Layers);
   PrintHitCollectionL(Fgt,fgt,layer,Layers);
   PrintHitCollection(Etr,etr);

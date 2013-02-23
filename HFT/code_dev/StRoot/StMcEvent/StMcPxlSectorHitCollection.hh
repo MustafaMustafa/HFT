@@ -7,9 +7,8 @@
  * 
  ***************************************************************************
  *
- * Description: Monte Carlo PXL Layer Hit Collection class from Kai
+ * Description: 
  *
- * The pixel detector hits are stored here.
  *
  ***************************************************************************
  *
@@ -18,27 +17,26 @@
 #ifndef StMcPxlSectorHitCollection_hh
 #define StMcPxlSectorHitCollection_hh
 
-#include "StMcContainers.hh"
 #include "StObject.h"
+#include "StMcPxlLadderHitCollection.hh"
 
-class StMcPxlHit;
 
 class StMcPxlSectorHitCollection : public StObject
 {
 public:
     StMcPxlSectorHitCollection();
     virtual ~StMcPxlSectorHitCollection();
-    void Clear(const char* opt="");
-    bool IsFolder() const { return true;};
-virtual void Browse(TBrowser *b); 
     
-    unsigned long numberOfHits() const;
+    unsigned int numberOfHits() const;
+    unsigned int numberOfLadders() const {return mNumberOfLadders;}
 
-    StSPtrVecMcPxlHit&       hits();
-    const StSPtrVecMcPxlHit& hits() const; 
+    StMcPxlLadderHitCollection*     ladder(unsigned int);
+    const StMcPxlLadderHitCollection* ladder(unsigned int) const;
 
 protected:
-    StSPtrVecMcPxlHit mHits;
+    enum { mNumberOfLadders = 4 };
+    StMcPxlLadderHitCollection mLadders[mNumberOfLadders];
+
     ClassDef(StMcPxlSectorHitCollection,1)
 };
 #endif
