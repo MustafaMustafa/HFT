@@ -13,7 +13,7 @@ class StMcPxlHit : public StMcHit {
 public:
   StMcPxlHit() {}
   StMcPxlHit(const StThreeVectorF& x,const StThreeVectorF& p,
-	     Float_t de = 0, Float_t ds = 0, Float_t tof = 0, Long_t k = 0, Long_t volId = 0, StMcTrack* parent=0) : 
+	     float de = 0, float ds = 0, float tof = 0, long int k = 0, long int volId = 0, StMcTrack* parent=0) : 
     StMcHit(x,p,de,ds,tof,k,volId,parent) {}
   StMcPxlHit(g2t_pix_hit_st* pt) : 
     StMcHit(StThreeVectorF(pt->x[0], pt->x[1], pt->x[2]),
@@ -22,10 +22,10 @@ public:
   ~StMcPxlHit() {}
 
   // Get methods
-  ULong_t sector() const {return mVolumeId/1000000;}
-  ULong_t ladder() const {return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
-  ULong_t sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
-  UShort_t  idTruth() const;
+  unsigned long sector() const {return mVolumeId/1000000;}
+  unsigned long ladder() const {return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
+  unsigned long sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
+  unsigned short  idTruth() const;
   virtual void Print(Option_t *option="") const; // *MENU* 
 
   void setIdTruth(const UShort_t id);
@@ -38,7 +38,7 @@ private:
 
 ostream&  operator<<(ostream& os, const StMcPxlHit&);
 
-inline UShort_t StMcPxlHit::idTruth() const {return mIdTruth;} 
+inline unsigned short StMcPxlHit::idTruth() const {return mIdTruth;} 
 
 inline void StMcPxlHit::setIdTruth(const UShort_t id) {mIdTruth=id;}
 

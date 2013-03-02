@@ -9,8 +9,6 @@
  *
  * Description: Monte Carlo PXL Hit Collection class
  *
- *  ***************************************************************************
- *
  **************************************************************************/
 #include "StMcPxlHitCollection.hh"
 #include "StMcPxlHit.hh"

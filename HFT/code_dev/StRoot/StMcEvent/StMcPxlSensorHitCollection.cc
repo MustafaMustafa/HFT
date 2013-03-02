@@ -1,14 +1,6 @@
 /***************************************************************************
  *
  * $Id: $
- *
- * Author:
- ***************************************************************************
- *
- * Description:
- *
- ***************************************************************************
- *
  * $Log: $
  *
  **************************************************************************/
@@ -24,11 +16,6 @@ StMcPxlSensorHitCollection::StMcPxlSensorHitCollection()
 
 StMcPxlSensorHitCollection::~StMcPxlSensorHitCollection()
 {
-   //
-   // Usually this wouldn't be necessary but mHits
-   // is a polymorphic container and StPxlHit
-   // provides its own new/delete operator.
-   //
    for (unsigned int i = 0; i < mHits.size(); i++)
    {
       delete mHits[i];
