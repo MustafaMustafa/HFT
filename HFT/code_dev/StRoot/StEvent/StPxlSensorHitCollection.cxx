@@ -1,8 +1,8 @@
 /***************************************************************************
  *
- * $Id: StPxlSensorHitCollection.cxx,v 1.3 2013/01/31 01:13:03 qiuh Exp $
+ * $Id: StPxlSensorHitCollection.cxx,v 2.1 2013/03/05 14:40:41 ullrich Exp $
  *
- * Author: Thomas Ullrich, Jan 2006
+ * Author: X. Dong, Jan 2013
  ***************************************************************************
  *
  * Description:
@@ -10,6 +10,8 @@
  ***************************************************************************
  *
  * $Log: StPxlSensorHitCollection.cxx,v $
+ * Revision 2.1  2013/03/05 14:40:41  ullrich
+ * Initial Revision.
  *
  **************************************************************************/
 #include "StPxlSensorHitCollection.h"

@@ -1,13 +1,17 @@
 /***************************************************************************
  *
- * $Id: StPxlHitCollection.cxx,v 1.3 2013/01/31 01:13:03 qiuh Exp $
+ * $Id: StPxlHitCollection.cxx,v 2.1 2013/03/05 14:40:21 ullrich Exp $
  *
- * Author: Thomas Ullrich, Jan 2006
+ * Author: X. Dong, Jan 2013
  ***************************************************************************
  *
  * Description:
  *
  ***************************************************************************
+ *
+ * $Log: StPxlHitCollection.cxx,v $
+ * Revision 2.1  2013/03/05 14:40:21  ullrich
+ * Initial Revision.
  *
  **************************************************************************/
 #include "StPxlHitCollection.h"
@@ -31,10 +35,10 @@ StPxlHitCollection::addHit(StPxlHit* hit)
         (l = hit->ladder()-1) < mSectors[s].numberOfLadders() &&
         (w = hit->sensor()-1) < mSectors[s].ladder(l)->numberOfSensors()) {
         mSectors[s].ladder(l)->sensor(w)->hits().push_back(hit);
-        return kTRUE;
+        return true;
     }
     else
-        return kFALSE;
+        return false;
 }
 
 unsigned int
@@ -42,11 +46,11 @@ StPxlHitCollection::numberOfHits() const
 {
     unsigned int sum = 0;
     for (int i=0; i<mNumberOfSectors; i++) {
-      for (unsigned int j=0; j<mSectors[i].numberOfLadders(); j++) {
-        for (unsigned int k=0; k<mSectors[i].ladder(j)->numberOfSensors(); k++) {
-          sum += mSectors[i].ladder(j)->sensor(k)->hits().size();
+        for (unsigned int j=0; j<mSectors[i].numberOfLadders(); j++) {
+            for (unsigned int k=0; k<mSectors[i].ladder(j)->numberOfSensors(); k++) {
+                sum += mSectors[i].ladder(j)->sensor(k)->hits().size();
+            }
         }
-      }
     }
     return sum;
 }
@@ -54,11 +58,11 @@ StPxlHitCollection::numberOfHits() const
 StPxlSectorHitCollection*
 StPxlHitCollection::sector(unsigned int i)
 {
-  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+    return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 
 const StPxlSectorHitCollection*
 StPxlHitCollection::sector(unsigned int i) const
 {
-  return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+    return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
 }

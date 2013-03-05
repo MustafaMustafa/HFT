@@ -1,17 +1,21 @@
 /*!
  * \class StPxlLadderHitCollection 
- * \author Thomas Ullrich, Jan 2006
+ * \author X. Dong, Jan 2013
  */
 /***************************************************************************
  *
- * $Id: StPxlLadderHitCollection.h,v 1.3 2013/01/31 01:14:04 qiuh Exp $
+ * $Id: StPxlLadderHitCollection.h,v 2.1 2013/03/05 14:40:41 ullrich Exp $
  *
- * Author: Thomas Ullrich, Jan 2006
+ * Author: X. Dong, Jan 2013
  ***************************************************************************
  *
  * Description:
  *
  ***************************************************************************
+ *
+ * $Log: StPxlLadderHitCollection.h,v $
+ * Revision 2.1  2013/03/05 14:40:41  ullrich
+ * Initial Revision.
  *
  **************************************************************************/
 #ifndef StPxlLadderHitCollection_hh
@@ -26,7 +30,7 @@ public:
     ~StPxlLadderHitCollection();
 
     unsigned int numberOfHits() const;
-    unsigned int numberOfSensors() const { return mNumberOfSensors; }
+    unsigned int numberOfSensors() const;
         
     StPxlSensorHitCollection*       sensor(unsigned int);
     const StPxlSensorHitCollection* sensor(unsigned int) const;
@@ -37,4 +41,7 @@ private:
     
     ClassDef(StPxlLadderHitCollection,1)
 };
+
+inline unsigned int StPxlLadderHitCollection::numberOfSensors() const { return mNumberOfSensors; }
+
 #endif

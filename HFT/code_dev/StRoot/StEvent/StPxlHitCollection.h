@@ -1,12 +1,12 @@
 /*!
- * \class StRnDHitCollection 
- * \author Thomas Ullrich, Jan 2006
+ * \class StPxlHitCollection 
+ * \author X. Dong, Jan 2013
  */
 /***************************************************************************
  *
- * $Id: StPxlHitCollection.h,v 1.3 2013/01/31 01:14:04 qiuh Exp $
+ * $Id: StPxlHitCollection.h,v 2.1 2013/03/05 14:40:40 ullrich Exp $
  *
- * Author: Thomas Ullrich, Jan 2006
+ * Author: X. Dong, Jan 2013
  ***************************************************************************
  *
  * Description:
@@ -14,10 +14,7 @@
  ***************************************************************************
  *
  * $Log: StPxlHitCollection.h,v $
- * Revision 1.3  2013/01/31 01:14:04  qiuh
- * *** empty log message ***
- *
- * Revision 2.1  2006/01/19 21:42:06  ullrich
+ * Revision 2.1  2013/03/05 14:40:40  ullrich
  * Initial Revision.
  *
  **************************************************************************/
@@ -36,7 +33,7 @@ public:
     
     bool          addHit(StPxlHit*);
     unsigned int  numberOfHits() const;
-    unsigned int  numberOfSectors() const { return mNumberOfSectors; }
+    unsigned int  numberOfSectors() const;
     
     StPxlSectorHitCollection*       sector(unsigned int);
     const StPxlSectorHitCollection* sector(unsigned int) const;
@@ -47,4 +44,7 @@ private:
     
     ClassDef(StPxlHitCollection,1)
 };
+
+inline unsigned int StPxlHitCollection::numberOfSectors() const { return mNumberOfSectors; }
+
 #endif

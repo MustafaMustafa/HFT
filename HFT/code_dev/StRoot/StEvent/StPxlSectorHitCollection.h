@@ -1,17 +1,21 @@
 /*!
  * \class StPxlSectorHitCollection 
- * \author Thomas Ullrich, Jan 2006
+ * \author X. Dong, Jan 2013
  */
 /***************************************************************************
  *
- * $Id: StPxlSectorHitCollection.h,v 1.3 2013/01/31 01:14:04 qiuh Exp $
+ * $Id: StPxlSectorHitCollection.h,v 2.1 2013/03/05 14:40:41 ullrich Exp $
  *
- * Author: Thomas Ullrich, Jan 2006
+ * Author: X. Dong, Jan 2013
  ***************************************************************************
  *
  * Description:
  *
  ***************************************************************************
+ *
+ * $Log: StPxlSectorHitCollection.h,v $
+ * Revision 2.1  2013/03/05 14:40:41  ullrich
+ * Initial Revision.
  *
  **************************************************************************/
 #ifndef StPxlSectorHitCollection_hh
@@ -26,7 +30,7 @@ public:
     ~StPxlSectorHitCollection();
 
     unsigned int numberOfHits() const;
-    unsigned int numberOfLadders() const { return mNumberOfLadders; }
+    unsigned int numberOfLadders() const;
         
     StPxlLadderHitCollection*       ladder(unsigned int);
     const StPxlLadderHitCollection* ladder(unsigned int) const;
@@ -37,4 +41,7 @@ private:
     
     ClassDef(StPxlSectorHitCollection,1)
 };
+
+inline unsigned int StPxlSectorHitCollection::numberOfLadders() const { return mNumberOfLadders; }
+
 #endif
