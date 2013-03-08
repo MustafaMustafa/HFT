@@ -37,10 +37,10 @@ StMcPxlHitCollection::addHit(StMcPxlHit* hit)
          (w = hit->sensor() - 1) < mSectors[s].ladder(l)->numberOfSensors())
    {
       mSectors[s].ladder(l)->sensor(w)->hits().push_back(hit);
-      return kTRUE;
+      return true;
    }
    else
-      return kFALSE;
+      return false;
 }
 
 unsigned int

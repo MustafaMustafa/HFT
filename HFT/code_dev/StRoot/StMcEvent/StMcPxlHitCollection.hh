@@ -18,7 +18,7 @@ public:
     
     bool addHit(StMcPxlHit*);
     unsigned int numberOfHits() const;
-    unsigned int  numberOfSectors() const {return mNumberOfSectors;}
+    unsigned int  numberOfSectors() const;
     
     StMcPxlSectorHitCollection*       sector(unsigned int);
     const StMcPxlSectorHitCollection* sector(unsigned int) const;
@@ -27,4 +27,6 @@ protected:
     StMcPxlSectorHitCollection mSectors[mNumberOfSectors];
     ClassDef(StMcPxlHitCollection,1)
 };
+
+inline unsigned int StMcPxlHitCollection::numberOfSectors() const {return mNumberOfSectors;}
 #endif

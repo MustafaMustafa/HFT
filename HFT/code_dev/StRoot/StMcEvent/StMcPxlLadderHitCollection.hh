@@ -18,7 +18,7 @@ public:
     virtual ~StMcPxlLadderHitCollection();
     
     unsigned int numberOfHits() const;
-    unsigned int numberOfSensors() const {return mNumberOfSensors;}
+    unsigned int numberOfSensors() const;
 
     StMcPxlSensorHitCollection*     sensor(unsigned int);
     const StMcPxlSensorHitCollection* sensor(unsigned int) const;
@@ -29,4 +29,6 @@ protected:
 
     ClassDef(StMcPxlLadderHitCollection,1)
 };
+
+inline unsigned int StMcPxlLadderHitCollection::numberOfSensors() const {return mNumberOfSensors;}
 #endif

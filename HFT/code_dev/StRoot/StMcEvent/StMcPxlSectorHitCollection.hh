@@ -18,7 +18,7 @@ public:
     virtual ~StMcPxlSectorHitCollection();
     
     unsigned int numberOfHits() const;
-    unsigned int numberOfLadders() const {return mNumberOfLadders;}
+    unsigned int numberOfLadders() const;
 
     StMcPxlLadderHitCollection*     ladder(unsigned int);
     const StMcPxlLadderHitCollection* ladder(unsigned int) const;
@@ -29,4 +29,6 @@ protected:
 
     ClassDef(StMcPxlSectorHitCollection,1)
 };
+
+inline unsigned int StMcPxlSectorHitCollection::numberOfLadders() const {return mNumberOfLadders;}
 #endif
