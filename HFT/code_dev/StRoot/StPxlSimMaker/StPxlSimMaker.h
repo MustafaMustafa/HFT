@@ -98,7 +98,6 @@ class StPxlSimMaker : public StMaker
   virtual Int_t InitRun(Int_t);
 
   void useDIGMAPSSim() {SetAttr("useDIGMAPSSim",kTRUE);}
-  
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.
   */
@@ -108,6 +107,7 @@ class StPxlSimMaker : public StMaker
 private:
     StPxlISim* mPxlSimulator;
 
+    Bool_t mUseFastSim;
     Bool_t mUseDIGMAPSSim;
 
 

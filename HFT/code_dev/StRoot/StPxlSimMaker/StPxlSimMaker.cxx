@@ -143,6 +143,7 @@ using namespace std;
 
 StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name)
 {
+   mUseFastSim = kFALSE;
    mUseDIGMAPSSim = kFALSE;
 }
 //____________________________________________________________
@@ -163,8 +164,9 @@ Int_t StPxlSimMaker::Init()
    //}
    //else
    //{
+   mUseFastSim = kTRUE;
    mPxlSimulator = new StPxlFastSim();
-   LOG_INFO << "StPxlSimMaker: using StPxlFastSim " <<endm;
+   LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
    //}
 
    return kStOk;
@@ -212,29 +214,36 @@ Int_t StPxlSimMaker::Make()
       return kStErr;
    }
 
-   StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
-   if (!pxlHitCol)
+   // call the requested simulator
+   if (mUseFastSim)
    {
-      LOG_ERROR << "StPxlSimMaker -E- no PxlHitCollection!" << endm;
-      return kStErr;
+      StPxlHitCollection *pxlHitCol = new StPxlHitCollection;
+      if (!pxlHitCol)
+      {
+         LOG_ERROR << "StPxlSimMaker -E- no PxlHitCollection in this StEvent!" << endm;
+         return kStErr;
+      }
+
+      //Get MC Pxl hit collection. This contains all PXL hits.
+      StMcPxlHitCollection* mcPxlHitCol = mcEvent->pxlHitCollection();
+
+      if (mcPxlHitCol)
+      {
+         mPxlSimulator->addPxlHits(*mcPxlHitCol, *pxlHitCol);
+      }
+      else
+      {
+         LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
+      }
+
+      rcEvent->setPxlHitCollection(pxlHitCol);
+      LOG_DEBUG << " size of hit collection : " << pxlHitCol->numberOfHits() << endm;
+   }
+   else if (mUseDIGMAPSSim)
+   {
+      // mPxlSimulator->addPxlRawHits();
    }
 
-   //Get MC Pxl hit collection. This contains all PXL hits.
-   StMcPxlHitCollection* mcPxlHitCol = mcEvent->pxlHitCollection();
-
-   if (mcPxlHitCol)
-   {
-      //if(mUseDIGMAPSSim) mPxlSimulator->addPxlRawHits();
-      mPxlSimulator->addPxlHits(*mcPxlHitCol, *pxlHitCol);
-   }
-   else
-   {
-      LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
-   }
-
-
-   rcEvent->setPixelHitCollection(pxlHitCol);
-   LOG_DEBUG << " size of hit collection : " << pxlHitCol->numberOfHits() << endm;
 
    return kStOK;
 }

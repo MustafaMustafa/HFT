@@ -171,11 +171,11 @@ Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
       return kStErr;
    }
 
-   // please note what is called local Y in the PXL sensor design
+   // please note that what is called local Y in the PXL sensor design
    // is actually called Z in STAR coordinates convention
-   mResXPix = sqrt(pxlHitError->coeff[0]);
-   mResZPix = sqrt(pxlHitError->coeff[3]);
-   mResYPix = sqrt(pxlHitError->coeff[3]); // needs to be updated in the DB later
+   mResXPix = sqrt(pxlHitError->coeff[0]); // local x
+   mResZPix = sqrt(pxlHitError->coeff[3]); // local Y
+   mResYPix = 0;//sqrt(pxlHitError->coeff[3]); // needs to be updated in the DB later
 
    return kStOk;
 }
@@ -200,7 +200,6 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
          for (UInt_t iSen = 0; iSen < mcPxlLadderHitCol->numberOfSensors(); iSen++)
          { 
             const StMcPxlSensorHitCollection* mcPxlSensorHitCol = mcPxlLadderHitCol->sensor(iSen);
-	    LOG_DEBUG<< mcPxlSensorHitCol <<endm;
             if (!mcPxlSensorHitCol) continue;
 
             UInt_t nSenHits = mcPxlSensorHitCol->hits().size();
@@ -232,12 +231,13 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
 
                LOG_DEBUG << "globalPixHitPos = " << globalPixHitPos[0] << " " << globalPixHitPos[1] << " " << globalPixHitPos[2] << endm;
                LOG_DEBUG << "localPixHitPos = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
-               // please note what is called local Y in the PXL sensor design
-               // is actually called Z in STAR coordinates convention
+               // please note that what is called local Y in the PXL sensor design
+               // is actually called Z in STAR coordinates convention and vice-versa
                smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH / 2.0);
                smearedZ = distortHit(localPixHitPos[2], mResZPix, PXL_ACTIVE_Y_LENGTH / 2.0);
                // Need to check with Hao on the constraint and smearing resolution for local Z. Both need to be in the DB.
-               smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
+               if(!mResXPix) smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
+	       else smearedY = localPixHitPos[1];
                localPixHitPos[0] = smearedX;
                localPixHitPos[2] = smearedZ;
                localPixHitPos[1] = smearedY;
