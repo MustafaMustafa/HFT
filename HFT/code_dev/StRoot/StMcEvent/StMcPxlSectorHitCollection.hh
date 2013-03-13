@@ -24,11 +24,11 @@ public:
     const StMcPxlLadderHitCollection* ladder(unsigned int) const;
 
 protected:
-    enum { mNumberOfLadders = 4 };
-    StMcPxlLadderHitCollection mLadders[mNumberOfLadders];
+    enum { kNumberOfLadders = 4 };
+    StMcPxlLadderHitCollection mLadders[kNumberOfLadders];
 
     ClassDef(StMcPxlSectorHitCollection,1)
 };
 
-inline unsigned int StMcPxlSectorHitCollection::numberOfLadders() const {return mNumberOfLadders;}
+inline unsigned int StMcPxlSectorHitCollection::numberOfLadders() const {return kNumberOfLadders;}
 #endif

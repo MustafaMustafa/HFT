@@ -24,19 +24,19 @@ StMcPxlSectorHitCollection::~StMcPxlSectorHitCollection()
 StMcPxlLadderHitCollection*
 StMcPxlSectorHitCollection::ladder(unsigned int i)
 {
-   return (i < mNumberOfLadders) ? &(mLadders[i]) : 0;
+   return (i < kNumberOfLadders) ? &(mLadders[i]) : 0;
 }
 
 const StMcPxlLadderHitCollection*
 StMcPxlSectorHitCollection::ladder(unsigned int i) const
 {
-   return (i < mNumberOfLadders) ? &(mLadders[i]) : 0;
+   return (i < kNumberOfLadders) ? &(mLadders[i]) : 0;
 }
 
 unsigned int StMcPxlSectorHitCollection::numberOfHits() const
 {
    unsigned int sum = 0;
-   for (int iLadder = 0; iLadder < mNumberOfLadders; iLadder++)
+   for (int iLadder = 0; iLadder < kNumberOfLadders; iLadder++)
    {
       for (int iSensor = 0; iSensor < mLadders[iSensor].numberOfSensors(); iSensor++)
       {

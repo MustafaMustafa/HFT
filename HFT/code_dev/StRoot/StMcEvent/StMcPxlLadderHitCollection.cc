@@ -24,19 +24,19 @@ StMcPxlLadderHitCollection::~StMcPxlLadderHitCollection()
 StMcPxlSensorHitCollection*
 StMcPxlLadderHitCollection::sensor(unsigned int i)
 {
-   return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
+   return (i < kNumberOfSensors) ? &(mSensors[i]) : 0;
 }
 
 const StMcPxlSensorHitCollection*
 StMcPxlLadderHitCollection::sensor(unsigned int i) const
 {
-   return (i < mNumberOfSensors) ? &(mSensors[i]) : 0;
+   return (i < kNumberOfSensors) ? &(mSensors[i]) : 0;
 }
 
 unsigned int StMcPxlLadderHitCollection::numberOfHits() const
 {
    unsigned int sum = 0;
-   for (int iSen = 0; iSen < mNumberOfSensors; iSen++)
+   for (int iSen = 0; iSen < kNumberOfSensors; iSen++)
    {
       sum += mSensors[iSen].hits().size();
    }

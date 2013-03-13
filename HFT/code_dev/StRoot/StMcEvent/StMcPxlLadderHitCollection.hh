@@ -24,11 +24,11 @@ public:
     const StMcPxlSensorHitCollection* sensor(unsigned int) const;
 
 protected:
-    enum { mNumberOfSensors = 10 };
-    StMcPxlSensorHitCollection mSensors[mNumberOfSensors];
+    enum { kNumberOfSensors = 10 };
+    StMcPxlSensorHitCollection mSensors[kNumberOfSensors];
 
     ClassDef(StMcPxlLadderHitCollection,1)
 };
 
-inline unsigned int StMcPxlLadderHitCollection::numberOfSensors() const {return mNumberOfSensors;}
+inline unsigned int StMcPxlLadderHitCollection::numberOfSensors() const {return kNumberOfSensors;}
 #endif

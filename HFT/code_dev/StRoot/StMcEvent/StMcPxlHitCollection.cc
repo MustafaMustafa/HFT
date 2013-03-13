@@ -32,7 +32,7 @@ StMcPxlHitCollection::addHit(StMcPxlHit* hit)
 {
    unsigned int s, l, w;
    if (hit &&
-         (s = hit->sector() - 1) < mNumberOfSectors &&
+         (s = hit->sector() - 1) < kNumberOfSectors &&
          (l = hit->ladder() - 1) < mSectors[s].numberOfLadders() &&
          (w = hit->sensor() - 1) < mSectors[s].ladder(l)->numberOfSensors())
    {
@@ -47,7 +47,7 @@ unsigned int
 StMcPxlHitCollection::numberOfHits() const
 {
    unsigned int sum = 0;
-   for (int iSec = 0; iSec < mNumberOfSectors; iSec++)
+   for (int iSec = 0; iSec < kNumberOfSectors; iSec++)
    {
       for (unsigned int iLad = 0; iLad < mSectors[iSec].numberOfLadders(); iLad++)
       {
@@ -63,13 +63,13 @@ StMcPxlHitCollection::numberOfHits() const
 StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i)
 {
-   return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+   return (i < kNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 
 const StMcPxlSectorHitCollection*
 StMcPxlHitCollection::sector(unsigned int i) const
 {
-   return (i < mNumberOfSectors) ? &(mSectors[i]) : 0;
+   return (i < kNumberOfSectors) ? &(mSectors[i]) : 0;
 }
 /***************************************************************************
  *

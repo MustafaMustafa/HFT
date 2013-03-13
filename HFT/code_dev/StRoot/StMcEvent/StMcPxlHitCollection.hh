@@ -23,10 +23,10 @@ public:
     StMcPxlSectorHitCollection*       sector(unsigned int);
     const StMcPxlSectorHitCollection* sector(unsigned int) const;
 protected:
-    enum { mNumberOfSectors = 10 };
-    StMcPxlSectorHitCollection mSectors[mNumberOfSectors];
+    enum { kNumberOfSectors = 10 };
+    StMcPxlSectorHitCollection mSectors[kNumberOfSectors];
     ClassDef(StMcPxlHitCollection,1)
 };
 
-inline unsigned int StMcPxlHitCollection::numberOfSectors() const {return mNumberOfSectors;}
+inline unsigned int StMcPxlHitCollection::numberOfSectors() const {return kNumberOfSectors;}
 #endif
