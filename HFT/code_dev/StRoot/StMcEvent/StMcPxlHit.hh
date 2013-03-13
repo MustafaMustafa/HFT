@@ -21,10 +21,20 @@ public:
 	    pt->de, pt->ds, pt->tof, pt->id, pt->volume_id, 0) {}
   ~StMcPxlHit() {}
 
-  // Get methods
-  ULong_t sector() const {return mVolumeId/1000000;}
-  ULong_t ladder() const {return  (mVolumeId%1000000)/10000;} // 1-6, 1-18
-  ULong_t sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
+  ///
+  /// Returns sector number (sectors are numbered CW 1-10 when viewed from East. see drupal.star.bnl.gov/STAR/system/files/HFT%20numbering%20scheme_v5_0.pdf)
+  ///
+  UChar_t sector() const {return mVolumeId/1000000;}
+  ///
+  /// Returns ladder number (ladders are numbered CW 1-4 when viewed from East, 4 is inner ladder)
+  ///
+  UChar_t ladder() const {return  (mVolumeId%1000000)/10000;} 
+  ///
+  /// Returns sensor number (sensors are numbered 1-10 from East to West)
+  ///
+  UChar_t sensor() const {return  (mVolumeId - sector()*1000000 - ladder()*10000)/100;} 
+
+
   virtual void Print(Option_t *option="") const; // *MENU* 
 
 private:
