@@ -253,12 +253,12 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
                tempHit->setSector(iSec + 1);
                tempHit->setLadder(mcPix->ladder());
                tempHit->setSensor(mcPix->sensor());
-               tempHit->setIdTruth(mcPix->idTruth(), 100);
+               tempHit->setIdTruth(mcPix->parentTrack()->key(), 100);
 	       tempHit->setDetectorId(kPxlId);
 	       tempHit->setId(mcPix->key());
                tempHit->setLocalPosition(localPixHitPos[0], localPixHitPos[1], localPixHitPos[2]);
 
-               LOG_DEBUG << "key() : " << mcPix->key() - 1 << " idTruth: " << mcPix->idTruth() << endm;
+               LOG_DEBUG << "key() : " << mcPix->key() - 1 << " idTruth: " << mcPix->parentTrack()->key() << endm;
                LOG_DEBUG << "from StMcPxlHit : x= " << mcPix->position().x() << ";  y= " << mcPix->position().y() << ";  z= " << mcPix->position().z() << endm;
                LOG_DEBUG << "pxlHit location x= " << tempHit->position().x() << "; y= " << tempHit->position().y() << "; z= " << tempHit->position().z() << endm;
 
