@@ -9,9 +9,11 @@
 
 #include "StPxlSimMaker.h"
 #include "StPxlFastSim.h"
+#include "StPxlDigmapsSim.h"
 #include "StPxlISim.h"
-#include "StMcPxlHitCollection.hh"
-#include "StPxlHitCollection.h"
+#include "StMcEvent/StMcPxlHitCollection.hh"
+#include "StEvent/StPxlHitCollection.h"
+#include "StPxlUtil/StPxlRawHitCollection.h"
 
 #include "Stiostream.h"
 #include "StHit.h"
@@ -21,6 +23,8 @@
 #include "StMcEventTypes.hh"
 
 #include "TGeoManager.h"
+#include "TSystem.h" // temporary hack
+#include "TObjectSet.h"
 
 ClassImp(StPxlSimMaker)
 
@@ -49,9 +53,13 @@ Int_t StPxlSimMaker::Init()
    //}
    //else
    //{
-   mUseFastSim = kTRUE;
-   mPxlSimulator = new StPxlFastSim();
-   LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
+   // temp
+   //mUseFastSim = kTRUE;
+   //mPxlSimulator = new StPxlFastSim();
+   ///LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
+   mUseDIGMAPSSim = kTRUE;
+   mPxlSimulator = new StPxlDigmapsSim();
+   LOG_INFO << "StPxlSimMaker: using StPxlDigmapsSim " << endm;
    //}
 
    return kStOk;
@@ -75,6 +83,8 @@ Int_t StPxlSimMaker::InitRun(Int_t RunNo)
 
 Int_t StPxlSimMaker::Make()
 {
+    // temporary hack
+    gSystem->Load("StPxlUtil");
    LOG_INFO << "StPxlSimMaker::Make()" << endm;
 
    // Get the input data structures from StEvent and StMcEvent
@@ -90,6 +100,14 @@ Int_t StPxlSimMaker::Make()
    {
       LOG_INFO << "No StMcEvent on input" << endl;
       return kStWarn;
+   }
+
+   //Get MC Pxl hit collection. This contains all PXL hits.
+   StMcPxlHitCollection* mcPxlHitCol = mcEvent->pxlHitCollection();
+   if(!mcPxlHitCol)
+   { 
+       LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
+       return kStOk;
    }
 
    if (!gGeoManager) GetDataBase("VmcGeometry");
@@ -109,24 +127,37 @@ Int_t StPxlSimMaker::Make()
          return kStErr;
       }
 
-      //Get MC Pxl hit collection. This contains all PXL hits.
-      StMcPxlHitCollection* mcPxlHitCol = mcEvent->pxlHitCollection();
-
-      if (mcPxlHitCol)
-      {
-         mPxlSimulator->addPxlHits(*mcPxlHitCol, *pxlHitCol);
-      }
-      else
-      {
-         LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
-      }
+      mPxlSimulator->addPxlHits(*mcPxlHitCol, *pxlHitCol);
 
       rcEvent->setPxlHitCollection(pxlHitCol);
       LOG_DEBUG << " size of hit collection : " << pxlHitCol->numberOfHits() << endm;
    }
    else if (mUseDIGMAPSSim)
    {
-      // mPxlSimulator->addPxlRawHits();
+       // for testing
+       StPxlRawHitCollection* pxlRawHitCol = 0;
+
+       TObjectSet* pxlRawHitDataSet = (TObjectSet*)GetDataSet("pxlRawHit");
+       
+       if (!pxlRawHitDataSet) 
+       {
+            pxlRawHitDataSet = new TObjectSet("pxlRawHit");
+            m_DataSet = pxlRawHitDataSet;
+            pxlRawHitCol = new StPxlRawHitCollection();
+            pxlRawHitDataSet->AddObject(pxlRawHitCol);
+       }   
+       else
+       {
+           pxlRawHitCol= (StPxlRawHitCollection*)pxlRawHitDataSet->GetObject();
+       }
+
+       if(!pxlRawHitCol) 
+       {
+	   LOG_ERROR << "Make() - no pxlRawHitCollection."<<endm;
+	   return kStErr;
+       }   
+
+       mPxlSimulator->addPxlRawHits(*mcPxlHitCol,*pxlRawHitCol);
    }
 
 

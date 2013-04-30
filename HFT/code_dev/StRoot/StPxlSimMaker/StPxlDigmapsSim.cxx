@@ -1,125 +1,10 @@
 /*
  *
- * Author: A. Rose, LBL, Y. Fisyak, BNL, M. Miller, MIT, M. Mustafa
+ * Author: M. Mustafa
  *
  *
  **********************************************************
- * $Log: StPixelFastSimMaker.cxx,v $
- * Revision 1.44  2012/12/18 18:46:59  margetis
- * update for DEV13 geometry
- *
- * Revision 1.43  2010/09/01 20:31:47  fisyak
- * clean up unused varaibles
- *
- * Revision 1.42  2009/02/06 20:48:48  wleight
- * UPGR15 Update
- *
- * Revision 1.41  2009/01/26 14:50:46  fisyak
- * Clean up
- *
- * Revision 1.40  2007/12/03 20:42:43  wleight
- * Replaced couts with LOG_DEBUGs
- *
- * Revision 1.37  2007/11/13 19:09:51  wleight
- * Corrected bug causing pixel fast simulator to crash when there were no pixel and/or ist hits in the event
- *
- * Revision 1.36  2007/11/06 16:20:06  wleight
- * Digitized Pixel, removed all hit smearing, and implemented idTruth
- *
- * Revision 1.34  2007/10/18 16:31:44  fisyak
- * Add pile-up from weixie
- *
- * Revision 1.33  2007/10/18 14:25:13  didenko
- * updates for pile-up events
- *
- * Revision 1.32  2007/10/16 19:53:08  fisyak
- * rename Hft => Pxl, remove Hpd, Igt and Fst
- *
- * Revision 1.31  2007/10/16 19:50:46  fisyak
- * rename Hft => Pxl, remove Hpd, Igt and Fst
- *
- * Revision 1.30  2007/09/09 17:00:32  fisyak
- * Fix bug 1056
- *
- * Revision 1.29  2007/09/08 00:33:05  andrewar
- * Modifications for pileup hit read in.
- *
- * Revision 1.28  2007/05/17 13:18:52  andrewar
- * Removed cout in shiftHit.
- *
- * Revision 1.27  2007/05/16 15:06:55  andrewar
- * Switched cout's to LOG_INFO.
- *
- * Revision 1.26  2007/04/28 17:56:36  perev
- * Redundant StChain.h removed
- *
- * Revision 1.25  2007/04/27 18:41:29  wleight
- * Removed smearing of the coordinate not controlled by the strips in the 17cm layer
- *
- * Revision 1.24  2007/04/27 14:59:10  wleight
- * Corrected another error in the creation of new hits
- *
- * Revision 1.23  2007/04/26 04:08:41  perev
- * Remove StBFChain dependency
- *
- * Revision 1.22  2007/04/25 17:44:59  wleight
- * Corrected error in assignment of reconstructed IST hits
- *
- * Revision 1.21  2007/04/23 18:11:30  andrewar
- * Removed references to Hpd (includes were obsolete)
- *
- * Revision 1.19  2007/04/23 16:32:47  wleight
- * Added explicit casting for Double_t to int in calculating strip number
- *
- * Revision 1.18  2007/04/22 22:57:23  wleight
- * The two hits in the 17 cm layer are no longer combined into 1
- *
- * Revision 1.17  2007/04/16 19:10:52  wleight
- * Added IST simulation (digitization but no clustering)
- *
- * Revision 1.16  2007/04/13 19:17:15  andrewar
- * Removed misleading errors. Changed cout and printf to gMessMgr.
- *
- * Revision 1.15  2007/04/06 21:46:36  andrewar
- * Removed some debug messages.
- *
- * Revision 1.14  2007/04/06 14:55:11  andrewar
- * Shift of HFT hit to face of ladder.
- *
- * Revision 1.13  2007/03/28 13:33:45  mmiller
- * Removed cout/printf's.
- *
- * Revision 1.12  2006/12/21 18:11:59  wleight
- * Fixed UPGR09 compatibility so it works with all versions
- *
- * Revision 1.11  2006/12/20 16:50:21  wleight
- * Added fix for UPGR09 problem with layer number mismatch
- *
- * Revision 1.10  2006/12/15 02:17:20  wleight
- * Ist now gets hit smearing parameters from the database
- *
- * Revision 1.9  2006/12/14 23:52:51  andrewar
- * Added Sevil's hit error db loader.
- *
- * Revision 1.7  2006/11/29 21:42:07  andrewar
- * Update with Pixel resolution smearing.
- *
- * Revision 1.6  2006/11/28 22:37:42  wleight
- * Fixed minor smearing bug
- *
- * Revision 1.4  2006/10/13 20:15:45  fisyak
- * Add Hpd fast simulation (Sevil)
- *
- * Revision 1.3  2006/02/17 21:44:29  andrewar
- * Remover streaming of each Pixel hit.
- *
- * Revision 1.2  2006/02/08 20:57:33  fisyak
- * Set proper Detector Id
- *
- * Revision 1.1  2006/02/03 20:11:56  fisyak
- * The initial revision
- *
- *
+ * $Log:  $
  */
 
 #include <stdio.h>
@@ -127,11 +12,12 @@
 #include "StMessMgr.h"
 #include "Stypes.h"
 #include "Stiostream.h"
-#include "StPxlFastSim.h"
-#include "StEvent/StPxlHit.h"
-#include "StEvent/StPxlHitCollection.h"
-#include "StMcEvent/StMcPixelHit.hh"
-#include "StMcEvent/StMcPixelHitCollection.hh"
+#include "StPxlDigmapsSim.h"
+#include "StMcEvent/StMcPxlHit.hh"
+#include "StMcEvent/StMcPxlHitCollection.hh"
+#include "StPxlUtil/StPxlRawHitCollection.h"
+#include "StPxlUtil/StPxlRawHit.h"
+#include "StPxlUtil/StPxlConstants.h"
 #include "tables/St_HitError_Table.h"
 #include "StarClassLibrary/StRandom.hh"
 #include "StThreeVectorF.hh"
@@ -139,72 +25,141 @@
 #include "TGeoManager.h"
 #include "TGeoMatrix.h"
 #include "TDataSet.h"
+#include "TMath.h"
+#include "TRandom3.h"
 
-StPxlFastSim::~StPxlFastSim()
+#include "DIGMAPS/digplane.h"
+#include "DIGMAPS/digadc.h"
+#include "DIGMAPS/digtransport.h"
+#include "DIGMAPS/digparticle.h"
+#include "DIGMAPS/digevent.h"
+
+StPxlDigmapsSim::~StPxlDigmapsSim()
 {
-   if (mRandom) delete mRandom;
+   delete mDigAdc;
+   delete mDigPlane;
+   delete mDigTransport;
 }
 //____________________________________________________________
-Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
+Int_t StPxlDigmapsSim::initRun(const TDataSet& calib_db, const Int_t run)
 {
    // run is not used in the current implementation, but might be necessary in the future.
 
-   LOG_INFO << "StPxlFastSim::init()" << endm;
+   LOG_INFO << "StPxlDigmapsSim::init()" << endm;
 
-   if (!mRandom) mRandom = new StRandom();
-   Int_t seed = time(NULL);
-   mRandom->setSeed(seed);
+   // temporary setup, need to utilize a DB
 
-   St_HitError *pxlTableSet = (St_HitError*)calib_db.Find("PixelHitError");
+   // set ADC threshold(s)
+   Int_t nAdcBits = 1;
+   Int_t nAdcThresholds = int(TMath::Power(2.0, nAdcBits) - 1);
+   Bool_t adcLinear = 0;
+   Float_t adcElectronConversion = -999;
+   Float_t adcThresholds[] = {4.0}; // one threshold only
+   Float_t adcLsb = adcThresholds[0];
 
-   if (!pxlTableSet)
-   {
-      LOG_ERROR << "StPxlFastSim - E - PixelHitError is not available" << endm;
-      return kStErr;
-   }
+   if (!mDigAdc) mDigAdc = new DIGADC();
+   cout<<mDigAdc<<endl;
+   mDigAdc->SetNbits(nAdcBits);
+   mDigAdc->SetNThresholds(nAdcThresholds);
+   mDigAdc->SetADC_linear(adcLinear);
+   mDigAdc->SetLSB(adcLsb);
+   mDigAdc->SetElectron_Conversion(adcElectronConversion);
+   mDigAdc->SetADC_thresholds(adcThresholds, nAdcThresholds);
 
-   HitError_st* pxlHitError = pxlTableSet->GetTable();
+   // set transport
+   Int_t transportChargeModel = 5;
+   Float_t transportRangeLimit_InPitchUnit = 2.5;
+   Float_t   transport_l1dimgauslor_Norm_g_1st = 0.458955;
+   Float_t   transport_l1dimgauslor_x0_g_1st = -3.98149;
+   Float_t   transport_l1dimgauslor_sigma_g_1st = 13.1559;
+   Float_t   transport_l1dimgauslor_Gamma_lor_1st = 3.98673;
+   Float_t   transport_l1dimgauslor_x0_lor_1st = 1.79712;
+   Float_t   transport_l1dimgauslor_norm_lor_1st = 6.4533;
+   Float_t   transport_l1dimgauslor_Norm_g_2nd = 0.116703;
+   Float_t   transport_l1dimgauslor_x0_g_2nd = -1.0688;
+   Float_t   transport_l1dimgauslor_sigma_g_2nd = 17.4533;
+   Float_t   transport_l1dimgauslor_Gamma_lor_2nd = 47.0837;
+   Float_t   transport_l1dimgauslor_x0_lor_2nd = -4.63879;
+   Float_t   transport_l1dimgauslor_norm_lor_2nd = 3.71411;
 
-   if (!pxlHitError)
-   {
-      LOG_ERROR << "StPxlFastSim - E - pxl hit table is not available in PixelHitError" << endm;
-      return kStErr;
-   }
+   if (!mDigTransport) mDigTransport = new DIGTransport();
+   mDigTransport->SetChargeModel(transportChargeModel);
+   mDigTransport->SetRangeLimit_InPitchUnit(transportRangeLimit_InPitchUnit);
+   mDigTransport->Setf1dimgauslor_Norm_g_1st(transport_l1dimgauslor_Norm_g_1st);
+   mDigTransport->Setf1dimgauslor_x0_g_1st(transport_l1dimgauslor_x0_g_1st);
+   mDigTransport->Setf1dimgauslor_sigma_g_1st(transport_l1dimgauslor_sigma_g_1st);
+   mDigTransport->Setf1dimgauslor_Gamma_lor_1st(transport_l1dimgauslor_Gamma_lor_1st);
+   mDigTransport->Setf1dimgauslor_x0_lor_1st(transport_l1dimgauslor_x0_lor_1st);
+   mDigTransport->Setf1dimgauslor_norm_lor_1st(transport_l1dimgauslor_norm_lor_1st);
+   mDigTransport->Setf1dimgauslor_Norm_g_2nd(transport_l1dimgauslor_Norm_g_2nd);
+   mDigTransport->Setf1dimgauslor_x0_g_2nd(transport_l1dimgauslor_x0_g_2nd);
+   mDigTransport->Setf1dimgauslor_sigma_g_2nd(transport_l1dimgauslor_sigma_g_2nd);
+   mDigTransport->Setf1dimgauslor_Gamma_lor_2nd(transport_l1dimgauslor_Gamma_lor_2nd);
+   mDigTransport->Setf1dimgauslor_x0_lor_2nd(transport_l1dimgauslor_x0_lor_2nd);
+   mDigTransport->Setf1dimgauslor_norm_lor_2nd(transport_l1dimgauslor_norm_lor_2nd);
 
-   // please note what is called local Y in the PXL sensor design
-   // is actually called Z in STAR coordinates convention
-   mResXPix = sqrt(pxlHitError->coeff[0]);
-   mResZPix = sqrt(pxlHitError->coeff[3]);
-   mResYPix = sqrt(pxlHitError->coeff[3]); // needs to be updated in the DB later
+   // set plane
+   Float_t planePitchX = 20.7;
+   Float_t planePitchY = 20.7;
+   Float_t planeEpitaxialThickness = 9.0;
+   Float_t planeNoiseElectrons = 13.7;
+   Int_t planeNpixelsX = nPxlColumnsOnSensor;
+   Int_t planeNpixelsY = nPxlRowsOnSensor;
+   Float_t planeTemprature = 10.0;
+   Float_t planeIonizationEnergy = 3.6;
+   Float_t planeSegmentSize = 0.1;
+   Float_t planeMaximumSegmentSize = 1.0;
+   Float_t planeMaximumChargePerSegment = 1.0;
+   Float_t planeDiffusionMaximumRangeInX = 2.5;
+   Float_t planeDiffusionMaximumRangeInY = 2.5;
+   Float_t planeReflexionCoefficient = 1.0;
+   Float_t planeBasicModel_SigmaTenMicrons = 10.0;
+
+   if (!mDigPlane) mDigPlane = new DIGPlane();
+   mDigPlane->SetPitch(planePitchX, planePitchY);
+   mDigPlane->SetNpixels(planeNpixelsX, planeNpixelsY);
+   mDigPlane->SetDimensions(planePitchX * planeNpixelsX, planePitchY * planeNpixelsY, planeEpitaxialThickness);
+   mDigPlane->SetNoiseElectrons(planeNoiseElectrons);
+   mDigPlane->SetTemperature(planeTemprature);
+   mDigPlane->SetIonizationEnergy(planeIonizationEnergy);
+   mDigPlane->SetSegmentSize(planeSegmentSize);
+   mDigPlane->SetMaximumSegmentSize(planeMaximumSegmentSize);
+   mDigPlane->SetMaximumChargePerSegment(planeMaximumChargePerSegment);
+   mDigPlane->SetDiffusionMaximumRange(planeDiffusionMaximumRangeInX, planeDiffusionMaximumRangeInY);
+   mDigPlane->SetReflexionCoefficient(planeReflexionCoefficient);
+   mDigPlane->SetBasicModel_SigmaTenMicrons(planeBasicModel_SigmaTenMicrons);
 
    return kStOk;
 }
 //____________________________________________________________
-Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
-                               StPxlHitCollection& pxlHitCol)
+Int_t StPxlDigmapsSim::addPxlRawHits(const StMcPxlHitCollection& mcPxlHitCol,
+                                     StPxlRawHitCollection& pxlRawHitCol)
 {
-   Float_t smearedX = 0, smearedY = 0, smearedZ = 0;
 
-   Int_t nMcHits = mcPxlHitCol.numberOfHits();
-   LOG_DEBUG << "There are" << nMcHits << " mc pixel hits" << endm;
-
-   if (nMcHits)
+   // Loop over sectors
+   for (UInt_t iSec = 0; iSec < mcPxlHitCol.numberOfSectors(); iSec++)
    {
-      // Loop over sectors
-      for (UInt_t iSec = 0; iSec < mcPxlHitCol.numberOfSectors(); iSec++)
+      const StMcPxlSectorHitCollection* mcPxlSectorHitCol = mcPxlHitCol.sector(iSec);
+      if (!mcPxlSectorHitCol) continue;
+
+      for (UInt_t iLad = 0; iLad < mcPxlSectorHitCol->numberOfLadders(); iLad++)
       {
-         if (mcPxlHitCol.sector(iSec))
+         const StMcPxlLadderHitCollection* mcPxlLadderHitCol = mcPxlSectorHitCol->ladder(iLad);
+         if (!mcPxlLadderHitCol) continue;
+
+         for (UInt_t iSen = 0; iSen < mcPxlLadderHitCol->numberOfSensors(); iSen++)
          {
-            LOG_DEBUG << "Sector " << iSec + 1 << endm;
+            const StMcPxlSensorHitCollection* mcPxlSensorHitCol = mcPxlLadderHitCol->sensor(iSen);
+            if (!mcPxlSensorHitCol) continue;
 
-            UInt_t nSecHits = mcPxlHitCol.sector(iSec)->hits().size();
-            LOG_DEBUG << " Number of hits in sector " << iSec + 1 << " =" << nSecHits << endm;
+            UInt_t nSenHits = mcPxlSensorHitCol->hits().size();
+            LOG_DEBUG << "Sector/Ladder/Sensor = " << iSec << "/" << iLad << "/" << iSen << ". Number of sensor hits = " << nSenHits << endm;
 
-            // Loop over hits in the sector
-            for (UInt_t iHit = 0; iHit < nSecHits; iHit++)
+	    DIGEvent* fdigevent = new DIGEvent();
+            // Loop over hits in the sensor
+            for (UInt_t iHit = 0; iHit < nSenHits; iHit++)
             {
-               StMcHit* mcH = mcPxlHitCol.sector(iSec)->hits()[iHit];
-               StMcPixelHit* mcPix = dynamic_cast<StMcPixelHit*>(mcH);
+               StMcPxlHit* mcPix = mcPxlSensorHitCol->hits()[iHit];
 
                Long_t volId = mcPix->volumeId();
                Int_t sector = mcPix->sector();
@@ -225,56 +180,124 @@ Int_t StPxlFastSim::addPxlHits(const StMcPixelHitCollection& mcPxlHitCol,
                Double_t localPixHitPos[3]  = {0, 0, 0};
                gGeoManager->GetCurrentMatrix()->MasterToLocal(globalPixHitPos, localPixHitPos);
 
+	       // convert to um
+	       localPixHitPos[0] *= 10000.0;
+	       localPixHitPos[1] *= 10000.0;
+	       localPixHitPos[2] *= 10000.0;
+
                LOG_DEBUG << "globalPixHitPos = " << globalPixHitPos[0] << " " << globalPixHitPos[1] << " " << globalPixHitPos[2] << endm;
                LOG_DEBUG << "localPixHitPos = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
-               // please note what is called local Y in the PXL sensor design
-               // is actually called Z in STAR coordinates convention
-               smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH / 2.0);
-               smearedZ = distortHit(localPixHitPos[2], mResZPix, PXL_ACTIVE_Y_LENGTH / 2.0);
-               // Need to check with Hao on the constraint and smearing resolution for local Z. Both need to be in the DB.
-               smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
-               localPixHitPos[0] = smearedX;
-               localPixHitPos[2] = smearedZ;
-               localPixHitPos[1] = smearedY;
-               LOG_DEBUG << "smearedlocal = " << localPixHitPos[0] << " " << localPixHitPos[1] << " " << localPixHitPos[2] << endm;
-               Double_t smearedGlobalPixHitPos[3] = {0, 0, 0};
-               gGeoManager->GetCurrentMatrix()->LocalToMaster(localPixHitPos, smearedGlobalPixHitPos);
 
-               StThreeVectorF gpixpos(smearedGlobalPixHitPos);
-               StThreeVectorF mRndHitError(0., 0., 0.);
+               Float_t lXpos = localPixHitPos[0] + mDigPlane->GetXdimension()/2.0;
+               Float_t lYpos = localPixHitPos[2] + mDigPlane->GetYdimension()/2.0;
+               Float_t lZpos = 0.0;
+               LOG_DEBUG << "digHitPos = " << lXpos << " " << lYpos << " " << lZpos << endm;
+               Float_t thetapos = 0; //temporary
+               Float_t phipos = 0; // temporary
+               Float_t thetaposrad = thetapos * TMath::Pi() / 180.0;
+               Float_t phiposrad = phipos * TMath::Pi() / 180.0;
+               //compute exit position given the incident angle:
+               Float_t totalXlength = (mDigPlane->GetZdimension()) * TMath::Tan(thetaposrad) * TMath::Cos(phiposrad);
+               Float_t totalYlength = (mDigPlane->GetZdimension()) * TMath::Tan(thetaposrad) * TMath::Sin(phiposrad);
+               Float_t outputXpos = lXpos + totalXlength;
+               Float_t outputYpos = lYpos + totalYlength;
+               Float_t outputZpos = lZpos + mDigPlane->GetZdimension();
 
-               UInt_t hw = sector * 10 + ladder; // needs to be updated later after clustering alogrithms are finalized
-               StPxlHit* tempHit = new StPxlHit(gpixpos, mRndHitError, hw, mcPix->dE() , 0);
-               tempHit->setSector(iSec + 1);
-               tempHit->setLadder(mcPix->ladder());
-               tempHit->setSensor(mcPix->sensor());
-               tempHit->setIdTruth(mcPix->idTruth(), 100);
-               tempHit->setLocalPosition(localPixHitPos[0], localPixHitPos[1], localPixHitPos[2]);
+               // calculate deposited energy - need to move to a separate function
+               Float_t mtotallentgh = (mDigPlane->GetZdimension()) / TMath::Cos(thetaposrad);
+               Float_t EnergyMPV = 800.0 * mtotallentgh / 10.0;
+               Float_t EnergySIGMA = 180.0 * mtotallentgh / 10.0;
+               Float_t Energy = LandauLaw(EnergyMPV, EnergySIGMA);
 
-               LOG_DEBUG << "key() : " << mcPix->key() - 1 << " idTruth: " << mcPix->idTruth() << endm;
-               LOG_DEBUG << "from StMcPixelHit : x= " << mcPix->position().x() << ";  y= " << mcPix->position().y() << ";  z= " << mcPix->position().z() << endm;
-               LOG_DEBUG << "pxlHit location x= " << tempHit->position().x() << "; y= " << tempHit->position().y() << "; z= " << tempHit->position().z() << endm;
+               while (Energy > 20000)
+               {
+                  cout << "Energy too high -> Energy regenerated" << Energy << endl;
+                  Energy = LandauLaw(EnergyMPV, EnergySIGMA);
+               }
 
-               pxlHitCol.addHit(tempHit);
+               DIGParticle* fdigparticle = new DIGParticle(lXpos, lYpos, lZpos, outputXpos, outputYpos, outputZpos, Energy);
+               //---------charge generation
+               fdigparticle->ComputeChargeDeposition(mDigPlane->GetSegmentSize(),
+                                                     mDigPlane->GetMaximumSegmentSize(),
+                                                     mDigPlane->GetMaximumChargePerSegment());
+               //---------charge transport
+               fdigparticle->ComputeChargeTransport(mDigPlane, mDigTransport);
+               //---------random noise (should be removed if one wants to avoid double noise on double hit pixels)
+               fdigparticle->AddRandomNoise(mDigPlane);
+               //---------ADC (stored only for reference)
+               //fdigparticle->AnalogToDigitalconversion(mDigAdc,mDigPlane);
+
+               fdigevent->AddParticle(*fdigparticle);
+               std::vector<Float_t> chargevector;
+               std::vector<Int_t> pixmapvector;
+               chargevector = fdigparticle->GetAnalogCharge();
+               pixmapvector = fdigparticle->GetPixelMap();
+
+               for (Int_t ipix = 0 ; ipix < fdigparticle->GetNpixels() ; ipix++)
+               {
+                  (fdigevent->GetReadoutmap())->UpdatePixel(chargevector[ipix], pixmapvector[ipix]);
+               }
+               delete fdigparticle;
             }
+
+            // .... done with simulating hits on this sensor
+
+            //---------Build readout map:
+            (fdigevent->GetReadoutmap())->AnalogToDigitalconversion(mDigAdc, mDigPlane);
+            //---------Build clusters (ideal clusters):
+            //fdigevent->BuildTrueClusters(GetPlane(PlaneNumber));
+
+            if (fdigevent->GetReadoutmap()->GetNpixels() > 0)
+            {
+               for (Int_t iy = 0 ; iy < mDigPlane->GetNpixelsY() ; iy++)
+               {
+                  for (Int_t ix = 0 ; ix < mDigPlane->GetNpixelsX() ; ix++)
+                  {
+                     //search pixel:
+                     Int_t Npixel = ix + mDigPlane->GetNpixelsX() * iy;
+                     Bool_t found = false;
+                     Int_t j = 0;
+                     while ((!found) && (j < fdigevent->GetReadoutmap()->GetNpixels()))
+                     {
+                        if (Npixel == fdigevent->GetReadoutmap()->GetPixelMap()[j])
+                        {
+                           found = true;
+			   StPxlRawHit *pxlRawHit = pxlRawHitCol.newRawHit(iSec,iLad ,iSen);
+			   if(!pxlRawHit) continue;
+    
+			   pxlRawHit->setSector(iSec+1);
+			   pxlRawHit->setLadder(iLad+1);
+			   pxlRawHit->setSensor(iSen+1);
+			   pxlRawHit->setRow(iy);
+			   pxlRawHit->setColumn(ix);
+    
+			   pxlRawHitCol.nRawHits[iSec][iLad][iSen]++;
+                        }
+                        else
+                        {
+                           j++;
+                        }
+                     }
+                  }
+               }
+            }
+
+	    delete fdigevent;
          }
       }
    }
-
    return kStOK;
 }
-
-//____________________________________________________________
-Double_t StPxlFastSim::distortHit(Double_t x, Double_t res, Double_t constraint)
+//______________________________________________________________________________
+Double_t  StPxlDigmapsSim::LandauLaw(Double_t mean, Double_t sigma)
 {
-   Double_t test;
+   Double_t x;
+   Int_t seed = time(NULL);
+   // need to create one global TRandom3 and change the seed only
+   TRandom3 *r3 = new TRandom3(seed);
 
-   test = x + mRandom->gauss(0, res);
+   x = r3->Landau(mean, sigma);
 
-   while (fabs(test) > constraint)
-   {
-      test = x + mRandom->gauss(0, res);
-   }
-
-   return test;
+   delete r3;
+   return x;
 }

@@ -14,25 +14,23 @@
 #define STAR_StPxlDigmapsSim
 
 #include "StPxlISim.h"
-class StRandom;
-
-//! coordinates of PXL sensor active area to restrict smeared hits to active area
-//! see doc/PXL_ultimate_sensor_flemming.pdf
-const Double_t PXL_ACTIVE_X_LENGTH = 1.921;
-const Double_t PXL_ACTIVE_Y_LENGTH = 1.9872;
 
 
-class StPxlFastSim: public StPxlISim
+class DIGPlane;
+class DIGADC;
+class DIGTransport;
+
+class StPxlDigmapsSim: public StPxlISim
 {
  public:
 
   /*! \brief Constructor */ 
-  StPxlFastSim(const Char_t *name="pxlFastSim"): StPxlISim(name){mRandom=0;}
+  StPxlDigmapsSim(const Char_t *name="pxlDigmapsSim"): StPxlISim(name){mDigAdc=0;mDigPlane=0;mDigTransport=0;}
 
   /*! \brief This class does not own any hit containers.
    *        mRandom is deleted here. 
   */
-  virtual ~StPxlFastSim();
+  virtual ~StPxlDigmapsSim();
 
 
   /*! \brief A random seed is passed to mRandom 
@@ -48,7 +46,7 @@ class StPxlFastSim: public StPxlISim
    *  Returns:
    *  kStOk: if hits have been loaded to StPxlHitCollection successfully.
   */
-  virtual Int_t addPxlHits(const StMcPixelHitCollection&, StPxlHitCollection&);
+virtual Int_t addPxlRawHits(const StMcPxlHitCollection& in, StPxlRawHitCollection& out);
 
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.
@@ -56,15 +54,12 @@ class StPxlFastSim: public StPxlISim
  virtual const char *GetCVS() const
   {static const char cvs[]="Tag $Name$ $Id$ built "__DATE__" "__TIME__ ; return cvs;}
 
- private:
-  //Routine to smear hit by resolution with gaussian, mean zero and width res.
-  Double_t distortHit(Double_t x, Double_t res, Double_t constraint);
+private: 
+    Double_t         LandauLaw(Double_t mean, Double_t sigma);
 
- private:
-  StRandom* mRandom;
-
-  Double_t mResXPix;
-  Double_t mResYPix;
-  Double_t mResZPix;
+private:
+    DIGPlane* mDigPlane;
+    DIGADC* mDigAdc;
+    DIGTransport* mDigTransport;
 };
 #endif
