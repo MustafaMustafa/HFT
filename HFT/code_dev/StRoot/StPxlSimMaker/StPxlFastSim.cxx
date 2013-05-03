@@ -59,9 +59,15 @@ Int_t StPxlFastSim::initRun(const TDataSet& calib_db, const Int_t run)
 
    // please note that what is called local Y in the PXL sensor design
    // is actually called Z in STAR coordinates convention
+   if(pxlHitError->coeff[0]<0 || pxlHitError->coeff[3]<0)
+   {
+	   LOG_ERROR << "StPxlFastSim - E - negative PXL hits errors in DB" <<endm;
+	   return kStErr;
+   }
+
    mResXPix = sqrt(pxlHitError->coeff[0]); // local x
    mResZPix = sqrt(pxlHitError->coeff[3]); // local Y
-   mResYPix = 0;//sqrt(pxlHitError->coeff[3]); // needs to be updated in the DB later
+   mResYPix = 0;//sqrt(pxlHitError->coeff[2]); // needs to be updated in the DB later
 
    return kStOk;
 }
@@ -89,7 +95,7 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
             if (!mcPxlSensorHitCol) continue;
 
             UInt_t nSenHits = mcPxlSensorHitCol->hits().size();
-	    LOG_DEBUG << "Sector/Ladder/Sensor = " << iSec<<"/"<<iLad<<"/"<<iSen << ". Number of sensor hits = "<< nSenHits <<endm;
+	    LOG_DEBUG << "Sector/Ladder/Sensor = " << iSec+1 <<"/"<<iLad+1<<"/"<<iSen+1 << ". Number of sensor hits = "<< nSenHits <<endm;
 
             // Loop over hits in the sensor
             for (UInt_t iHit = 0; iHit < nSenHits; iHit++)
@@ -121,8 +127,7 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
                // is actually called Z in STAR coordinates convention and vice-versa
                smearedX = distortHit(localPixHitPos[0], mResXPix, PXL_ACTIVE_X_LENGTH / 2.0);
                smearedZ = distortHit(localPixHitPos[2], mResZPix, PXL_ACTIVE_Y_LENGTH / 2.0);
-               // Need to check with Hao on the constraint and smearing resolution for local Z. Both need to be in the DB.
-               if(!mResXPix) smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
+               if(!mResYPix) smearedY = distortHit(localPixHitPos[1], mResYPix, 0.0020); // Not properly constrained yet
 	       else smearedY = localPixHitPos[1];
                localPixHitPos[0] = smearedX;
                localPixHitPos[2] = smearedZ;

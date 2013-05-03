@@ -9,11 +9,9 @@
 
 #include "StPxlSimMaker.h"
 #include "StPxlFastSim.h"
-#include "StPxlDigmapsSim.h"
 #include "StPxlISim.h"
 #include "StMcEvent/StMcPxlHitCollection.hh"
 #include "StEvent/StPxlHitCollection.h"
-#include "StPxlUtil/StPxlRawHitCollection.h"
 
 #include "Stiostream.h"
 #include "StHit.h"
@@ -23,17 +21,14 @@
 #include "StMcEventTypes.hh"
 
 #include "TGeoManager.h"
-#include "TSystem.h" // temporary hack
 #include "TObjectSet.h"
 
 ClassImp(StPxlSimMaker)
 
 using namespace std;
 
-StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name)
+StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name) , mPxlSimulator(0), mUseFastSim(kFALSE), mUseDIGMAPSSim(kFALSE) 
 {
-   mUseFastSim = kFALSE;
-   mUseDIGMAPSSim = kFALSE;
 }
 //____________________________________________________________
 StPxlSimMaker::~StPxlSimMaker()
@@ -53,13 +48,10 @@ Int_t StPxlSimMaker::Init()
    //}
    //else
    //{
-   // temp
-   //mUseFastSim = kTRUE;
-   //mPxlSimulator = new StPxlFastSim();
-   ///LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
-   mUseDIGMAPSSim = kTRUE;
-   mPxlSimulator = new StPxlDigmapsSim();
-   LOG_INFO << "StPxlSimMaker: using StPxlDigmapsSim " << endm;
+   // temporary till DIGMAPS algorithm is added and option added in StMaker
+   mUseFastSim = kTRUE;
+   mPxlSimulator = new StPxlFastSim();
+   LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
    //}
 
    return kStOk;
@@ -70,11 +62,12 @@ Int_t StPxlSimMaker::InitRun(Int_t RunNo)
 {
    LOG_INFO << "StPxlSimMaker::InitRun" << endm;
 
-   TDataSet *set = GetDataBase("Calibrations/tracker");
+   TDataSet *set = GetDataBase("Calibrations/tracker/PixelHitError");
 
    if (!set)
    {
       LOG_ERROR << "StPxlSimMaker - E - could not Get Calibrations/tracker." << endm;
+      return kStErr;
    }
 
    return mPxlSimulator->initRun(*set, RunNo);
@@ -83,8 +76,6 @@ Int_t StPxlSimMaker::InitRun(Int_t RunNo)
 
 Int_t StPxlSimMaker::Make()
 {
-    // temporary hack
-    gSystem->Load("StPxlUtil");
    LOG_INFO << "StPxlSimMaker::Make()" << endm;
 
    // Get the input data structures from StEvent and StMcEvent
@@ -135,7 +126,7 @@ Int_t StPxlSimMaker::Make()
    else if (mUseDIGMAPSSim)
    {
        // for testing
-       StPxlRawHitCollection* pxlRawHitCol = 0;
+       /*StPxlRawHitCollection* pxlRawHitCol = 0;
 
        TObjectSet* pxlRawHitDataSet = (TObjectSet*)GetDataSet("pxlRawHit");
        
@@ -157,7 +148,7 @@ Int_t StPxlSimMaker::Make()
 	   return kStErr;
        }   
 
-       mPxlSimulator->addPxlRawHits(*mcPxlHitCol,*pxlRawHitCol);
+       mPxlSimulator->addPxlRawHits(*mcPxlHitCol,*pxlRawHitCol); */
    }
 
 

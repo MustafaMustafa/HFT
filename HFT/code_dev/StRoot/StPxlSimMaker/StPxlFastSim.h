@@ -33,7 +33,7 @@ class StPxlFastSim: public StPxlISim
  public:
 
   /*! \brief Constructor */ 
-  StPxlFastSim(const Char_t *name="pxlFastSim"): StPxlISim(name){mRandom=0;}
+  StPxlFastSim(const Char_t *name="pxlFastSim"): StPxlISim(name), mRandom(0), mResXPix(0), mResYPix(0), mResZPix(0){}
 
   /*! \brief This class does not own any hit containers.
    *        mRandom is deleted here. 
