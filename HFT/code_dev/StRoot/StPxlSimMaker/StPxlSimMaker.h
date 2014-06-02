@@ -82,6 +82,7 @@ private:
     Bool_t mUseFastSim;
     Bool_t mUseDIGMAPSSim;
 
+    Bool_t mAddPileUp; // THIS IS A HACK THAT IS NOT IN THE OFFICIAL STAR VERSION
     Bool_t mUseIdealGeom;
     Bool_t mUseDbGeom;
     Bool_t mUseRandomSeed;
