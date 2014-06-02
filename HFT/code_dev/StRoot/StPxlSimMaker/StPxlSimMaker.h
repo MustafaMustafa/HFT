@@ -37,6 +37,8 @@
 #endif
 
 class StPxlISim;
+class TString;
+class StPxlPileupAdder;
 
 class StPxlSimMaker : public StMaker 
 {
@@ -70,6 +72,10 @@ class StPxlSimMaker : public StMaker
   void useDbGeom() {mUseDbGeom = kTRUE;}
   void useRandomSeed() {mUseRandomSeed = kTRUE;}
 
+
+  void addPileup(){mAddPileup = kTRUE;}
+  void setPileupFile(TString pileupFile) {mPileupFile = pileupFile;}
+
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
    *  of all maker versions in use.
   */
@@ -82,10 +88,13 @@ private:
     Bool_t mUseFastSim;
     Bool_t mUseDIGMAPSSim;
 
-    Bool_t mAddPileUp; // THIS IS A HACK THAT IS NOT IN THE OFFICIAL STAR VERSION
     Bool_t mUseIdealGeom;
     Bool_t mUseDbGeom;
     Bool_t mUseRandomSeed;
+
+    TString mPileupFile; // THIS IS A HACK THAT IS NOT IN THE OFFICIAL STAR VERSION
+    Bool_t mAddPileup;
+    StPxlPileupAdder* mPileupAdder;
 
 
   ClassDef(StPxlSimMaker,1)   //StAF chain virtual base class for Makers

@@ -17,6 +17,8 @@
 #include "StMcEvent/StMcPxlHitCollection.hh"
 #include "StEvent/StPxlHitCollection.h"
 
+#include "StPxlPileupAdder.h"
+
 #include "Stiostream.h"
 #include "StHit.h"
 #include "StEventTypes.h"
@@ -28,12 +30,13 @@
 #include "TGeoMatrix.h"
 
 #include "TObjectSet.h"
+#include "TString.h"
 
 ClassImp(StPxlSimMaker)
 
 using namespace std;
 
-StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name) , mPxlSimulator(0), mUseFastSim(kFALSE), mUseDIGMAPSSim(kFALSE) , mUseIdealGeom(kTRUE), mUseDbGeom(kFALSE), mUseRandomSeed(kFALSE)
+StPxlSimMaker::StPxlSimMaker(const Char_t* name) : StMaker(name) , mPxlSimulator(0), mUseFastSim(kFALSE), mUseDIGMAPSSim(kFALSE) , mUseIdealGeom(kTRUE), mUseDbGeom(kFALSE), mUseRandomSeed(kFALSE),mAddPileup(kFALSE)
 {
 }
 //____________________________________________________________
@@ -56,6 +59,13 @@ Int_t StPxlSimMaker::Init()
    //{
    // temporary till DIGMAPS algorithm is added and option added in StMaker
    mUseFastSim = kTRUE;
+
+   if(mAddPileup)
+   {
+	   mPileupAdder = new StPxlPileupAdder();
+	   mPileupAdder->init(mPileupFile);
+   }
+
    mPxlSimulator = new StPxlFastSim("pxlFastSim",mUseRandomSeed);
 
    LOG_INFO << "StPxlSimMaker: using StPxlFastSim " << endm;
@@ -116,6 +126,12 @@ Int_t StPxlSimMaker::Make()
    {
       LOG_INFO << "StPxlSimMaker no PXL hits in this StMcEvent!" << endm;
       return kStOk;
+   }
+
+   // add pile up 
+   if(mAddPileup)
+   {
+	   mPileupAdder->addPxlHits(*mcPxlHitCol);
    }
 
    if (mUseIdealGeom && !gGeoManager) GetDataBase("VmcGeometry");
