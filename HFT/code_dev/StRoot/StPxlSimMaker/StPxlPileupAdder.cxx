@@ -64,6 +64,8 @@ Int_t StPxlPileupAdder::addPxlHits(StMcPxlHitCollection& mcPxlHitCol)
 
 	LOG_INFO<<"StPxlPileupAdder: adding "<<nhits<<" pileup hits."<<endm;
 
+	cout<<"Number of hits before adding..."<<mcPxlHitCol.numberOfHits()<<endl;
+
 	for(int i=0;i<nhits;i++)
 	{
 		StThreeVectorF hit_x(xLoc[i],yLoc[i],zLoc[i]);
@@ -71,6 +73,8 @@ Int_t StPxlPileupAdder::addPxlHits(StMcPxlHitCollection& mcPxlHitCol)
 
 		mcPxlHitCol.addHit(new StMcPxlHit(hit_x,hit_p,de[i],ds[i],0,key[i],vid[i]));
 	}
+
+	cout<<"Number of hits after adding..."<<mcPxlHitCol.numberOfHits()<<endl;
 
    return kStOK;
 }

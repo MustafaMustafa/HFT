@@ -57,10 +57,10 @@ class StPxlPileupAdder
  TTree* mPileupTree;
 
  // pileup tree 
-    float x[MAXHIT], y[MAXHIT], z[MAXHIT], xLoc[MAXHIT], yLoc[MAXHIT], zLoc[MAXHIT],
+   Float_t x[MAXHIT], y[MAXHIT], z[MAXHIT], xLoc[MAXHIT], yLoc[MAXHIT], zLoc[MAXHIT],
 	 px[MAXHIT], py[MAXHIT], pz[MAXHIT], de[MAXHIT], ds[MAXHIT];
-   long key[MAXHIT], vid[MAXHIT];
-   int layer[MAXHIT], nhits;
+   Long64_t key[MAXHIT], vid[MAXHIT];
+   Int_t layer[MAXHIT], nhits;
 
    TBranch  *b_nhits;   //! 
    TBranch  *b_x;   //! 
