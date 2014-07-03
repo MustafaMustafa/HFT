@@ -27,6 +27,8 @@ class TBranch;
 class TFile;
 class TTree;
 class StMcPxlHitCollection;
+class TObjectSet;
+class StPxlDb;
 
 const int MAXHIT = 200000;
 
@@ -42,7 +44,7 @@ class StPxlPileupAdder
   ~StPxlPileupAdder();
 
 
-  Int_t init(TString pileupFileName);
+  Int_t init(TString pileupFileName,const TObjectSet*);
   Int_t addPxlHits(StMcPxlHitCollection&);
 
   /*! \brief Documentation method. GetCVS can be called from the chain, providing a list
@@ -53,6 +55,7 @@ class StPxlPileupAdder
   {static const char cvs[]=""__DATE__" "__TIME__ ; return cvs;}
 
  private:
+ StPxlDb* mPxlDb;
  TFile* mPileupFile;
  TTree* mPileupTree;
 
@@ -77,6 +80,8 @@ class StPxlPileupAdder
    TBranch  *b_key;   //! 
    TBranch  *b_vid;   //! 
    TBranch  *b_layer;   //! 
+
+   Long64_t get_vid(Int_t);
  
 };
 #endif

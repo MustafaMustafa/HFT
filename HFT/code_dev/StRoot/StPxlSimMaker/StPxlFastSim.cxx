@@ -172,7 +172,7 @@ Int_t StPxlFastSim::addPxlHits(const StMcPxlHitCollection& mcPxlHitCol,
                tempHit->setSector(iSec + 1);
                tempHit->setLadder(mcPix->ladder());
                tempHit->setSensor(mcPix->sensor());
-               tempHit->setIdTruth(mcPix->parentTrack()->key(), 100);
+               mcPix->parentTrack()? tempHit->setIdTruth(mcPix->parentTrack()->key(), 100): tempHit->setIdTruth(-999);
                tempHit->setDetectorId(kPxlId);
                tempHit->setId(mcPix->key());
                tempHit->setLocalPosition(localPixHitPos[0], localPixHitPos[1], localPixHitPos[2]);

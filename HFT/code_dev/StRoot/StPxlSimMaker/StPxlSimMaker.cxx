@@ -66,7 +66,6 @@ Int_t StPxlSimMaker::Init()
    if(mAddPileup)
    {
 	   mPileupAdder = new StPxlPileupAdder();
-	   mPileupAdder->init(mPileupFile);
    }
 
    mPxlSimulator = new StPxlFastSim("pxlFastSim",mUseRandomSeed);
@@ -98,6 +97,11 @@ Int_t StPxlSimMaker::InitRun(Int_t RunNo)
 		   LOG_ERROR << "StPxlSimMaker - E - pxlDb  is not available" << endm;
 		   return kStErr;
 	   }
+   }
+
+   if(mAddPileup)
+   {
+	   mPileupAdder->init(mPileupFile,pxlDbDataSet);
    }
 
    return mPxlSimulator->initRun(*hitErrSet, pxlDbDataSet, RunNo);
