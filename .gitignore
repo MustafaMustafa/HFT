@@ -1,2 +1,4 @@
 *.root
 outputdig2.txt
+.consign
+CVS
