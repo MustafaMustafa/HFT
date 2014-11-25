@@ -19,7 +19,7 @@ Model: "basic"
 // BEAM Parameter 
 // -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
 RunNumber: 1000
-NumberOfEvents: 100
+NumberOfEvents: 1
 // Beam generation option. 
 //1=realistic beam with random number of particle per event
 //2=1 particle per event with a hit in a central pixel
@@ -50,8 +50,8 @@ EpitaxialThickness:  9.
 //EpitaxialThickness 12.2
 //-----------OTHER PARAMETERS
 //---number of pixels
-NpixelsX: 21
-NpixelsY: 21
+NpixelsX: 980
+NpixelsY: 921
 //---Chip temperature
 NTemperature: 1
 Temperature: 10
