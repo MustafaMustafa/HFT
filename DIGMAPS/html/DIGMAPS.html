@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@pcroot.cern.ch)  -->
+<!--                                             -->
+<!--   Date: Tue Oct 25 11:51:45 2011            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>DIGMAPS</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class DIGMAPS','','digmaps.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/DIGMAPS.h.html">header file</a>
+<a class="descrheadentry" href="src/DIGMAPS.cxx.html">source file</a>
+<a class="descrheadentry" href="DIGMAPS_Tree.pdf">inheritance tree (.pdf)</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk/digmaps.h?view=log">viewVC header</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk//var/autofs/nfs/rawcmos7/abesson/ILCSOFT/DIGITISEUR/code/digmaps.cxx?view=log">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#DIGMAPS:description">class description</a> 
+<a class="descrheadentry" href="#DIGMAPS:Function_Members">function members</a>
+<a class="descrheadentry" href="#DIGMAPS:Data_Members">data members</a>
+<a class="descrheadentry" href="#DIGMAPS:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">(UNKNOWN PRODUCT)</a>
+ &#187; <a class="locationlevel" href="./VAR_Index.html">VAR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_Index.html">AUTOFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_Index.html">NFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_Index.html">RAWCMOS7</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_Index.html">ABESSON</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_Index.html">ILCSOFT</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_Index.html">DIGITISEUR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_CODE_Index.html">CODE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">DIGMAPS</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="DIGMAPS:description"></a>class DIGMAPS: public TNamed, public <a href="./DIGHistograms.html">DIGHistograms</a></h1>
+<div class="classdescr">
+<pre>
+
+<a href="./DIGMAPS.html">DIGMAPS</a>
+
+Main <a href="./DIGMAPS.html#DIGMAPS:Class" title="TClass* DIGMAPS::Class()">Class</a> of <a href="./DIGMAPS.html">DIGMAPS</a>
+Contains pointers to all other classes and to the root tree
+units are all in micrometer.
+
+contains:
+- <a href="./DIGMAPS.html#DIGMAPS:Run" title="void DIGMAPS::Run()">Run</a>() function (loop on all configurations)
+- <a href="./DIGMAPS.html#DIGMAPS:ActionPlot" title="void DIGMAPS::ActionPlot()">ActionPlot</a>() function (plot a configuration)
+- <a href="./DIGMAPS.html#DIGMAPS:RunConfiguration" title="void DIGMAPS::RunConfiguration(Int_t configcounter,Int_t BeamNumber,Int_t PlaneNumber,Int_t ADCNumber,Int_t TransportNumber)">RunConfiguration</a>() loop on all events for a given configuration
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="DIGMAPS:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGMAPS:DIGMAPS">DIGMAPS</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGMAPS:DIGMAPS%1">DIGMAPS</a>(<span class="keyword">char</span>* name, <span class="keyword">char</span>* title, TString aCP, TString aCFN, TString action)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGMAPS:DIGMAPS%2">DIGMAPS</a>(<span class="keyword">char</span>* name, <span class="keyword">char</span>* title, TString aCP, TString aCFN, TString outp, TString outf, TString action)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#DIGMAPS:_DIGMAPS">~DIGMAPS</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:ActionPlot">ActionPlot</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="./DIGHistograms.html#DIGHistograms:AutoZoom"><span class="baseclass">DIGHistograms::</span>AutoZoom</a>(TH1F* H, <a href="./ListOfTypes.html#Option_t">Option_t</a>* aType = <span class="string">"all"</span>, <a href="./ListOfTypes.html#Int_t">Int_t</a> EntryMin = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">TH2F*</td><td class="funcname"><a class="funcname" href="./DIGHistograms.html#DIGHistograms:AutoZoom%1"><span class="baseclass">DIGHistograms::</span>AutoZoom</a>(TH2F* H, <a href="./ListOfTypes.html#Option_t">Option_t</a>* aType = <span class="string">"all"</span>, <a href="./ListOfTypes.html#Int_t">Int_t</a> EntryMin = 0)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./DIGHistograms.html#DIGHistograms:BookHistograms"><span class="baseclass">DIGHistograms::</span>BookHistograms</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> myNumberOfConfigurations)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:ChargeGeneration">ChargeGeneration</a>(<a href="./DIGParticle.html">DIGParticle</a>&amp; aDIGParticle, <a href="./ListOfTypes.html#Float_t">Float_t</a> StartingSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumChargePerSegment)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:Clear"><span class="baseclass">TNamed::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:Copy"><span class="baseclass">TNamed::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; named) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute%1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject%1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GaussianLaw">GaussianLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGAction.html">DIGAction</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetAction">GetAction</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGADC.html">DIGADC</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetADC">GetADC</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> anADCNumber)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetADCN">GetADCN</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGBeam.html">DIGBeam</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetBeam">GetBeam</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aBeamNumber)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetBeamN">GetBeamN</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetConfigFileName">GetConfigFileName</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetConfigPath">GetConfigPath</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetConfigPathAndFileName">GetConfigPathAndFileName</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGInitialize.html">DIGInitialize</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetDIGInitialize">GetDIGInitialize</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGEvent.html">DIGEvent</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetEvent">GetEvent</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetfAction">GetfAction</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetIsOutputfile">GetIsOutputfile</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetNumberOfConfigurations">GetNumberOfConfigurations</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetOutputFileName">GetOutputFileName</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetOutputPath">GetOutputPath</a>()</td></tr>
+<tr class="func"><td class="funcret">TString</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetOutputPathAndFileName">GetOutputPathAndFileName</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGPlane.html">DIGPlane</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetPlane">GetPlane</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aPlaneNumber)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetPlanesN">GetPlanesN</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGTransport.html">DIGTransport</a>*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetTransport">GetTransport</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aTransportNumber)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:GetTransportN">GetTransportN</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom%1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:InspectEvent">InspectEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> EventNumber)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#DIGMAPS:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:LandauLaw">LandauLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:Lorentz2D">Lorentz2D</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete%1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]%1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new%1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]%1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>&amp;</td><td class="funcname"><a class="funcname" href="#TNamed:operator_"><span class="baseclass">TNamed::</span>operator=</a>(<span class="keyword">const</span> <a href="./#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:PlotAConfiguration">PlotAConfiguration</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> confignumber, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> newcanvas)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./DIGHistograms.html#DIGHistograms:PlotHistograms"><span class="baseclass">DIGHistograms::</span>PlotHistograms</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> myNumberOfConfigurations)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGMAPS:PoissonLaw">PoissonLaw</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lambda)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:Print"><span class="baseclass">TNamed::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:PrintConfigurations">PrintConfigurations</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./DIGHistograms.html#DIGHistograms:PrintInfo"><span class="baseclass">DIGHistograms::</span>PrintInfo</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:ReadTree">ReadTree</a>(TString StringTree)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:Run">Run</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:RunConfiguration">RunConfiguration</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> configcounter, <a href="./ListOfTypes.html#Int_t">Int_t</a> BeamNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> PlaneNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> ADCNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> TransportNumber)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(basic_ostream&lt;<span class="keyword">char</span>,char_traits&lt;<span class="keyword">char</span>&gt; &gt;&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetAction">SetAction</a>(<a href="./DIGAction.html">DIGAction</a>* aDIGAction)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit%1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetConfigFileName">SetConfigFileName</a>(TString aCFN)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetConfigPath">SetConfigPath</a>(TString aCP)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetConfigPathAndFileName">SetConfigPathAndFileName</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetConfigPathAndFileName%1">SetConfigPathAndFileName</a>(TString aCP, TString aCFN)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetfAction">SetfAction</a>(TString action)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetIsOutputfile">SetIsOutputfile</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> IsOutputfile)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetNumberOfConfigurations">SetNumberOfConfigurations</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> NumberOfConfiguration)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetOutputFileName">SetOutputFileName</a>(TString outf)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetOutputPath">SetOutputPath</a>(TString outp)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetOutputPathAndFileName">SetOutputPathAndFileName</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:SetOutputPathAndFileName%1">SetOutputPathAndFileName</a>(TString outp, TString outf)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:Streamer">Streamer</a>(TBuffer&amp; b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGMAPS:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write%1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="DIGMAPS:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="data"><td class="datatype">TCanvas*</td><td class="dataname"><a name="DIGMAPS:MainCanvas1"></a>MainCanvas1</td><td class="datadesc">canvas 1</td></tr>
+<tr class="data"><td class="datatype">TCanvas*</td><td class="dataname"><a name="DIGMAPS:MainCanvas2"></a>MainCanvas2</td><td></td></tr>
+<tr class="data"><td class="datatype">TCanvas*</td><td class="dataname"><a name="DIGMAPS:MainCanvas3"></a>MainCanvas3</td><td></td></tr>
+<tr class="data"><td class="datatype">TCanvas*</td><td class="dataname"><a name="DIGMAPS:MainCanvas4"></a>MainCanvas4</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGMAPS:fADCN"></a>fADCN</td><td class="datadesc">number of ADCs</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fAction"></a>fAction</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGMAPS:fBeamN"></a>fBeamN</td><td class="datadesc">number of beams</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fConfigFileName"></a>fConfigFileName</td><td class="datadesc">name of the configuration file</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fConfigPath"></a>fConfigPath</td><td class="datadesc">name of the configuration path</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fConfigPathAndFileName"></a>fConfigPathAndFileName</td><td class="datadesc">both path and file name appended</td></tr>
+<tr class="data"><td class="datatype">TObjArray*</td><td class="dataname"><a name="DIGMAPS:fDIGADCArray"></a>fDIGADCArray</td><td class="datadesc">pointer to array of ADCs</td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGAction.html">DIGAction</a>*</td><td class="dataname"><a name="DIGMAPS:fDIGAction"></a>fDIGAction</td><td></td></tr>
+<tr class="data"><td class="datatype">TObjArray*</td><td class="dataname"><a name="DIGMAPS:fDIGBeamArray"></a>fDIGBeamArray</td><td class="datadesc">pointer to array of beams</td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGInitialize.html">DIGInitialize</a>*</td><td class="dataname"><a name="DIGMAPS:fDIGInitialize"></a>fDIGInitialize</td><td class="datadesc">pointer to configuration</td></tr>
+<tr class="data"><td class="datatype">TObjArray*</td><td class="dataname"><a name="DIGMAPS:fDIGPlaneArray"></a>fDIGPlaneArray</td><td class="datadesc">pointer to array of planes			    </td></tr>
+<tr class="data"><td class="datatype">TObjArray*</td><td class="dataname"><a name="DIGMAPS:fDIGTransportArray"></a>fDIGTransportArray</td><td class="datadesc">pointer to array of models</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="DIGMAPS:fIsOutputfile"></a>fIsOutputfile</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGMAPS:fNumberOfConfigurations"></a>fNumberOfConfigurations</td><td class="datadesc">number of configurations to study = number of planes x number of ADCs</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fOutputFileName"></a>fOutputFileName</td><td class="datadesc">name of the configuration file</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#ofstream">ofstream</a></td><td class="dataname"><a name="DIGMAPS:fOutputFileStream"></a>fOutputFileStream</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fOutputPath"></a>fOutputPath</td><td class="datadesc">name of the configuration path</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="DIGMAPS:fOutputPathAndFileName"></a>fOutputPathAndFileName</td><td class="datadesc">both path and file name appended</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGMAPS:fPlanesN"></a>fPlanesN</td><td class="datadesc">number of planes </td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGMAPS:fTransportN"></a>fTransportN</td><td class="datadesc">number of charge transport models</td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGADC.html">DIGADC</a>*</td><td class="dataname"><a name="DIGMAPS:fdigadc"></a>fdigadc</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGBeam.html">DIGBeam</a>*</td><td class="dataname"><a name="DIGMAPS:fdigbeam"></a>fdigbeam</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGEvent.html">DIGEvent</a>*</td><td class="dataname"><a name="DIGMAPS:fdigevent"></a>fdigevent</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGPlane.html">DIGPlane</a>*</td><td class="dataname"><a name="DIGMAPS:fdigplane"></a>fdigplane</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./DIGTransport.html">DIGTransport</a>*</td><td class="dataname"><a name="DIGMAPS:fdigtransport"></a>fdigtransport</td><td></td></tr>
+<tr class="data"><td class="datatype">TFile*</td><td class="dataname"><a name="DIGMAPS:ffile"></a>ffile</td><td></td></tr>
+<tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="DIGMAPS:ftree"></a>ftree</td><td></td></tr>
+<tr class="data"><td class="datatype">TStopwatch</td><td class="dataname"><a name="DIGMAPS:timer1"></a>timer1</td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Charge_Q_over_Qtot_vs_distance"><span class="baseclass">DIGHistograms::</span>Ar_h1_Charge_Q_over_Qtot_vs_distance</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_1stCrownDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_1stCrownDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_1stCrownOverTotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_1stCrownOverTotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_2ndCrownDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_2ndCrownDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_2ndCrownOverTotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_2ndCrownOverTotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_4NeighboursDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_4NeighboursDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_4NeighboursOverTotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_4NeighboursOverTotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_9x9DigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_9x9DigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_SeedDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_SeedDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_SeedOverTotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_SeedOverTotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Cluster_TotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Cluster_TotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Particle_Energy_deposited"><span class="baseclass">DIGHistograms::</span>Ar_h1_Particle_Energy_deposited</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Particle_TotalAnalogCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Particle_TotalAnalogCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Particle_TotalDigitalCharge"><span class="baseclass">DIGHistograms::</span>Ar_h1_Particle_TotalDigitalCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Resolution_ResidualX_CoG_true"><span class="baseclass">DIGHistograms::</span>Ar_h1_Resolution_ResidualX_CoG_true</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Resolution_ResidualY_CoG_true"><span class="baseclass">DIGHistograms::</span>Ar_h1_Resolution_ResidualY_CoG_true</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_Resolution_Residualdist_CoG_true"><span class="baseclass">DIGHistograms::</span>Ar_h1_Resolution_Residualdist_CoG_true</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_01"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_01</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_02"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_02</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_03"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_03</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_04"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_04</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_05"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_05</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_06"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_06</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_07"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_07</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_08"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_08</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_09"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_09</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_multiplicity_with_threshold_10"><span class="baseclass">DIGHistograms::</span>Ar_h1_multiplicity_with_threshold_10</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h1_test"><span class="baseclass">DIGHistograms::</span>Ar_h1_test</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Charge_Q_over_Qtot_vs_distance"><span class="baseclass">DIGHistograms::</span>Ar_h2_Charge_Q_over_Qtot_vs_distance</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Particle_EnergyDeposited_vs_TotalAnalogCharge"><span class="baseclass">DIGHistograms::</span>Ar_h2_Particle_EnergyDeposited_vs_TotalAnalogCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Particle_TotalDigitalCharge_vs_TotalAnalogCharge"><span class="baseclass">DIGHistograms::</span>Ar_h2_Particle_TotalDigitalCharge_vs_TotalAnalogCharge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Resolution_CoG"><span class="baseclass">DIGHistograms::</span>Ar_h2_Resolution_CoG</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Resolution_CoG_modulo"><span class="baseclass">DIGHistograms::</span>Ar_h2_Resolution_CoG_modulo</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Resolution_TruePosition"><span class="baseclass">DIGHistograms::</span>Ar_h2_Resolution_TruePosition</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:Ar_h2_Resolution_TruePosition_modulo"><span class="baseclass">DIGHistograms::</span>Ar_h2_Resolution_TruePosition_modulo</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:fNumberOfConfigs"><span class="baseclass">DIGHistograms::</span>fNumberOfConfigs</a></td><td class="datadesc">number of configurations to study = nb of planes x nb of ADCs x nb  beams</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="datainh"><td class="datatype">TH1F*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:h1_NumberOfConfigurations"><span class="baseclass">DIGHistograms::</span>h1_NumberOfConfigurations</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">TH1F*</td><td class="dataname"><a href="./DIGHistograms.html#DIGHistograms:h1_NumberOfEventsPerConfiguration"><span class="baseclass">DIGHistograms::</span>h1_NumberOfEventsPerConfiguration</a></td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="DIGMAPS:Class_Charts"></a>Class Charts</h2>
+<!--INHERITANCE TREE-->
+<table><tr><td width="10%"></td><td width="70%"><a href="ClassHierarchy.html">Inheritance Chart</a>:</td></tr><tr class="inhtree"><td width="10%"></td><td width="70%"><table class="inhtree"><tr><td>
+<table width="100%" border="0" cellpadding ="0" cellspacing="2"><tr>
+<td><table><tr>
+<td bgcolor="#f7f7f7" align="right">
+<tt>TNamed</tt></td>
+</tr><tr>
+<td bgcolor="#f7f7f7" align="right">
+<table><tr><td>
+<center><tt><a name="DIGHistograms" href="./DIGHistograms.html">DIGHistograms</a></tt></center>
+</td>
+</tr></table>
+</td>
+</tr></table></td>
+<td>&larr;</td><td>
+<center><big><b><tt><a name="DIGMAPS" href="./DIGMAPS.html">DIGMAPS</a></tt></b></big></center>
+</td>
+<td><table><tr>
+<td></td>
+</tr></table></td>
+</tr></table>
+</td></tr></table></td></tr></table>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGMAPS:DIGMAPS" href="src/DIGMAPS.cxx.html#XXRrrB">DIGMAPS</a>()</span><br />
+<div class="funccomm"><pre>
+ default constructor
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGMAPS:DIGMAPS%2" href="src/DIGMAPS.cxx.html#fsQtcD">DIGMAPS</a>(<span class="keyword">char</span>* name, <span class="keyword">char</span>* title, TString aCP, TString aCFN, TString outp, TString outf, TString action)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGMAPS:DIGMAPS%1" href="src/DIGMAPS.cxx.html#ET7lyD">DIGMAPS</a>(<span class="keyword">char</span>* name, <span class="keyword">char</span>* title, TString aCP, TString aCFN, TString action)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGMAPS:_DIGMAPS" href="src/DIGMAPS.cxx.html#Fur0AD">~DIGMAPS</a>()</span><br />
+<div class="funccomm"><pre> virtual destructor
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:Run" href="src/DIGMAPS.cxx.html#mVzDKD">Run</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:ActionPlot" href="src/DIGMAPS.cxx.html#hRMhtB">ActionPlot</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:PlotAConfiguration" href="src/DIGMAPS.cxx.html#zfGKS">PlotAConfiguration</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> confignumber, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> newcanvas)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:PrintConfigurations" href="src/DIGMAPS.cxx.html#EZizUE">PrintConfigurations</a>()</span><br />
+<div class="funccomm"><pre>  <a href="./DIGMAPS.html#DIGMAPS:fNumberOfConfigurations" title="Int_t DIGMAPS::fNumberOfConfigurations">fNumberOfConfigurations</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:InspectEvent" href="src/DIGMAPS.cxx.html#Pb2p3E">InspectEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> EventNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:RunConfiguration" href="src/DIGMAPS.cxx.html#EcdE1">RunConfiguration</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> configcounter, <a href="./ListOfTypes.html#Int_t">Int_t</a> BeamNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> PlaneNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> ADCNumber, <a href="./ListOfTypes.html#Int_t">Int_t</a> TransportNumber)</span><br />
+<div class="funccomm"><pre>compute visible surface.
+compute active length, xlength, Y length, output position.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:ChargeGeneration" href="src/DIGMAPS.cxx.html#nrW9dD">ChargeGeneration</a>(<a href="./DIGParticle.html">DIGParticle</a>&amp; aDIGParticle, <a href="./ListOfTypes.html#Float_t">Float_t</a> StartingSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumSegmentSize, <a href="./ListOfTypes.html#Float_t">Float_t</a> MaximumChargePerSegment)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:PoissonLaw" href="src/DIGMAPS.cxx.html#JZUZD">PoissonLaw</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lambda)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="DIGMAPS:LandauLaw" href="src/DIGMAPS.cxx.html#gNh5uD">LandauLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="DIGMAPS:GaussianLaw" href="src/DIGMAPS.cxx.html#arkr3">GaussianLaw</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mean, <a href="./ListOfTypes.html#Double_t">Double_t</a> sigma)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="DIGMAPS:Lorentz2D" href="src/DIGMAPS.cxx.html#lS3n4C">Lorentz2D</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>x[0] = x
+x[1] = y
+ par[0] = Gamma
+ par[1] = x0
+ par[2] = y0
+ par[3] = norm
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetfAction" href="src/DIGMAPS.cxx.html#RO1Bb">SetfAction</a>(TString action)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetIsOutputfile" href="src/DIGMAPS.cxx.html#HZ7QJE">SetIsOutputfile</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> IsOutputfile)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetAction" href="src/DIGMAPS.cxx.html#XGF6fC">SetAction</a>(<a href="./DIGAction.html">DIGAction</a>* aDIGAction)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetNumberOfConfigurations" href="src/DIGMAPS.cxx.html#T8K4hC">SetNumberOfConfigurations</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> NumberOfConfiguration)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetConfigPath" href="src/DIGMAPS.cxx.html#fttoYC">SetConfigPath</a>(TString aCP)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetConfigFileName" href="src/DIGMAPS.cxx.html#MVFClD">SetConfigFileName</a>(TString aCFN)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetConfigPathAndFileName" href="src/DIGMAPS.cxx.html#qFgiHB">SetConfigPathAndFileName</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetConfigPathAndFileName%1" href="src/DIGMAPS.cxx.html#B__GVD">SetConfigPathAndFileName</a>(TString aCP, TString aCFN)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetConfigPath" href="src/DIGMAPS.cxx.html#IcnOIC">GetConfigPath</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetConfigFileName" href="src/DIGMAPS.cxx.html#NYjamD">GetConfigFileName</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetConfigPathAndFileName" href="src/DIGMAPS.cxx.html#uHweoE">GetConfigPathAndFileName</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetOutputPath" href="src/DIGMAPS.cxx.html#rQzd4D">SetOutputPath</a>(TString outp)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetOutputFileName" href="src/DIGMAPS.cxx.html#UbWGjE">SetOutputFileName</a>(TString outf)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetOutputPathAndFileName" href="src/DIGMAPS.cxx.html#Txye1E">SetOutputPathAndFileName</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:SetOutputPathAndFileName%1" href="src/DIGMAPS.cxx.html#TvFJH">SetOutputPathAndFileName</a>(TString outp, TString outf)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGPlane.html">DIGPlane</a>* <a class="funcname" name="DIGMAPS:GetPlane" href="src/DIGMAPS.cxx.html#fpA0kD">GetPlane</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aPlaneNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGADC.html">DIGADC</a>* <a class="funcname" name="DIGMAPS:GetADC" href="src/DIGMAPS.cxx.html#upyFx">GetADC</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> anADCNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGTransport.html">DIGTransport</a>* <a class="funcname" name="DIGMAPS:GetTransport" href="src/DIGMAPS.cxx.html#DZk2AE">GetTransport</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aTransportNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGBeam.html">DIGBeam</a>* <a class="funcname" name="DIGMAPS:GetBeam" href="src/DIGMAPS.cxx.html#z__l5D">GetBeam</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> aBeamNumber)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGMAPS:ReadTree" href="src/DIGMAPS.cxx.html#L8sii">ReadTree</a>(TString StringTree)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetOutputPath" href="src/DIGMAPS.h.html#FJwGfC">GetOutputPath</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fOutputPath" title="TString DIGMAPS::fOutputPath">fOutputPath</a> ;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetOutputFileName" href="src/DIGMAPS.h.html#NfRaLE">GetOutputFileName</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fOutputFileName" title="TString DIGMAPS::fOutputFileName">fOutputFileName</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetOutputPathAndFileName" href="src/DIGMAPS.h.html#aE5FsB">GetOutputPathAndFileName</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fOutputPathAndFileName" title="TString DIGMAPS::fOutputPathAndFileName">fOutputPathAndFileName</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="DIGMAPS:GetIsOutputfile" href="src/DIGMAPS.h.html#RqXDGE">GetIsOutputfile</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fIsOutputfile" title="Bool_t DIGMAPS::fIsOutputfile">fIsOutputfile</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGInitialize.html">DIGInitialize</a>   * <a class="funcname" name="DIGMAPS:GetDIGInitialize" href="src/DIGMAPS.h.html#oE7R4">GetDIGInitialize</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{     <span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fDIGInitialize" title="DIGInitialize* DIGMAPS::fDIGInitialize">fDIGInitialize</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:GetPlanesN" href="src/DIGMAPS.h.html#MRAs2C">GetPlanesN</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fPlanesN" title="Int_t DIGMAPS::fPlanesN">fPlanesN</a>;      }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:GetADCN" href="src/DIGMAPS.h.html#OVCgZC">GetADCN</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fADCN" title="Int_t DIGMAPS::fADCN">fADCN</a>;      }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:GetTransportN" href="src/DIGMAPS.h.html#kd9Jm">GetTransportN</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fTransportN" title="Int_t DIGMAPS::fTransportN">fTransportN</a>;      }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:GetBeamN" href="src/DIGMAPS.h.html#Vw8XzC">GetBeamN</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fBeamN" title="Int_t DIGMAPS::fBeamN">fBeamN</a>;      }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGEvent.html">DIGEvent</a>        * <a class="funcname" name="DIGMAPS:GetEvent" href="src/DIGMAPS.h.html#zrDvvB">GetEvent</a>()</span><br />
+<div class="funccomm"><pre><a href="./DIGHistograms.html">DIGHistograms</a>   *GetHistograms() { return   fdighistograms;}
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fdigevent" title="DIGEvent* DIGMAPS::fdigevent">fdigevent</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGMAPS:GetNumberOfConfigurations" href="src/DIGMAPS.h.html#utRHFB">GetNumberOfConfigurations</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span>  <a href="./DIGMAPS.html#DIGMAPS:fNumberOfConfigurations" title="Int_t DIGMAPS::fNumberOfConfigurations">fNumberOfConfigurations</a>;      }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./DIGAction.html">DIGAction</a>           * <a class="funcname" name="DIGMAPS:GetAction" href="src/DIGMAPS.h.html#quf7DD">GetAction</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fDIGAction" title="DIGAction* DIGMAPS::fDIGAction">fDIGAction</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname">TString <a class="funcname" name="DIGMAPS:GetfAction" href="src/DIGMAPS.h.html#i3kiWD">GetfAction</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGMAPS.html#DIGMAPS:fAction" title="TString DIGMAPS::fAction">fAction</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Tue Oct 25 11:51:45 2011 </em><em>&raquo; Last generated: 2011-10-25 11:51</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@root.cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

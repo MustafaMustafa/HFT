@@ -1,0 +1,9 @@
+rm *pdf;
+rm *html;
+rm *.gif;
+rm *png;
+rm *.h;
+rm src/*;
+rm LibraryDependencies.dot;
+rm ROOT.css;
+rm ROOT.js;

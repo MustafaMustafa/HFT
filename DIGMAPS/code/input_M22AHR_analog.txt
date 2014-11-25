@@ -1,0 +1,127 @@
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+//
+// This is a Configuration File for Silicon Tracking Analysis DIGMAPS Package
+// 
+// created   -> 18/03/2011
+// Author = Auguste Besson abesson@in2p3.fr
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// -------------------- !!!! DO NOT USE Colons in Comments !!! -----------------
+//
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// Action Parameter 
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// chose the action -> foresee = model result ; train = adjust/fit the model. ; plot = fill histograms from the tree.
+//Doit "foresee"
+Model: "basic"
+
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// BEAM Parameter 
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+RunNumber: 1000
+NumberOfEvents: 10000
+// Beam generation option. 
+//1=realistic beam with random number of particle per event
+//2=1 particle per event with a hit in a central pixel
+BeamOption: 2
+//number of particles per mm^2 on the Plane per event (Lambda factor of a Poisson Law)
+ParticleDensity: 5.0
+//ParticleDensityWidth 0.5
+// incident angle in degrees in cylindrical coordinates (theta and phi, in Degrees)
+NAngles: 1
+//ThetaIncidentDeg 0.0 10.0 20.0 30.0 40.0 50.0 60.0 70.0  0.0 10.0 20.0 30.0 40.0 50.0 60.0 70.0  0.0 10.0 20.0 30.0 40.0 50.0 60.0 70.0 
+//PhiIncidentDeg   0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 30.0 30.0 30.0 30.0 30.0 30.0 30.0 30.0 45.0 45.0 45.0 45.0 45.0 45.0 45.0 45.0
+ThetaIncidentDeg: 0.0
+PhiIncidentDeg:   0.0
+
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// PLANE Parameters 
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+
+//-----------GENERAL GEOMETRY
+//---pixel pitch in X and Y in microns
+NGeom: 1
+PitchX:             20.70
+PitchY:             20.70
+//---Noise in electrons
+NoiseElectrons:     14.0
+//---epitaxial thickness in microns
+EpitaxialThickness: 12.0
+//-----------OTHER PARAMETERS
+//---number of pixels
+NpixelsX: 21
+NpixelsY: 21
+//---Chip temperature
+NTemperature: 1
+Temperature: 10
+//------------CHARGE TRANSPORT
+//---ionization energy (eV)
+IonizationEnergy: 3.6
+//---Starting Segment size (in microns)
+SegmentSize: 0.1
+//---Maximum Segment size (in microns)
+MaximumSegmentSize: 1.0
+//---Maximum Charge Per Segment (in electrons)
+MaximumChargePerSegment: 1.0
+//---Diffusion Maximum Range in X and Y (in pitch units)
+DiffusionMaximumRangeInX: 2.5
+DiffusionMaximumRangeInY: 2.5
+//---Reflexion Coefficient on the subtrat-epi border (1.0 means 100%) NOT USED
+ReflexionCoefficient: 1.0
+//---sigma of the gaussian width dispersion of charge at 10 microns depth
+BasicModel_SigmaTenMicrons: 10.0
+//------------CHARGE TRANSPORT MODEL
+NTransport: 2
+//-------------Transport 1
+//---Chose Model (1=Lorentz2D , 2=2xGauss2D, 3=Lor+gaus, 4=Lor+gaus+gaus  )
+ChargeModel: 3
+RangeLimit_InPitchUnit: 2.5
+//---Lor+gaus Model
+LorGaussModel_Norm1_Cp0: 0.160573
+LorGaussModel_Norm1_Cp1: -0.00184473
+LorGaussModel_Norm1_Cp2: 5.07964e-05
+LorGaussModel_sigma_Cp0: 0.95
+LorGaussModel_sigma_Cp1: 0.60
+LorGaussModel_C_Cp0: 0.171697
+LorGaussModel_C_Cp1: 0.316165
+LorGaussModel_Norm_Cp0: 5.69809
+LorGaussModel_Norm_Cp1: 2.55373
+//---Chose Model (1=Lorentz2D , 2=2xGauss2D, 3=Lor+gaus, 4=Lor+gaus+gaus  )
+ChargeModel: 3
+RangeLimit_InPitchUnit: 2.5
+//---Lor+gaus Model
+LorGaussModel_Norm1_Cp0: 5.627
+LorGaussModel_Norm1_Cp1: 0.0
+LorGaussModel_Norm1_Cp2: 0.0
+LorGaussModel_sigma_Cp0: 10.8
+LorGaussModel_sigma_Cp1: 0.0
+LorGaussModel_C_Cp0: 5.31
+LorGaussModel_C_Cp1: 0.0
+LorGaussModel_Norm_Cp0: 32.14
+LorGaussModel_Norm_Cp1: 0.0
+// -+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-+-
+// ADC Parameters 
+// -+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+--+-+-+-+-+-
+// number of different ADC to test
+NADC: 1
+// ADC parameters
+// Nbits = number of bits of the ADC. There will be (2^Nbits - 1) thresholds.
+// LSB, Electron_Conversion and ADC_thresholds are in Noise multiple units (e.g. 2.0 = 2.0 times the noise)
+// There are 2 different ways to set the ADC
+// ---------- EITHER --------------
+// 1/ ADC_linear = 1 (the response is linear, so setting the LSB and the Electron Conversion factor allow to compute all thresholds.
+// = thresholds will be = LSB, LSB+1xElectron_conversion, LSB+2xElectron_conversion etc.
+// LSB= 1.5 = threshold of the first significant bit
+// Electron_Conversion= 1.5 
+// ADC_thresholds= -  
+// ----------- OR --------------
+// 2/ ADC_linear = 0 (the response is not linear, so enter all the different threshold values
+// LSB= -
+// Electron_Conversion= -
+// ADC_thresholds= 2.0 4.0 5.0 etc.
+// ---ADC 1
+Nbits: 12
+ADC_linear: 1
+LSB: 0.27
+Electron_Conversion: 0.27
+ADC_thresholds: -

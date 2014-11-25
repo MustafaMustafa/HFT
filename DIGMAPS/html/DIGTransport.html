@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@pcroot.cern.ch)  -->
+<!--                                             -->
+<!--   Date: Tue Oct 25 11:51:47 2011            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>DIGTransport</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class DIGTransport','','digtransport.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/DIGTransport.h.html">header file</a>
+<a class="descrheadentry" href="src/DIGTransport.cxx.html">source file</a>
+<a class="descrheadentry" href="DIGTransport_Tree.pdf">inheritance tree (.pdf)</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk/digtransport.h?view=log">viewVC header</a> <a class="descrheadentry" href="http://root.cern.ch/viewcvs/trunk//var/autofs/nfs/rawcmos7/abesson/ILCSOFT/DIGITISEUR/code/digtransport.cxx?view=log">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#DIGTransport:description">class description</a> 
+<a class="descrheadentry" href="#DIGTransport:Function_Members">function members</a>
+<a class="descrheadentry" href="#DIGTransport:Data_Members">data members</a>
+<a class="descrheadentry" href="#DIGTransport:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">(UNKNOWN PRODUCT)</a>
+ &#187; <a class="locationlevel" href="./VAR_Index.html">VAR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_Index.html">AUTOFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_Index.html">NFS</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_Index.html">RAWCMOS7</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_Index.html">ABESSON</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_Index.html">ILCSOFT</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_Index.html">DIGITISEUR</a>
+ &#187; <a class="locationlevel" href="./VAR_AUTOFS_NFS_RAWCMOS7_ABESSON_ILCSOFT_DIGITISEUR_CODE_Index.html">CODE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">DIGTransport</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="DIGTransport:description"></a>class DIGTransport: public TObject</h1>
+<div class="classdescr">
+<pre>
+
+<a href="./DIGTransport.html">DIGTransport</a>
+
+Contains charge transport models parameters
+
+
+
+
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="DIGTransport:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGTransport:DIGTransport">DIGTransport</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGTransport:DIGTransport%1">DIGTransport</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> myvar)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#DIGTransport:DIGTransport%2">DIGTransport</a>(<a href="./DIGTransport.html">DIGTransport</a>&amp; adigtransport)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#DIGTransport:_DIGTransport">~DIGTransport</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#DIGTransport:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute%1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject%1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetChargeModel">GetChargeModel</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetGauss2DModel_sigma1_Cp0">GetGauss2DModel_sigma1_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetGauss2DModel_sigma1_Cp1">GetGauss2DModel_sigma1_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetGauss2DModel_sigma2_Cp0">GetGauss2DModel_sigma2_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetGauss2DModel_sigma2_Cp1">GetGauss2DModel_sigma2_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetGauss2DModel_weight">GetGauss2DModel_weight</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorentz2DModel_Cp0">GetLorentz2DModel_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorentz2DModel_Cp1">GetLorentz2DModel_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_C_Cp0">GetLorGaussModel_C_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_C_Cp1">GetLorGaussModel_C_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_Norm1_Cp0">GetLorGaussModel_Norm1_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_Norm1_Cp1">GetLorGaussModel_Norm1_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_Norm1_Cp2">GetLorGaussModel_Norm1_Cp2</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_Norm_Cp0">GetLorGaussModel_Norm_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_Norm_Cp1">GetLorGaussModel_Norm_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_sigma_Cp0">GetLorGaussModel_sigma_Cp0</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetLorGaussModel_sigma_Cp1">GetLorGaussModel_sigma_Cp1</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetMyvar">GetMyvar</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#DIGTransport:GetRangeLimit_InPitchUnit">GetRangeLimit_InPitchUnit</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom%1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#DIGTransport:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete%1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]%1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new%1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]%1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./DIGTransport.html">DIGTransport</a>&amp;</td><td class="funcname"><a class="funcname" href="#DIGTransport:operator_">operator=</a>(<span class="keyword">const</span> <a href="./DIGTransport.html">DIGTransport</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:PrintInfo">PrintInfo</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(basic_ostream&lt;<span class="keyword">char</span>,char_traits&lt;<span class="keyword">char</span>&gt; &gt;&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit%1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetChargeModel">SetChargeModel</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ChargeModel)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetGauss2DModel_sigma1_Cp0">SetGauss2DModel_sigma1_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma1_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetGauss2DModel_sigma1_Cp1">SetGauss2DModel_sigma1_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma1_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetGauss2DModel_sigma2_Cp0">SetGauss2DModel_sigma2_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma2_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetGauss2DModel_sigma2_Cp1">SetGauss2DModel_sigma2_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma2_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetGauss2DModel_weight">SetGauss2DModel_weight</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_weight)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorentz2DModel_Cp0">SetLorentz2DModel_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lorentz2DModel_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorentz2DModel_Cp1">SetLorentz2DModel_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lorentz2DModel_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_C_Cp0">SetLorGaussModel_C_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_C_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_C_Cp1">SetLorGaussModel_C_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_C_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_Norm1_Cp0">SetLorGaussModel_Norm1_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_Norm1_Cp1">SetLorGaussModel_Norm1_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_Norm1_Cp2">SetLorGaussModel_Norm1_Cp2</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp2)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_Norm_Cp0">SetLorGaussModel_Norm_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_Norm_Cp1">SetLorGaussModel_Norm_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_sigma_Cp0">SetLorGaussModel_sigma_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_sigma_Cp0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetLorGaussModel_sigma_Cp1">SetLorGaussModel_sigma_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_sigma_Cp1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetMyvar">SetMyvar</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Myvar)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:SetRangeLimit_InPitchUnit">SetRangeLimit_InPitchUnit</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> RangeLimit_InPitchUnit)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:Streamer">Streamer</a>(TBuffer&amp; b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#DIGTransport:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write%1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="DIGTransport:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="DIGTransport:fChargeModel"></a>fChargeModel</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fGauss2DModel_sigma1_Cp0"></a>fGauss2DModel_sigma1_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fGauss2DModel_sigma1_Cp1"></a>fGauss2DModel_sigma1_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fGauss2DModel_sigma2_Cp0"></a>fGauss2DModel_sigma2_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fGauss2DModel_sigma2_Cp1"></a>fGauss2DModel_sigma2_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fGauss2DModel_weight"></a>fGauss2DModel_weight</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_C_Cp0"></a>fLorGaussModel_C_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_C_Cp1"></a>fLorGaussModel_C_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_Norm1_Cp0"></a>fLorGaussModel_Norm1_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_Norm1_Cp1"></a>fLorGaussModel_Norm1_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_Norm1_Cp2"></a>fLorGaussModel_Norm1_Cp2</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_Norm_Cp0"></a>fLorGaussModel_Norm_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_Norm_Cp1"></a>fLorGaussModel_Norm_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_sigma_Cp0"></a>fLorGaussModel_sigma_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorGaussModel_sigma_Cp1"></a>fLorGaussModel_sigma_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorentz2DModel_Cp0"></a>fLorentz2DModel_Cp0</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fLorentz2DModel_Cp1"></a>fLorentz2DModel_Cp1</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fMyvar"></a>fMyvar</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="DIGTransport:fRangeLimit_InPitchUnit"></a>fRangeLimit_InPitchUnit</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="DIGTransport:Class_Charts"></a>Class Charts</h2>
+<!--INHERITANCE TREE-->
+<table><tr><td width="10%"></td><td width="70%"><a href="ClassHierarchy.html">Inheritance Chart</a>:</td></tr><tr class="inhtree"><td width="10%"></td><td width="70%"><table class="inhtree"><tr><td>
+<table width="100%" border="0" cellpadding ="0" cellspacing="2"><tr>
+<td><table><tr>
+<td bgcolor="#f7f7f7" align="right">
+<tt>TObject</tt></td>
+</tr></table></td>
+<td>&larr;</td><td>
+<center><big><b><tt><a name="DIGTransport" href="./DIGTransport.html">DIGTransport</a></tt></b></big></center>
+</td>
+<td><table><tr>
+<td></td>
+</tr></table></td>
+</tr></table>
+</td></tr></table></td></tr></table>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGTransport:DIGTransport" href="src/DIGTransport.cxx.html#Vmqla">DIGTransport</a>()</span><br />
+<div class="funccomm"><pre>
+ default constructor
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGTransport:DIGTransport%1" href="src/DIGTransport.cxx.html#NeHT2E">DIGTransport</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> myvar)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGTransport:_DIGTransport" href="src/DIGTransport.cxx.html#CB7VBD">~DIGTransport</a>()</span><br />
+<div class="funccomm"><pre>
+ virtual destructor
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="DIGTransport:DIGTransport%2" href="src/DIGTransport.cxx.html#MxT2pC">DIGTransport</a>(<a href="./DIGTransport.html">DIGTransport</a>&amp; adigtransport)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:Clear" href="src/DIGTransport.cxx.html#ocAhf">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>*  = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>  delete pointers.  fDIGParticleArray-&gt;<a href="./DIGTransport.html#DIGTransport:Clear" title="void DIGTransport::Clear(Option_t* =&quot;&quot;)">Clear</a>(<span class="string">"C"</span>);
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorentz2DModel_Cp0" href="src/DIGTransport.cxx.html#eDBh1D">SetLorentz2DModel_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lorentz2DModel_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorentz2DModel_Cp1" href="src/DIGTransport.cxx.html#n5KX1D">SetLorentz2DModel_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Lorentz2DModel_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetRangeLimit_InPitchUnit" href="src/DIGTransport.cxx.html#q.7U9B">SetRangeLimit_InPitchUnit</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> RangeLimit_InPitchUnit)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetChargeModel" href="src/DIGTransport.cxx.html#DunPDE">SetChargeModel</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ChargeModel)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetGauss2DModel_sigma1_Cp0" href="src/DIGTransport.cxx.html#wus.cC">SetGauss2DModel_sigma1_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma1_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetGauss2DModel_sigma1_Cp1" href="src/DIGTransport.cxx.html#k9Y.cC">SetGauss2DModel_sigma1_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma1_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetGauss2DModel_sigma2_Cp0" href="src/DIGTransport.cxx.html#UJ0.cC">SetGauss2DModel_sigma2_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma2_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetGauss2DModel_sigma2_Cp1" href="src/DIGTransport.cxx.html#IYg.cC">SetGauss2DModel_sigma2_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_sigma2_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetGauss2DModel_weight" href="src/DIGTransport.cxx.html#woxzHC">SetGauss2DModel_weight</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Gauss2DModel_weight)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_Norm1_Cp0" href="src/DIGTransport.cxx.html#Ix61eD">SetLorGaussModel_Norm1_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_Norm1_Cp1" href="src/DIGTransport.cxx.html#w.m1eD">SetLorGaussModel_Norm1_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_Norm1_Cp2" href="src/DIGTransport.cxx.html#kOT1eD">SetLorGaussModel_Norm1_Cp2</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm1_Cp2)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_sigma_Cp0" href="src/DIGTransport.cxx.html#Q_dlzE">SetLorGaussModel_sigma_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_sigma_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_sigma_Cp1" href="src/DIGTransport.cxx.html#ENKlzE">SetLorGaussModel_sigma_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_sigma_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_C_Cp0" href="src/DIGTransport.cxx.html#dUrtXB">SetLorGaussModel_C_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_C_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_C_Cp1" href="src/DIGTransport.cxx.html#lA.tXB">SetLorGaussModel_C_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_C_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_Norm_Cp0" href="src/DIGTransport.cxx.html#kNjA5E">SetLorGaussModel_Norm_Cp0</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm_Cp0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetLorGaussModel_Norm_Cp1" href="src/DIGTransport.cxx.html#IYZK5E">SetLorGaussModel_Norm_Cp1</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> LorGaussModel_Norm_Cp1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:PrintInfo" href="src/DIGTransport.cxx.html#RkIKWD">PrintInfo</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="DIGTransport:SetMyvar" href="src/DIGTransport.cxx.html#zOiWqE">SetMyvar</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> Myvar)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetMyvar" href="src/DIGTransport.h.html#XbwWaD">GetMyvar</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fMyvar" title="Float_t DIGTransport::fMyvar">fMyvar</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="DIGTransport:GetChargeModel" href="src/DIGTransport.h.html#fpmWUD">GetChargeModel</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fChargeModel" title="Int_t DIGTransport::fChargeModel">fChargeModel</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorentz2DModel_Cp0" href="src/DIGTransport.h.html#droEmD">GetLorentz2DModel_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorentz2DModel_Cp0" title="Float_t DIGTransport::fLorentz2DModel_Cp0">fLorentz2DModel_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorentz2DModel_Cp1" href="src/DIGTransport.h.html#RwoEmD">GetLorentz2DModel_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorentz2DModel_Cp1" title="Float_t DIGTransport::fLorentz2DModel_Cp1">fLorentz2DModel_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetRangeLimit_InPitchUnit" href="src/DIGTransport.h.html#RJfOnB">GetRangeLimit_InPitchUnit</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fRangeLimit_InPitchUnit" title="Float_t DIGTransport::fRangeLimit_InPitchUnit">fRangeLimit_InPitchUnit</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetGauss2DModel_sigma1_Cp0" href="src/DIGTransport.h.html#ba0FAD">GetGauss2DModel_sigma1_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fGauss2DModel_sigma1_Cp0" title="Float_t DIGTransport::fGauss2DModel_sigma1_Cp0">fGauss2DModel_sigma1_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetGauss2DModel_sigma1_Cp1" href="src/DIGTransport.h.html#z8RonD">GetGauss2DModel_sigma1_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fGauss2DModel_sigma1_Cp1" title="Float_t DIGTransport::fGauss2DModel_sigma1_Cp1">fGauss2DModel_sigma1_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetGauss2DModel_sigma2_Cp0" href="src/DIGTransport.h.html#bplUxC">GetGauss2DModel_sigma2_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fGauss2DModel_sigma2_Cp0" title="Float_t DIGTransport::fGauss2DModel_sigma2_Cp0">fGauss2DModel_sigma2_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetGauss2DModel_sigma2_Cp1" href="src/DIGTransport.h.html#zLD3YD">GetGauss2DModel_sigma2_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fGauss2DModel_sigma2_Cp1" title="Float_t DIGTransport::fGauss2DModel_sigma2_Cp1">fGauss2DModel_sigma2_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetGauss2DModel_weight" href="src/DIGTransport.h.html#XgVAB">GetGauss2DModel_weight</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fGauss2DModel_weight" title="Float_t DIGTransport::fGauss2DModel_weight">fGauss2DModel_weight</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_Norm1_Cp0" href="src/DIGTransport.h.html#KidaY">GetLorGaussModel_Norm1_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_Norm1_Cp0" title="Float_t DIGTransport::fLorGaussModel_Norm1_Cp0">fLorGaussModel_Norm1_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_Norm1_Cp1" href="src/DIGTransport.h.html#iE78.">GetLorGaussModel_Norm1_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_Norm1_Cp1" title="Float_t DIGTransport::fLorGaussModel_Norm1_Cp1">fLorGaussModel_Norm1_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_Norm1_Cp2" href="src/DIGTransport.h.html#m..3mB">GetLorGaussModel_Norm1_Cp2</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_Norm1_Cp2" title="Float_t DIGTransport::fLorGaussModel_Norm1_Cp2">fLorGaussModel_Norm1_Cp2</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_sigma_Cp0" href="src/DIGTransport.h.html#ZZOXEE">GetLorGaussModel_sigma_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_sigma_Cp0" title="Float_t DIGTransport::fLorGaussModel_sigma_Cp0">fLorGaussModel_sigma_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_sigma_Cp1" href="src/DIGTransport.h.html#x7r5rE">GetLorGaussModel_sigma_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_sigma_Cp1" title="Float_t DIGTransport::fLorGaussModel_sigma_Cp1">fLorGaussModel_sigma_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_C_Cp0" href="src/DIGTransport.h.html#wryjG">GetLorGaussModel_C_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_C_Cp0" title="Float_t DIGTransport::fLorGaussModel_C_Cp0">fLorGaussModel_C_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_C_Cp1" href="src/DIGTransport.h.html#swt8t">GetLorGaussModel_C_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_C_Cp1" title="Float_t DIGTransport::fLorGaussModel_C_Cp1">fLorGaussModel_C_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_Norm_Cp0" href="src/DIGTransport.h.html#v.B1aE">GetLorGaussModel_Norm_Cp0</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_Norm_Cp0" title="Float_t DIGTransport::fLorGaussModel_Norm_Cp0">fLorGaussModel_Norm_Cp0</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="DIGTransport:GetLorGaussModel_Norm_Cp1" href="src/DIGTransport.h.html#v.B1aE">GetLorGaussModel_Norm_Cp1</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./DIGTransport.html#DIGTransport:fLorGaussModel_Norm_Cp1" title="Float_t DIGTransport::fLorGaussModel_Norm_Cp1">fLorGaussModel_Norm_Cp1</a>;}</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Tue Oct 25 11:51:47 2011 </em><em>&raquo; Last generated: 2011-10-25 11:51</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@root.cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>
