@@ -2,7 +2,7 @@
 #define ST_MCANALYSISMAKER_H
 
 class TFile;
-class TNtuple;
+class TH1F;
 
 class StMcTrack;
 class StTrack;
@@ -19,7 +19,9 @@ class StMcAnalysisMaker : public StMaker
     char* outfile;
     TFile* mFile;
 
-    TNtuple* mTracks; //.. RC is a subset of MC
+    TH1F* hTpcHitsDiffX;
+    TH1F* hTpcHitsDiffY;
+    TH1F* hTpcHitsDiffZ;
 
     StAssociationMaker* mAssoc;
     const StTrack* findPartner(StMcTrack*, int&);

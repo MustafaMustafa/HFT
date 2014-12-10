@@ -1,5 +1,5 @@
 #include "TFile.h"
-#include "TNtuple.h"
+#include "TH1F.h"
 
 #include "StParticleDefinition.hh"
 #include "StTrack.h"
@@ -45,14 +45,11 @@ int StMcAnalysisMaker::Init()
 
     mFile = new TFile(outfile, "recreate");
     assert(mFile && !mFile->IsZombie());
+
+    hTpcHitsDiffX = new TH1F("hTpcHitsDiffX","hTpcHitsDiffX",100,-1,1);
+    hTpcHitsDiffY = new TH1F("hTpcHitsDiffY","hTpcHitsDiffY",100,-1,1);
+    hTpcHitsDiffZ = new TH1F("hTpcHitsDiffZ","hTpcHitsDiffZ",100,-1,1);
         
-    const char* varlist = "geantId:p:pt:svx:svy:svz:pgeantId:pp:ppt:phi:y:eta:peta:label:"
-    "rp:rpt:reta:rphi:nfit:ncom:nmax:"
-    "nDedxPts:dedx:dedx_2:nSigPi:nSigK:nSigP:nSigE:"
-    "vx:vy:vz:";
-
-    mTracks= new TNtuple("tracks", "tracks", varlist);
-
     mAssoc = (StAssociationMaker*)GetMaker("StAssociationMaker");
 
     cout<<"StMcAnalysisMaker::Init - DONE"<<endl;
@@ -82,8 +79,13 @@ int StMcAnalysisMaker::Make()
 
     for(rcTpcHitMapIter iter = mAssoc->rcTpcHitMap()->begin(); iter!=mAssoc->rcTpcHitMap()->end(); iter++)
     {
-      // pair<const StTpcHit*, const StMcTpcHit*>& p = dynamic_cast< pair<const StTpcHit*,const StMcTpcHit*> >(*iter);
-      cout<<(*iter).first->qaTruth()<<endl;
+      const StTpcHit* rcHit = (*iter).first;
+      const StMcTpcHit* mcHit = (*iter).second;
+
+
+      hTpcHitsDiffX->Fill(mcHit->position().x()-rcHit->position().x());
+      hTpcHitsDiffY->Fill(mcHit->position().y()-rcHit->position().y());
+      hTpcHitsDiffZ->Fill(mcHit->position().z()-rcHit->position().z());
     }
     
 
@@ -185,7 +187,10 @@ const StMcTrack* StMcAnalysisMaker::findPartner(StGlobalTrack* rcTrack, int& max
 //______________________________________________________
 int StMcAnalysisMaker::Finish()
 {
-    mFile->Write();
+    mFile->cd();
+    hTpcHitsDiffX->Write();
+    hTpcHitsDiffY->Write();
+    hTpcHitsDiffZ->Write();
     mFile->Close();
     return kStOk;
 }
