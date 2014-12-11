@@ -46,11 +46,17 @@ int StMcAnalysisMaker::Init()
     mFile = new TFile(outfile, "recreate");
     assert(mFile && !mFile->IsZombie());
 
-    hTpcHitsDiffX = new TH1F("hTpcHitsDiffX","hTpcHitsDiffX",100,-1,1);
-    hTpcHitsDiffY = new TH1F("hTpcHitsDiffY","hTpcHitsDiffY",100,-1,1);
-    hTpcHitsDiffZ = new TH1F("hTpcHitsDiffZ","hTpcHitsDiffZ",100,-1,1);
+    hTpcHitsDiffX = new TH1F("hTpcHitsDiffX","hTpcHitsDiffX",200,-2,2);
+    hTpcHitsDiffY = new TH1F("hTpcHitsDiffY","hTpcHitsDiffY",200,-2,2);
+    hTpcHitsDiffZ = new TH1F("hTpcHitsDiffZ","hTpcHitsDiffZ",200,-2,2);
         
     mAssoc = (StAssociationMaker*)GetMaker("StAssociationMaker");
+
+    if(!mAssoc)
+    {
+        cout<<" empty StAssociateMaker, stop!!"<<endl;
+        exit(1);
+    }
 
     cout<<"StMcAnalysisMaker::Init - DONE"<<endl;
     return StMaker::Init();
@@ -77,6 +83,7 @@ int StMcAnalysisMaker::Make()
     cout<<"StMcAnalysisMaker::Make() : event: "<<event->id()<<endl;
 
 
+    /*
     for(rcTpcHitMapIter iter = mAssoc->rcTpcHitMap()->begin(); iter!=mAssoc->rcTpcHitMap()->end(); iter++)
     {
       const StTpcHit* rcHit = (*iter).first;
@@ -87,11 +94,10 @@ int StMcAnalysisMaker::Make()
       hTpcHitsDiffY->Fill(mcHit->position().y()-rcHit->position().y());
       hTpcHitsDiffZ->Fill(mcHit->position().z()-rcHit->position().z());
     }
+    */
     
 
-    // fillTracks(mcEvent);
-
-    return kStOk;
+    return fillTracks(mcEvent);
 }
 //____________________________________
 int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
@@ -99,6 +105,12 @@ int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
     StSPtrVecMcTrack& trks = mcEvent->tracks();
     cout<<"Filling "<<trks.size()<<" mcTracks..."<<endl;   
     
+    if(!mAssoc->rcTpcHitMap())
+    {
+      cout<<"!!!There is no rcTpcHitMap in the association maker!!!!"<<endl;
+      return 1;
+    }
+
     for (unsigned int i = 0;  i<trks.size(); i++) 
     {
         StMcTrack* mcTrack = trks[i];
@@ -109,26 +121,63 @@ int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
         if(!rcTrack) continue;
 
         StPtrVecHit rcTpcHits = rcTrack->detectorInfo()->hits(kTpcId);
-        const StPtrVecMcHit* mcTpcHits = mcTrack->Hits(kTpcId);
+        // const StPtrVecMcHit* mcTpcHits = mcTrack->Hits(kTpcId);
         
+        // loop over all rcHits
         cout<<"ncommonhits "<<ncommonhits<<endl;
-        cout<<"Rc track hits"<<endl;
+
         for(size_t ih = 0; ih <rcTpcHits.size(); ih++)
         {
           StTpcHit* rcHit = dynamic_cast<StTpcHit*>(rcTpcHits[ih]);
-          if(!rcHit) continue;
-          cout<<rcHit->qaTruth()<<endl;
+          if (!rcHit) continue;
+
+          pair<rcTpcHitMapIter,rcTpcHitMapIter>  bounds = mAssoc->rcTpcHitMap()->equal_range(rcHit);
+
+          // loop over all mcHits associated with this rcHit
+          bool found = false;
+          for (rcTpcHitMapIter iter=bounds.first; iter!=bounds.second; iter++) 
+          {
+            const StMcTpcHit* mcHit = (*iter).second;
+
+            // fill histograms if this mcHit belongs to this mcTrack
+            if(mcHit->parentTrack()->key() == mcTrack->key())
+            {
+              hTpcHitsDiffX->Fill(mcHit->position().x()-rcHit->position().x());
+              hTpcHitsDiffY->Fill(mcHit->position().y()-rcHit->position().y());
+              hTpcHitsDiffZ->Fill(mcHit->position().z()-rcHit->position().z());
+              found = true;
+            }
+            else
+            {
+              cout<<"Not a good candidate"<<endl;
+            }
+          }
+
+          if(!found)
+          {
+            cout<<"No mc hit was found for this rc Hit!!!!"<<endl;
+          }
         }
 
-        cout<<"MC track hits"<<endl;
-        for(size_t ih = 0; ih <mcTpcHits->size(); ih++)
-        {
+
+        /*
+           cout<<"ncommonhits "<<ncommonhits<<endl;
+           cout<<"Rc track hits"<<endl;
+           for(size_t ih = 0; ih <rcTpcHits.size(); ih++)
+           {
+           StTpcHit* rcHit = dynamic_cast<StTpcHit*>(rcTpcHits[ih]);
+           if(!rcHit) continue;
+           cout<<rcHit->qaTruth()<<endl;
+           }
+
+           cout<<"MC track hits"<<endl;
+           for(size_t ih = 0; ih <mcTpcHits->size(); ih++)
+           {
           StMcTpcHit* mcHit = dynamic_cast<StMcTpcHit*>((*mcTpcHits)[ih]);
           if(!mcHit) continue;
           cout<<mcHit->key()<<endl;
         }
-
-
+        */
     }
 
     return kStOk;
@@ -138,10 +187,6 @@ int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
 //________________________________________________
 const StTrack* StMcAnalysisMaker::findPartner(StMcTrack* mcTrack, int& maxCommonTpcHits) 
 {//..StMcTrack find partner from the StTracks
-    if(!mAssoc) {
-        cout<<" empty StAssociateMaker, stop!!"<<endl;
-        exit(1);
-    }
     pair<mcTrackMapIter, mcTrackMapIter> p = mAssoc->mcTrackMap()->equal_range(mcTrack);
 
     const StTrack* maxTrack = 0;
@@ -162,12 +207,6 @@ const StTrack* StMcAnalysisMaker::findPartner(StMcTrack* mcTrack, int& maxCommon
 const StMcTrack* StMcAnalysisMaker::findPartner(StGlobalTrack* rcTrack, int& maxCommonTpcHits) 
 {//.. StGlobalTracks find partner from StMcTracks. 
     //.. See example from StRoot/StMcAnalysisMaker
-
-    if(!mAssoc) {
-        cout<<" empty StAssociateMaker, stop!!"<<endl;
-        exit(1);
-    }
-
     pair<rcTrackMapIter,rcTrackMapIter> p = mAssoc->rcTrackMap()->equal_range(rcTrack);
 
     const StMcTrack* maxTrack = 0;
