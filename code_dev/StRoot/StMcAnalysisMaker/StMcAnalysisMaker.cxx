@@ -116,6 +116,18 @@ int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
         StMcTrack* mcTrack = trks[i];
         // if(mcTrack->geantId()!=2 && mcTrack->geantId()!=3) continue;
 
+        // reject tracks which start away from the vertex
+        float t1svx, t1svy, t1svz;
+        
+        if(t1->startVertex()) 
+        {
+            t1svx = t1->startVertex()->position().x();
+            t1svy = t1->startVertex()->position().y();
+            t1svz = t1->startVertex()->position().z();
+        }
+
+        if(sqrt(t1svx*t1svx + t1svy*t1svy)>3) continue;
+
         int ncommonhits = 0;
         const StTrack* rcTrack = findPartner(mcTrack, ncommonhits);
         if(!rcTrack) continue;
