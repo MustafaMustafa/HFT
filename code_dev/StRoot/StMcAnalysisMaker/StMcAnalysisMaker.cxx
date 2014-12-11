@@ -49,6 +49,9 @@ int StMcAnalysisMaker::Init()
     hTpcHitsDiffX = new TH1F("hTpcHitsDiffX","hTpcHitsDiffX",200,-2,2);
     hTpcHitsDiffY = new TH1F("hTpcHitsDiffY","hTpcHitsDiffY",200,-2,2);
     hTpcHitsDiffZ = new TH1F("hTpcHitsDiffZ","hTpcHitsDiffZ",200,-2,2);
+    hTpcHitsDiffX->GetXaxis()->SetTitle("#Deltax(cm)");
+    hTpcHitsDiffY->GetXaxis()->SetTitle("#Deltay(cm)");
+    hTpcHitsDiffZ->GetXaxis()->SetTitle("#Deltaz(cm)");
         
     mAssoc = (StAssociationMaker*)GetMaker("StAssociationMaker");
 
@@ -117,16 +120,13 @@ int StMcAnalysisMaker::fillTracks(StMcEvent* mcEvent)
         // if(mcTrack->geantId()!=2 && mcTrack->geantId()!=3) continue;
 
         // reject tracks which start away from the vertex
-        float t1svx, t1svy, t1svz;
-        
-        if(t1->startVertex()) 
+        float svx, svy, svz;
+        if(mcTrack->startVertex()) 
         {
-            t1svx = t1->startVertex()->position().x();
-            t1svy = t1->startVertex()->position().y();
-            t1svz = t1->startVertex()->position().z();
+            svx = mcTrack->startVertex()->position().x();
+            svy = mcTrack->startVertex()->position().y();
         }
-
-        if(sqrt(t1svx*t1svx + t1svy*t1svy)>3) continue;
+        if(sqrt(svx*svx + svy*svy)>3) continue;
 
         int ncommonhits = 0;
         const StTrack* rcTrack = findPartner(mcTrack, ncommonhits);
