@@ -75,7 +75,7 @@ class StPxlFastSim: public StPxlISim
 
  private:
   //Routine to smear hit by resolution with gaussian, mean zero and width res.
-  Double_t distortHit(Double_t x, Double_t res, Double_t constraint);
+  double distortHit(const double x, const double res, const double constraint) const;
 
   void localToMatser(Double_t* local,Double_t* master,Int_t sector,Int_t ladder,Int_t sensor);
 
