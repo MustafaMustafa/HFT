@@ -6,6 +6,7 @@
 #include "StEvent.h"
 #include "StMcEvent.hh"
 #include "StMcEvent/StMcHit.hh"
+#include "StMcEvent/StMcPxlHit.hh"
 
 #include "StHistograms.h"
 
@@ -46,6 +47,23 @@ void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
   }
 }
 
+void StHistograms::addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit const & hits2)
+{
+  for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
+  {
+    StMcPxlHit const* hit1 = static_cast<StMcPxlHit*>(hits1[iHit1]);
+
+    if((int)hit1->ladder()==1) 
+    {
+      addHits(kPxl1,hit1,NULL);
+    }
+    else
+    {
+      addHits(kPxl2,hit1,NULL);
+    }
+  }
+}
+
 void StHistograms::closeFile()
 {
   mOutFile->cd();
@@ -61,9 +79,9 @@ StHistograms::hists::hists(TString layerName,TString hit1Name,TString hit2Name)
 {
   h1Hit1Pt = new TH1F(Form("h%s%sPt",layerName.Data(),hit1Name.Data()),";p_{T}(GeV/c)",50,0,5);
   h1Hit2Pt = new TH1F(Form("h%s%sPt",layerName.Data(),hit2Name.Data()),";p_{T}(GeV/c)",50,0,5);
-  h2XDiffVsPt = new TH2F(Form("h2%s%s%sXDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaX(cm)",50,0,5,4000,-0.2,0.2);
-  h2YDiffVsPt = new TH2F(Form("h2%s%s%sYDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaY(cm)",50,0,5,4000,-0.2,0.2);
-  h2ZDiffVsPt = new TH2F(Form("h2%s%s%sZDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaZ(cm)",50,0,5,4000,-0.2,0.2);
+  h2XDiffVsPt = new TH2F(Form("h2%s%s%sXDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaX(cm)",50,0,5,4000,-0.4,0.4);
+  h2YDiffVsPt = new TH2F(Form("h2%s%s%sYDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaY(cm)",50,0,5,4000,-0.4,0.4);
+  h2ZDiffVsPt = new TH2F(Form("h2%s%s%sZDiffVsPt",layerName.Data(),hit1Name.Data(), hit2Name.Data()),";p_{T}(GeV/c);#DeltaZ(cm)",50,0,5,4000,-0.4,0.4);
 }
 void StHistograms::hists::write(TFile* outFile)
 {

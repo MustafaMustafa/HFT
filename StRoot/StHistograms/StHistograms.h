@@ -17,6 +17,7 @@ class TString;
 class StEvent;
 class StMcEvent;
 class StMcHit;
+class StMcPxlHit;
 
 class StHistograms: public TObject
 {
@@ -28,6 +29,7 @@ class StHistograms: public TObject
    void addEvent(StMcEvent const *);
    void addEvent(StEvent const *);
    void addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2);
+   void addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit const & hits2);
    void closeFile();
 
   private:
