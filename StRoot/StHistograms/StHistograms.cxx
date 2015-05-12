@@ -42,9 +42,9 @@ void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
 
   if(hit1 && hit2)
   {
-    mHists[layer].h2XDiffVsPt->Fill(hit1->position().x()-hit2->position().x(),hit1->localMomentum().perp());
-    mHists[layer].h2YDiffVsPt->Fill(hit1->position().y()-hit2->position().y(),hit1->localMomentum().perp());
-    mHists[layer].h2ZDiffVsPt->Fill(hit1->position().z()-hit2->position().z(),hit1->localMomentum().perp());
+    mHists[layer].h2XDiffVsPt->Fill(hit1->localMomentum().perp(),hit1->position().x()-hit2->position().x());
+    mHists[layer].h2YDiffVsPt->Fill(hit1->localMomentum().perp(),hit1->position().y()-hit2->position().y());
+    mHists[layer].h2ZDiffVsPt->Fill(hit1->localMomentum().perp(),hit1->position().z()-hit2->position().z());
   }
 }
 
