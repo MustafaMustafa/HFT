@@ -50,8 +50,6 @@ void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
 
 void StHistograms::addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit const & hits2)
 {
-  LOG_INFO << "StHistograms - nHits1/nHits2 " << hits1.size() <<"/"<< hits2.size() <<endm;
-
   if(hits1.size())
   {
     for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
