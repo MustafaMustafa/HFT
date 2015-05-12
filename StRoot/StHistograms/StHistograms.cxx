@@ -7,6 +7,7 @@
 #include "StMcEvent.hh"
 #include "StMcEvent/StMcHit.hh"
 #include "StMcEvent/StMcPxlHit.hh"
+#include "StMessMgr.h"
 
 #include "StHistograms.h"
 
@@ -37,7 +38,7 @@ void StHistograms::addEvent(StEvent const* const mcEvent)
 void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
 {
   if(hit1) mHists[layer].h1Hit1Pt->Fill(hit1->localMomentum().perp());
-  if(hit2) mHists[layer].h1Hit1Pt->Fill(hit2->localMomentum().perp());
+  if(hit2) mHists[layer].h1Hit2Pt->Fill(hit2->localMomentum().perp());
 
   if(hit1 && hit2)
   {
@@ -49,18 +50,43 @@ void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
 
 void StHistograms::addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit const & hits2)
 {
-  for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
-  {
-    StMcPxlHit const* hit1 = static_cast<StMcPxlHit*>(hits1[iHit1]);
+  LOG_INFO << "StHistograms - nHits1/nHits2 " << hits1.size() <<"/"<< hits2.size() <<endm;
 
-    if((int)hit1->ladder()==1) 
+  if(hits1.size())
+  {
+    for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
     {
-      addHits(kPxl1,hit1,NULL);
+      StMcPxlHit const* hit1 = static_cast<StMcPxlHit*>(hits1[iHit1]);
+      StMcPxlHit* hit2 = NULL;
+
+      for(size_t iHit2 = 0; iHit2 < hits2.size(); ++iHit2)
+      {
+        if((hits2[iHit2]->volumeId() == hit1->volumeId()) ||
+            ((hits2[iHit2]->position() - hit1->position()).mag() < 0.2))
+        {
+          hit2 = static_cast<StMcPxlHit*>(hits2[iHit2]);
+          break;
+        }
+      }
+
+      Layer layer = (int)hit1->ladder() == 1? kPxl1 : kPxl2;
+      addHits(layer,hit1,hit2);
     }
-    else
+  }
+  else
+  {
+    for(size_t iHit2 = 0; iHit2 < hits2.size(); ++iHit2)
     {
-      addHits(kPxl2,hit1,NULL);
+      StMcPxlHit const* hit2 = static_cast<StMcPxlHit*>(hits2[iHit2]);
+
+      Layer layer= (int)hit2->ladder() == 1? kPxl1 : kPxl2;
+      addHits(layer,NULL,hit2);
     }
+  }
+
+  if(hits2.size() > hits1.size())
+  {
+    LOG_WARN << "StHistograms - nHits2 is larger than nHits1 - unfilled entries" <<endm;
   }
 }
 
