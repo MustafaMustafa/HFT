@@ -15,14 +15,20 @@
 #include "StPhysicalHelixD.hh"
 #include "StParticleDefinition.hh"
 #include "StMcPxlHitCollection.hh"
+#include "StMcEvent/StMcVertex.hh"
 
 #include "StPxlDbMaker/StPxlDb.h"
+#include "../StHistograms/StHistograms.h"
 #include "StPxlEmbHits.h"
 
 ClassImp(StPxlEmbHits);
 
-StPxlEmbHits::StPxlEmbHits(const Char_t *name) : StMaker(name), mMcEvent(NULL), mPxlDb(NULL)
+StPxlEmbHits::StPxlEmbHits(const Char_t *name) : StMaker(name), mMcEvent(NULL), mPxlDb(NULL),
+   mPionsHists(NULL), mKaonsHists(NULL), mProtonsHists(NULL)
 {
+   mPionsHists = new StHistograms("idealPions");
+   mKaonsHists = new StHistograms("idealKaons");
+   mProtonsHists = new StHistograms("idealProtons");
 }
 
 Int_t StPxlEmbHits::Init()
@@ -63,30 +69,39 @@ Int_t StPxlEmbHits::Make()
       return kStWarn;
    }
 
-   StMcPxlHitCollection* mcPxlHitColEmb = new StMcPxlHitCollection();
+   mPionsHists->addEvent(mMcEvent);
+   mKaonsHists->addEvent(mMcEvent);
+   mProtonsHists->addEvent(mMcEvent);
+
+   StMcPxlHitCollection* mcPxlHitColEmb = (StMcPxlHitCollection*)mMcEvent->pxlHitCollection();
    McTrk2RealGeo(*mcPxlHitColEmb);
-   mMcEvent->setPxlHitCollection(mcPxlHitColEmb);
 
    return kStOK;
 }
 void StPxlEmbHits::McTrk2RealGeo(StMcPxlHitCollection& mcPxlHitCol)
 {
-
-   LOG_INFO << "StPxlEmbHits::Projecting the simulated track to the reco geometry via physical helix " << endm;
+   LOG_INFO << "Re-projecting MC tracks to geometry..." << endm;
 
    StSPtrVecMcTrack& tracks = mMcEvent->tracks();
    size_t nMcTracks = tracks.size();
+   LOG_INFO << "nMcTracks = " << nMcTracks << endm;
 
-   Int_t count = 0, counttrk = 0;
-
-   for (size_t i = 0; i < nMcTracks; ++i)
+   for (size_t iTk = 0; iTk < nMcTracks; ++iTk)
    {
-      StMcTrack *Trk = tracks[i];
+      StMcTrack *Trk = tracks[iTk];
       if (!Trk) continue;
-      counttrk += Trk->pxlHits().size();
+
+      if (Trk->pt() < 0.15 || fabs(Trk->momentum().pseudoRapidity()) > 1.0) continue;
+      StHistograms* hists = NULL;
+      if (Trk->geantId() == 8 || Trk->geantId() == 9) hists = mPionsHists;
+      else if (Trk->geantId() == 11 || Trk->geantId() == 12) hists = mKaonsHists;
+      else if (Trk->geantId() == 14 || Trk->geantId() == 15) hists = mProtonsHists;
+      else continue;
 
       StPhysicalHelixD tHelix(Trk->momentum(), Trk->startVertex()->position(),
-                              mBField*kilogauss, Trk->particleDefinition()->charge());
+                              mBField * kilogauss, Trk->particleDefinition()->charge());
+
+      std::vector<StMcPxlHit*> projHits;
 
       for (int sector = 1; sector <= 10; ++sector)
       {
@@ -97,7 +112,6 @@ void StPxlEmbHits::McTrk2RealGeo(StMcPxlHitCollection& mcPxlHitCol)
 
                TGeoHMatrix *interceptionM = (TGeoHMatrix *)mPxlDb->geoHMatrixSensorOnGlobal(sector, ladder, sensor);
                if (!interceptionM) continue;
-               cout<<"sector/ladder/sensor = "<<sector<<"/"<<ladder<<"/"<<sensor<<endl;
                Double_t *Rotat = interceptionM->GetRotationMatrix();
                Double_t *Trans = interceptionM->GetTranslation();
                const StThreeVectorD senNorm(Rotat[1], Rotat[4], Rotat[7]);
@@ -120,16 +134,17 @@ void StPxlEmbHits::McTrk2RealGeo(StMcPxlHitCollection& mcPxlHitCol)
                                                    Trk->key(),
                                                    sensor * 100 + ladder * 10000 + sector * 1000000, //STAR volume id from g2t
                                                    Trk);
-               mcPxlHitCol.addHit(newHit);
-
-               count++;
+               projHits.push_back(newHit);
             }
          }
       }
-   }
 
-   LOG_INFO << "StPxlEmbHits::Number of McTracks       : " << nMcTracks << endm;
-   LOG_INFO << "StPxlEmbHits::Number of Interceptions  : " << count << endm;
+      LOG_INFO << " runNumber/eventNumber/mcTrackIndex/geantId: " << mMcEvent->runNumber() << "/" << mMcEvent->eventNumber() << "/" << iTk << "/" << Trk->geantId() << endm;
+      LOG_INFO << " pT/eta " << Trk->momentum().perp() << "/" << Trk->momentum().pseudoRapidity() << endm;
+      hists->addHits(Trk->pxlHits(), projHits);
+
+      for (size_t ii = 0; ii < projHits.size(); ++ii) delete projHits[ii];
+   }
 }
 
 bool StPxlEmbHits::IsOnSensor(Double_t LocalPosition[3])
@@ -137,5 +152,12 @@ bool StPxlEmbHits::IsOnSensor(Double_t LocalPosition[3])
    Float_t Rphiwidth = 1.9210; // From StPxlSimMaker/StPxlISim.h
    Float_t Zlength   = 1.9872; //
 
-   return fabs(LocalPosition[0]) < Rphiwidth/2. && fabs(LocalPosition[2]) < Zlength/2.0;
+   return fabs(LocalPosition[0]) < Rphiwidth / 2. && fabs(LocalPosition[2]) < Zlength / 2.0;
+}
+
+Int_t StPxlEmbHits::Finish()
+{
+   mPionsHists->closeFile();
+   mKaonsHists->closeFile();
+   mProtonsHists->closeFile();
 }
