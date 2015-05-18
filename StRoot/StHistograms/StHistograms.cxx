@@ -13,11 +13,13 @@
 
 // ClassImp(StHistograms)
 
-StHistograms::StHistograms(TString fileBaseName) : mOutFile(NULL), mhVz(NULL)
+StHistograms::StHistograms(TString fileBaseName) : mOutFile(NULL), mhVz(NULL), mhNHits(NULL)
 {
   mOutFile = new TFile(Form("%s.hists.root",fileBaseName.Data()),"RECREATE");
 
   mhVz = new TH1F("hVz","hVz;V_{z}(cm)",100,-10,10);
+
+  mhNHits = new TH1F("mhNHits","mhNHits;nHits",20,0,20);
 
   // the order here should be consistent with the enum Layer in the header file
   mHists.push_back(hists("Pxl1","Mc","McProj"));
@@ -30,9 +32,11 @@ StHistograms::~StHistograms()
 }
 void StHistograms::addEvent(StMcEvent const* const mcEvent)
 {
+  mhVz->Fill(mcEvent->primaryVertex().z());
 }
-void StHistograms::addEvent(StEvent const* const mcEvent)
+void StHistograms::addEvent(StEvent const* const event)
 {
+  mhVz->Fill(event->primaryVertex().z());
 }
 
 void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
@@ -92,6 +96,7 @@ void StHistograms::closeFile()
 {
   mOutFile->cd();
   mhVz->Write();
+  mhNHits->Write();
 
   for(size_t i=0;i<mHists.size();++i)
   {

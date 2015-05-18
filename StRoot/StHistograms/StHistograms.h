@@ -50,6 +50,7 @@ class StHistograms: public TObject
    };
 
    TH1F* mhVz;
+   TH1F* mhNHits;
    std::vector<hists> mHists;
 
    // ClassDef(StHistograms, 1)
