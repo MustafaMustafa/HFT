@@ -54,7 +54,33 @@ void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
 
 void StHistograms::addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit const & hits2)
 {
-  if(hits1.size())
+  LOG_INFO <<" --------------------------------- "<<endm;
+
+  mhNHits->Fill(hits1.size());
+
+  if(hits1.size() != hits2.size())
+  {
+    LOG_INFO <<" ----------Different Sizes---------- "<<endm;
+  }
+  
+  LOG_INFO <<" ----------hits1------------ "<<endm;
+
+  for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
+  {
+    StMcPxlHit const* hit1 = static_cast<StMcPxlHit*>(hits1[iHit1]);
+    LOG_INFO << "volId/sector/ladder/sensor: " << (int)hit1->sector() <<"/"<<(int)hit1->ladder()<<"/"<<(int)hit1->sensor()<<endm;
+    hit1->Print();
+  }
+
+  LOG_INFO <<" ----------hits2------------ "<<endm;
+  for(size_t iHit2 = 0; iHit2 < hits2.size(); ++iHit2)
+  {
+    StMcPxlHit const* hit2 = static_cast<StMcPxlHit*>(hits2[iHit2]);
+    LOG_INFO << "volId/sector/ladder/sensor: " << (int)hit2->sector() <<"/"<<(int)hit2->ladder()<<"/"<<(int)hit2->sensor()<<endm;
+    hit2->Print();
+  }
+
+  if(hits1.size() >= hits2.size())
   {
     for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
     {
@@ -80,15 +106,21 @@ void StHistograms::addHits(StPtrVecMcPxlHit const & hits1, StPtrVecMcPxlHit cons
     for(size_t iHit2 = 0; iHit2 < hits2.size(); ++iHit2)
     {
       StMcPxlHit const* hit2 = static_cast<StMcPxlHit*>(hits2[iHit2]);
+      StMcPxlHit* hit1 = NULL;
 
-      Layer layer= (int)hit2->ladder() == 1? kPxl1 : kPxl2;
-      addHits(layer,NULL,hit2);
+      for(size_t iHit1 = 0; iHit1 < hits1.size(); ++iHit1)
+      {
+        if((hits1[iHit1]->volumeId() == hit2->volumeId()) ||
+            ((hits1[iHit1]->position() - hit2->position()).mag() < 0.2))
+        {
+          hit1 = static_cast<StMcPxlHit*>(hits1[iHit1]);
+          break;
+        }
+      }
+
+      Layer layer = (int)hit2->ladder() == 1? kPxl1 : kPxl2;
+      addHits(layer,hit1,hit2);
     }
-  }
-
-  if(hits2.size() > hits1.size())
-  {
-    LOG_WARN << "StHistograms - nHits2 is larger than nHits1 - unfilled entries" <<endm;
   }
 }
 
