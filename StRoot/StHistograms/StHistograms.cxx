@@ -4,7 +4,9 @@
 #include "TFile.h"
 #include "TString.h"
 #include "StEvent.h"
+#include "StEvent/StPrimaryVertex.h"
 #include "StMcEvent.hh"
+#include "StMcEvent/StMcVertex.hh"
 #include "StMcEvent/StMcHit.hh"
 #include "StMcEvent/StMcPxlHit.hh"
 #include "StMessMgr.h"
@@ -32,11 +34,11 @@ StHistograms::~StHistograms()
 }
 void StHistograms::addEvent(StMcEvent const* const mcEvent)
 {
-  mhVz->Fill(mcEvent->primaryVertex().z());
+  mhVz->Fill(mcEvent->primaryVertex()->position().z());
 }
 void StHistograms::addEvent(StEvent const* const event)
 {
-  mhVz->Fill(event->primaryVertex().z());
+  mhVz->Fill(event->primaryVertex()->position().z());
 }
 
 void StHistograms::addHits(Layer layer,StMcHit const* hit1,StMcHit const* hit2)
